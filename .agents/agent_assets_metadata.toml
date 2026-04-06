@@ -1,0 +1,14 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "oNLztM0GcdnBwWlmWiCyC"
+uri = "file://artifacts/mac-academy/assets/images/icon.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "iAzsngbhomHs_0uU0BXO-"
+uri = "file://artifacts/mac-academy/assets/images/course_hero.png"
+type = "image"
+title = "generated_image"

@@ -1,0 +1,27 @@
+kind = "mobile"
+previewPath = "/"
+title = "Mac Academy"
+version = "1.0.0"
+id = "artifacts/mac-academy"
+router = "expo-domain"
+
+[[integratedSkills]]
+name = "expo"
+version = "1.0.0"
+
+[[services]]
+ensurePreviewReachable = "/status"
+name = "expo"
+paths = [ "/" ]
+localPort = 21758
+
+[services.development]
+run = "pnpm --filter @workspace/mac-academy run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/mac-academy", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/mac-academy", "run", "serve" ]
+
+[services.env]
+PORT = "21758"
+BASE_PATH = "/"
