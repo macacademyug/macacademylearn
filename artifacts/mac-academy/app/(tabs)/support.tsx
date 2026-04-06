@@ -16,23 +16,23 @@ import * as Haptics from "expo-haptics";
 const FAQS = [
   {
     q: "How do I watch a video lesson?",
-    a: "Go to the Courses tab, select a course, then tap any unlocked lesson. The video player will open and you can follow along at your own pace.",
+    a: "Go to the Courses tab, tap a course, then tap any unlocked lesson. The video player will open so you can follow along at your own pace.",
   },
   {
     q: "How does progress saving work?",
-    a: "Your progress is saved automatically to your device when you tap 'Mark as Complete' on a lesson. It will persist even if you close and reopen the app.",
+    a: "Your progress is saved automatically to your device when you tap 'Mark as Complete' on a lesson. It stays saved even after you close the app.",
   },
   {
     q: "How do I unlock Pro lessons?",
-    a: "Tap the orange 'Unlock Pro Lessons' button on the Courses screen. You'll be taken to our Flutterwave payment page for a one-time purchase.",
+    a: "Tap the orange 'Unlock Pro Lessons' button on the Courses screen. You'll be taken to our Flutterwave payment page where you can pay via MTN or Airtel Uganda Mobile Money.",
   },
   {
-    q: "Can I watch lessons offline?",
-    a: "Currently, lessons require an internet connection to stream. We recommend a stable Wi-Fi connection for the best viewing experience.",
+    q: "Which payment methods are supported?",
+    a: "We accept MTN Uganda Mobile Money and Airtel Uganda Mobile Money through Flutterwave.",
   },
   {
     q: "What is FlipaClip?",
-    a: "FlipaClip is a popular mobile animation app available on Android and iOS. This academy teaches you everything from beginner basics to advanced pro techniques.",
+    a: "FlipaClip is a popular mobile animation app available on Android and iOS. This academy teaches you everything from beginner basics all the way to advanced lip sync techniques.",
   },
   {
     q: "I completed a lesson but progress didn't save. What do I do?",
@@ -75,17 +75,44 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
+interface ContactRowProps {
+  icon: string;
+  label: string;
+  sub: string;
+  url: string;
+  color?: string;
+}
+
+function ContactRow({ icon, label, sub, url, color }: ContactRowProps) {
+  const colors = useColors();
+  const accent = color ?? colors.primary;
+  return (
+    <TouchableOpacity
+      style={[styles.contactCard, { backgroundColor: colors.card, borderColor: colors.border }]}
+      onPress={() => Linking.openURL(url)}
+      activeOpacity={0.8}
+    >
+      <View style={[styles.contactIcon, { backgroundColor: accent + "18" }]}>
+        <Feather name={icon as any} size={20} color={accent} />
+      </View>
+      <View style={{ flex: 1 }}>
+        <Text style={[styles.contactLabel, { color: colors.foreground, fontFamily: "Inter_600SemiBold" }]}>
+          {label}
+        </Text>
+        <Text style={[styles.contactSub, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
+          {sub}
+        </Text>
+      </View>
+      <Feather name="chevron-right" size={16} color={colors.mutedForeground} />
+    </TouchableOpacity>
+  );
+}
+
 export default function SupportScreen() {
   const colors = useColors();
   const insets = useSafeAreaInsets();
   const topPadding = Platform.OS === "web" ? 67 : insets.top;
   const bottomPadding = (Platform.OS === "web" ? 34 : insets.bottom) + 90;
-
-  const contactLinks = [
-    { icon: "mail", label: "Email Support", sub: "support@macademy.app", url: "mailto:support@macademy.app" },
-    { icon: "instagram", label: "Instagram", sub: "@macademy.official", url: "https://instagram.com" },
-    { icon: "youtube", label: "YouTube Channel", sub: "Mac Academy", url: "https://youtube.com" },
-  ];
 
   return (
     <ScrollView
@@ -100,7 +127,7 @@ export default function SupportScreen() {
         Support
       </Text>
       <Text style={[styles.pageSub, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
-        We're here to help you succeed
+        We're here to help
       </Text>
 
       <View style={[styles.heroBanner, { backgroundColor: colors.primary + "15", borderColor: colors.primary + "30" }]}>
@@ -108,38 +135,38 @@ export default function SupportScreen() {
           <Feather name="headphones" size={26} color="#fff" />
         </View>
         <Text style={[styles.heroTitle, { color: colors.foreground, fontFamily: "Inter_700Bold" }]}>
-          Need help?
+          Get in Touch
         </Text>
         <Text style={[styles.heroDesc, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
-          Check our FAQs below or reach out directly. We typically respond within 24 hours.
+          Reach out via phone, email, or TikTok. We typically respond within 24 hours.
         </Text>
       </View>
 
       <Text style={[styles.sectionTitle, { color: colors.foreground, fontFamily: "Inter_700Bold" }]}>
-        Contact Us
+        Contact & Socials
       </Text>
 
-      {contactLinks.map((c) => (
-        <TouchableOpacity
-          key={c.label}
-          style={[styles.contactCard, { backgroundColor: colors.card, borderColor: colors.border }]}
-          onPress={() => Linking.openURL(c.url)}
-          activeOpacity={0.8}
-        >
-          <View style={[styles.contactIcon, { backgroundColor: colors.primary + "18" }]}>
-            <Feather name={c.icon as any} size={20} color={colors.primary} />
-          </View>
-          <View style={{ flex: 1 }}>
-            <Text style={[styles.contactLabel, { color: colors.foreground, fontFamily: "Inter_600SemiBold" }]}>
-              {c.label}
-            </Text>
-            <Text style={[styles.contactSub, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
-              {c.sub}
-            </Text>
-          </View>
-          <Feather name="chevron-right" size={16} color={colors.mutedForeground} />
-        </TouchableOpacity>
-      ))}
+      <ContactRow
+        icon="phone"
+        label="Call Us"
+        sub="0745414641"
+        url="tel:0745414641"
+        color="#22c55e"
+      />
+      <ContactRow
+        icon="mail"
+        label="Email Support"
+        sub="alexkasaba20006@gmail.com"
+        url="mailto:alexkasaba20006@gmail.com"
+        color={colors.primary}
+      />
+      <ContactRow
+        icon="video"
+        label="TikTok"
+        sub="@mac_toonzug"
+        url="https://www.tiktok.com/@mac_toonzug"
+        color="#010101"
+      />
 
       <Text style={[styles.sectionTitle, { color: colors.foreground, fontFamily: "Inter_700Bold" }]}>
         Frequently Asked Questions
@@ -151,7 +178,7 @@ export default function SupportScreen() {
 
       <View style={[styles.versionCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
         <Text style={[styles.versionText, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
-          Mac Academy v2.0 • Made with creativity
+          Mac Academy v3.0 · Made with creativity
         </Text>
       </View>
     </ScrollView>
@@ -170,7 +197,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
     marginBottom: 24,
-    textAlign: "center",
   },
   heroIcon: {
     width: 56,
@@ -192,7 +218,7 @@ const styles = StyleSheet.create({
     padding: 16,
     marginBottom: 10,
   },
-  contactIcon: { width: 42, height: 42, borderRadius: 12, alignItems: "center", justifyContent: "center" },
+  contactIcon: { width: 44, height: 44, borderRadius: 13, alignItems: "center", justifyContent: "center" },
   contactLabel: { fontSize: 14, fontWeight: "600" },
   contactSub: { fontSize: 12, marginTop: 2 },
   faqItem: {
