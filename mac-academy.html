@@ -8,31 +8,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --bg:       #0d0d0d;
-    --card:     #1a1a1a;
-    --card2:    #222222;
-    --border:   #2a2a2a;
-    --fg:       #f0f0f0;
-    --muted:    #8a8a8a;
-    --primary:  #FF6B1A;
-    --green:    #22c55e;
-    --blue:     #3B82F6;
-    --gold:     #FBBF24;
-    --track:    #2a2a2a;
-    --radius:   14px;
-    --nav-h:    72px;
+    --bg:      #0d0d0d;
+    --card:    #1a1a1a;
+    --card2:   #222222;
+    --border:  #2a2a2a;
+    --fg:      #f0f0f0;
+    --muted:   #8a8a8a;
+    --primary: #FF6B1A;
+    --green:   #22c55e;
+    --blue:    #3B82F6;
+    --track:   #2a2a2a;
+    --radius:  14px;
+    --nav-h:   72px;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; background: var(--bg); color: var(--fg); font-family: 'Inter', sans-serif; overflow: hidden; }
 
-  /* ── SCREEN SYSTEM ── */
   #app { height: 100%; display: flex; flex-direction: column; max-width: 430px; margin: 0 auto; position: relative; overflow: hidden; }
   .screen { flex: 1; display: none; flex-direction: column; overflow: hidden; }
   .screen.active { display: flex; }
   .scroll-body { flex: 1; overflow-y: auto; padding: 0 18px 24px; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
   .scroll-body::-webkit-scrollbar { display: none; }
 
-  /* ── TOP BAR ── */
+  /* TOP BAR */
   .topbar { padding: 52px 18px 16px; }
   .topbar-row { display: flex; align-items: center; justify-content: space-between; }
   .app-name { font-size: 24px; font-weight: 700; color: var(--primary); }
@@ -40,17 +38,16 @@
   .logo-mark { width: 42px; height: 42px; background: var(--primary); border-radius: 13px; display: flex; align-items: center; justify-content: center; }
   .logo-mark svg { margin-left: 2px; }
 
-  /* ── BOTTOM NAV ── */
+  /* BOTTOM NAV */
   .bottom-nav { height: var(--nav-h); background: #111; border-top: 1px solid var(--border); display: flex; flex-shrink: 0; }
   .nav-tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; border: none; background: transparent; color: var(--muted); font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; padding: 8px 4px; transition: color .15s; -webkit-tap-highlight-color: transparent; }
   .nav-tab.active { color: var(--primary); }
-  .nav-tab svg { transition: color .15s; }
 
-  /* ── CARDS ── */
+  /* CARDS */
   .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
   .card + .card { margin-top: 12px; }
 
-  /* ── PROGRESS BAR ── */
+  /* PROGRESS BAR */
   .progress-wrap { margin-bottom: 14px; }
   .prog-row  { display: flex; justify-content: space-between; align-items: center; }
   .prog-title { font-size: 15px; font-weight: 700; }
@@ -59,15 +56,14 @@
   .bar-track  { height: 6px; background: var(--track); border-radius: 3px; overflow: hidden; margin-top: 10px; }
   .bar-fill   { height: 100%; background: var(--primary); border-radius: 3px; transition: width .4s ease; }
 
-  /* ── PRO BUTTON ── */
+  /* PRO BUTTON */
   .pro-btn { width: 100%; background: var(--primary); color: #fff; border: none; border-radius: 16px; padding: 18px; font-size: 16px; font-weight: 700; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; margin-bottom: 24px; box-shadow: 0 4px 18px rgba(255,107,26,.35); -webkit-tap-highlight-color: transparent; transition: opacity .15s; }
   .pro-btn:active { opacity: .85; }
   .pro-badge { background: rgba(255,255,255,.25); border-radius: 6px; padding: 2px 7px; font-size: 11px; font-weight: 700; }
 
-  /* ── SECTION TITLE ── */
   .section-title { font-size: 19px; font-weight: 700; margin-bottom: 12px; }
 
-  /* ── COURSE CARD ── */
+  /* COURSE CARD */
   .course-card { display: flex; background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 14px; overflow: hidden; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: opacity .15s; }
   .course-card:active { opacity: .82; }
   .accent-bar { width: 4px; flex-shrink: 0; }
@@ -85,17 +81,17 @@
   .mini-bar-fill  { height: 100%; border-radius: 2px; transition: width .4s ease; }
   .mini-prog-header { display: flex; justify-content: space-between; font-size: 11px; margin-top: 4px; }
 
-  /* ── BACK BUTTON ── */
+  /* BACK BUTTON / SCREEN HEADER */
   .back-btn { width: 42px; height: 42px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; -webkit-tap-highlight-color: transparent; }
   .screen-header { display: flex; align-items: center; gap: 12px; padding: 52px 18px 14px; }
   .screen-header-title { font-size: 20px; font-weight: 700; }
 
-  /* ── COURSE DETAIL HEADER ── */
+  /* COURSE DETAIL */
   .detail-hero { border-radius: 18px; border: 1px solid; padding: 18px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
   .hero-icon { width: 54px; height: 54px; border-radius: 15px; display: flex; align-items: center; justify-content: center; }
   .hero-meta { display: flex; gap: 12px; flex-wrap: wrap; }
 
-  /* ── LESSON ITEM ── */
+  /* LESSON ITEM */
   .lesson-item { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: opacity .15s; }
   .lesson-item.locked { opacity: .5; cursor: default; }
   .lesson-item.completed { border-color: rgba(34,197,94,.4); }
@@ -108,7 +104,7 @@
   .lesson-desc-preview { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .lesson-right { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); flex-shrink: 0; }
 
-  /* ── LESSON PLAYER ── */
+  /* LESSON PLAYER */
   .video-player { aspect-ratio: 16/9; background: #111; border-radius: 18px; border: 2px solid; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; cursor: pointer; margin-bottom: 16px; -webkit-tap-highlight-color: transparent; }
   .play-circle { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
   .video-hint { color: #fff; font-size: 15px; font-weight: 600; }
@@ -116,28 +112,32 @@
   .desc-card { margin-bottom: 16px; }
   .desc-label { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
   .desc-text  { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* COMPLETE BUTTON — two states */
   .complete-btn { width: 100%; border: none; border-radius: 16px; padding: 20px; font-size: 17px; font-weight: 700; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer; margin-bottom: 14px; transition: opacity .15s; -webkit-tap-highlight-color: transparent; }
   .complete-btn:active { opacity: .85; }
-  .completed-banner { display: flex; align-items: center; justify-content: center; gap: 12px; border-radius: 16px; border: 1px solid rgba(34,197,94,.4); background: rgba(34,197,94,.12); padding: 20px; margin-bottom: 14px; font-size: 16px; font-weight: 700; color: var(--green); }
+  .complete-btn.done { background: var(--green) !important; }
+
   .next-btn { display: flex; align-items: center; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; gap: 12px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
   .next-btn:active { opacity: .8; }
   .next-label { font-size: 11px; color: var(--muted); }
   .next-title { font-size: 15px; font-weight: 600; }
   .next-arrow { margin-left: auto; flex-shrink: 0; }
+
   .course-tag { display: inline-flex; align-items: center; gap: 5px; border-radius: 8px; padding: 3px 10px; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
   .lesson-title-big { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
   .lesson-meta-row { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
   .done-badge { display: flex; align-items: center; gap: 4px; background: rgba(34,197,94,.18); border-radius: 8px; padding: 3px 8px; font-size: 12px; font-weight: 600; color: var(--green); }
 
-  /* ── PRO LOCK SCREEN ── */
+  /* PRO LOCK */
   .pro-lock { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; gap: 16px; text-align: center; }
   .lock-icon-wrap { width: 80px; height: 80px; border-radius: 24px; background: rgba(255,107,26,.15); display: flex; align-items: center; justify-content: center; }
   .lock-title { font-size: 24px; font-weight: 700; }
   .lock-desc { font-size: 15px; color: var(--muted); line-height: 1.6; }
-  .lock-btn { background: var(--primary); color: #fff; border: none; border-radius: 16px; padding: 18px 32px; font-size: 16px; font-weight: 700; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px; cursor: pointer; margin-top: 8px; -webkit-tap-highlight-color: transparent; }
+  .lock-btn { background: var(--primary); color: #fff; border: none; border-radius: 16px; padding: 18px 32px; font-size: 16px; font-weight: 700; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px; cursor: pointer; margin-top: 8px; }
   .back-link { font-size: 14px; color: var(--muted); cursor: pointer; margin-top: 4px; }
 
-  /* ── PROGRESS TAB ── */
+  /* PROGRESS TAB */
   .overall-card { border-radius: 16px; border: 1px solid rgba(255,107,26,.3); background: rgba(255,107,26,.1); padding: 18px; margin-bottom: 18px; display: flex; flex-direction: column; gap: 10px; }
   .overall-row { display: flex; justify-content: space-between; align-items: center; }
   .overall-label { font-size: 15px; font-weight: 600; }
@@ -162,12 +162,12 @@
   .empty-title { font-size: 16px; font-weight: 600; }
   .empty-desc  { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
-  /* ── SUPPORT TAB ── */
+  /* SUPPORT TAB */
   .hero-banner { border-radius: 16px; border: 1px solid rgba(255,107,26,.3); background: rgba(255,107,26,.1); padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; margin-bottom: 24px; }
   .hero-icon-big { width: 56px; height: 56px; border-radius: 18px; background: var(--primary); display: flex; align-items: center; justify-content: center; margin-bottom: 4px; }
   .hero-title { font-size: 18px; font-weight: 700; }
   .hero-desc  { font-size: 13px; color: var(--muted); line-height: 1.6; }
-  .contact-card { display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 10px; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: opacity .15s; }
+  .contact-card { display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 10px; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: opacity .15s; text-decoration: none; color: inherit; }
   .contact-card:active { opacity: .8; }
   .contact-icon { width: 44px; height: 44px; border-radius: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .contact-label { font-size: 14px; font-weight: 600; }
@@ -179,19 +179,13 @@
   .faq-item.open .faq-a { display: block; }
   .version-card { border-radius: 12px; border: 1px solid var(--border); background: var(--card); padding: 14px; text-align: center; font-size: 12px; color: var(--muted); margin-top: 8px; }
 
-  /* ── SVG ICONS ── */
   svg { display: block; }
-  .icon { display: inline-block; }
-
-  /* ── UTILITIES ── */
-  .flex { display: flex; } .items-center { align-items: center; } .gap-4 { gap: 4px; }
-  .mt-4 { margin-top: 4px; }
 </style>
 </head>
 <body>
 <div id="app">
 
-  <!-- ═══ COURSES TAB ═══ -->
+  <!-- COURSES TAB -->
   <div class="screen active" id="screen-courses">
     <div class="topbar">
       <div class="topbar-row">
@@ -205,7 +199,6 @@
       </div>
     </div>
     <div class="scroll-body">
-      <!-- Overall progress -->
       <div class="card progress-wrap">
         <div class="prog-row">
           <div>
@@ -217,7 +210,6 @@
         <div class="bar-track"><div class="bar-fill" id="home-bar-fill" style="width:0%"></div></div>
       </div>
 
-      <!-- Unlock Pro -->
       <button class="pro-btn" onclick="openFlutterwave()">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
         Unlock Pro Lessons
@@ -229,7 +221,7 @@
     </div>
   </div>
 
-  <!-- ═══ COURSE DETAIL ═══ -->
+  <!-- COURSE DETAIL -->
   <div class="screen" id="screen-detail">
     <div class="screen-header">
       <button class="back-btn" onclick="goBack()">
@@ -240,7 +232,7 @@
     <div class="scroll-body" id="detail-body"></div>
   </div>
 
-  <!-- ═══ LESSON PLAYER ═══ -->
+  <!-- LESSON PLAYER -->
   <div class="screen" id="screen-lesson">
     <div id="lesson-back-header" class="screen-header">
       <button class="back-btn" onclick="goBack()">
@@ -250,7 +242,7 @@
     <div class="scroll-body" id="lesson-body"></div>
   </div>
 
-  <!-- ═══ PROGRESS TAB ═══ -->
+  <!-- PROGRESS TAB -->
   <div class="screen" id="screen-progress">
     <div class="topbar">
       <div class="app-name" style="font-size:24px">My Progress</div>
@@ -259,7 +251,7 @@
     <div class="scroll-body" id="progress-body"></div>
   </div>
 
-  <!-- ═══ SUPPORT TAB ═══ -->
+  <!-- SUPPORT TAB -->
   <div class="screen" id="screen-support">
     <div class="topbar">
       <div class="app-name" style="font-size:24px">Support</div>
@@ -268,7 +260,7 @@
     <div class="scroll-body" id="support-body"></div>
   </div>
 
-  <!-- ═══ BOTTOM NAV ═══ -->
+  <!-- BOTTOM NAV -->
   <nav class="bottom-nav" id="bottom-nav">
     <button class="nav-tab active" id="nav-courses" onclick="showTab('courses')">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="4" height="18" rx="1"/><rect x="9" y="3" width="4" height="18" rx="1"/><rect x="16" y="3" width="6" height="18" rx="1"/></svg>
@@ -286,41 +278,42 @@
 </div>
 
 <script>
-// ════════════════════════════════════════
-//  DATA
-// ════════════════════════════════════════
+// ═══ DATA ═══
+// To swap in your own videos replace the YouTube URLs below with your actual links.
+const VIDEO = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+
 const COURSES = [
   {
-    id: 'basics', title: 'Basics of FlipaClip', level: 'Beginner',
-    description: 'Master the essential tools and techniques to start creating your first animations in FlipaClip from scratch.',
-    totalLessons: 3, estimatedHours: '30 min', color: '#22c55e',
-    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
-    lessons: [
-      { id:'basics-1', title:'Getting Started with FlipaClip', duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=PLACEHOLDER', description:"A complete walkthrough of FlipaClip's interface — brushes, the timeline, layers, and playback controls. By the end you'll know exactly where everything lives and be ready to start animating.", order:1, isPro:false },
-      { id:'basics-2', title:'Drawing & Onion Skinning',       duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=PLACEHOLDER', description:"Learn to draw clean frames and use onion skinning to line up your animation perfectly. You'll animate a simple bouncing ball to practice timing and spacing.", order:2, isPro:false },
-      { id:'basics-3', title:'Layers, Color & Export',         duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=PLACEHOLDER', description:"Use layers to separate backgrounds, characters, and effects. Add color to your animation and export a finished video ready to share on social media.", order:3, isPro:true },
+    id:'basics', title:'Basics of FlipaClip', level:'Beginner',
+    description:'Master the essential tools and techniques to start creating your first animations in FlipaClip from scratch.',
+    totalLessons:3, estimatedHours:'30 min', color:'#22c55e',
+    icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+    lessons:[
+      { id:'basics-1', title:'Getting Started with FlipaClip', duration:'10:00', videoUrl:VIDEO, description:"A complete walkthrough of FlipaClip's interface — brushes, the timeline, layers, and playback controls. By the end you'll know exactly where everything lives and be ready to start animating.", order:1, isPro:false },
+      { id:'basics-2', title:'Bouncing Ball Animation',         duration:'15:00', videoUrl:VIDEO, description:'Animate a bouncing ball to understand timing, spacing, squash, and stretch — the core principles every animator must master. The best hands-on exercise to build your animation instincts.', order:2, isPro:false },
+      { id:'basics-3', title:'Exporting Your Animation',        duration:'5:00',  videoUrl:VIDEO, description:'Export your finished animation as a video or GIF. Learn the best settings for TikTok, Instagram, and YouTube so your work looks great wherever you share it.', order:3, isPro:true },
     ]
   },
   {
-    id: 'character', title: 'Character Animation', level: 'Intermediate',
-    description: "Bring characters to life with walk cycles, run cycles, and expressive movement using FlipaClip's animation tools.",
-    totalLessons: 3, estimatedHours: '30 min', color: '#3B82F6',
-    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
-    lessons: [
-      { id:'character-1', title:'Designing an Animatable Character', duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=PLACEHOLDER', description:"Design a character built for smooth animation — correct body proportions, clean joints, and how to separate body parts into layers for maximum flexibility.", order:1, isPro:false },
-      { id:'character-2', title:'Walk Cycle Fundamentals',           duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=PLACEHOLDER', description:"Animate the iconic walk cycle step by step. Master foot placement, weight shift, hip rotation, and arm swing for a fluid, natural-looking walk.", order:2, isPro:true },
-      { id:'character-3', title:'Run, Jump & Expressions',           duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=PLACEHOLDER', description:"Level up with a run cycle, a dynamic jump with anticipation and landing, plus facial expressions that give your character personality and emotion.", order:3, isPro:true },
+    id:'character', title:'Character Animation', level:'Intermediate',
+    description:"Bring characters to life with walk cycles, run cycles, and expressive movement using FlipaClip's animation tools.",
+    totalLessons:3, estimatedHours:'40 min', color:'#3B82F6',
+    icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+    lessons:[
+      { id:'character-1', title:'Drawing the Background',   duration:'10:00', videoUrl:VIDEO, description:'Design and draw a complete scene background — perspective basics, layering elements, and creating depth that makes your character pop against the environment.', order:1, isPro:false },
+      { id:'character-2', title:'Animating the Character',  duration:'20:00', videoUrl:VIDEO, description:'Animate your character moving through the scene. Cover walk cycles, weight shifts, and expressive actions — bringing your character to life with fluid, believable movement.', order:2, isPro:true },
+      { id:'character-3', title:'Finalizing Your Scene',    duration:'10:00', videoUrl:VIDEO, description:'Polish and finalize your animated scene — adjust timing, clean up rough lines, add finishing touches, and export a complete short animation ready to share.', order:3, isPro:true },
     ]
   },
   {
-    id: 'lipsync', title: 'Lip Sync', level: 'Advanced',
-    description: "Match your character's mouth movements perfectly to audio dialogue using FlipaClip's frame-by-frame lip sync techniques.",
-    totalLessons: 3, estimatedHours: '30 min', color: '#FF6B1A',
-    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>`,
-    lessons: [
-      { id:'lipsync-1', title:'Understanding Mouth Shapes', duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=PLACEHOLDER', description:"Learn the standard Preston Blair mouth chart — the 8 essential mouth shapes (A/I, E, O, U, F/V, L/TH, M/B/P, rest) and how they map to the sounds in spoken dialogue.", order:1, isPro:false },
-      { id:'lipsync-2', title:'Breaking Down Audio',        duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=PLACEHOLDER', description:"Import audio into FlipaClip and learn to read the waveform. Break a line of dialogue into individual sounds and map each sound to the correct mouth shape frame by frame.", order:2, isPro:true },
-      { id:'lipsync-3', title:'Full Lip Sync Scene',        duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=PLACEHOLDER', description:"Bring it all together — animate a complete talking character scene with synced mouth shapes, eye blinks, and subtle head movement for a convincing, polished performance.", order:3, isPro:true },
+    id:'lipsync', title:'Lip Sync', level:'Advanced',
+    description:"Match your character's mouth movements perfectly to audio dialogue using FlipaClip's frame-by-frame lip sync techniques.",
+    totalLessons:3, estimatedHours:'30 min', color:'#FF6B1A',
+    icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>`,
+    lessons:[
+      { id:'lipsync-1', title:'Understanding Mouth Shapes', duration:'10:00', videoUrl:VIDEO, description:'Learn the standard Preston Blair mouth chart — the 8 essential shapes (A/I, E, O, U, F/V, L/TH, M/B/P, rest) and how they map to sounds in spoken dialogue.', order:1, isPro:false },
+      { id:'lipsync-2', title:'Breaking Down Audio',        duration:'10:00', videoUrl:VIDEO, description:'Import audio into FlipaClip, read the waveform, break a line of dialogue into individual sounds, and map each sound to the correct mouth shape frame by frame.', order:2, isPro:true },
+      { id:'lipsync-3', title:'Full Lip Sync Scene',        duration:'10:00', videoUrl:VIDEO, description:'Animate a complete talking character scene with synced mouth shapes, eye blinks, and subtle head movement — a polished, convincing performance from start to finish.', order:3, isPro:true },
     ]
   }
 ];
@@ -328,108 +321,103 @@ const COURSES = [
 const FLUTTERWAVE_LINK = 'https://flutterwave.com/pay/mac-academy-pro';
 const STORAGE_KEY = 'mac_academy_progress_v3';
 
-// ════════════════════════════════════════
-//  PROGRESS STORAGE
-// ════════════════════════════════════════
-function getProgress() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { return {}; }
-}
+// ═══ PROGRESS ═══
+function getProgress() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); } catch { return {}; } }
 function saveProgress(p) { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }
-function isComplete(lessonId) { return !!getProgress()[lessonId]; }
-function markComplete(lessonId) { const p = getProgress(); p[lessonId] = true; saveProgress(p); }
+function isComplete(id) { return !!getProgress()[id]; }
+
+function toggleComplete(id) {
+  const p = getProgress();
+  p[id] = !p[id];
+  saveProgress(p);
+}
 
 function getCourseProgress(course) {
   const p = getProgress();
   const done = course.lessons.filter(l => p[l.id]).length;
-  return course.totalLessons > 0 ? Math.round((done / course.totalLessons) * 100) : 0;
+  return course.totalLessons > 0 ? Math.round((done/course.totalLessons)*100) : 0;
 }
 function getTotalProgress() {
-  const total = COURSES.reduce((s,c) => s + c.totalLessons, 0);
+  const total = COURSES.reduce((s,c)=>s+c.totalLessons,0);
   const done  = Object.values(getProgress()).filter(Boolean).length;
-  return { total, done, pct: total > 0 ? Math.round((done/total)*100) : 0 };
+  return { total, done, pct: total>0 ? Math.round((done/total)*100) : 0 };
 }
 
-// ════════════════════════════════════════
-//  NAVIGATION
-// ════════════════════════════════════════
+// ═══ NAVIGATION ═══
 let currentTab   = 'courses';
-let screenStack  = [];   // stack of screen ids
+let screenStack  = [];
 let currentCourse = null;
 
 function showTab(tab) {
   currentTab = tab;
   screenStack = [];
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen-' + tab).classList.add('active');
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+tab).classList.add('active');
   document.getElementById('bottom-nav').style.display = 'flex';
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('nav-' + tab).classList.add('active');
-  if (tab === 'progress') renderProgress();
-  if (tab === 'support')  renderSupport();
-  if (tab === 'courses')  updateHomeProgress();
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('nav-'+tab).classList.add('active');
+  if (tab==='progress') renderProgress();
+  if (tab==='support')  renderSupport();
+  if (tab==='courses')  updateHomeProgress();
 }
 
-function pushScreen(screenId) {
+function pushScreen(id) {
   screenStack.push(document.querySelector('.screen.active').id);
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(screenId).classList.add('active');
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
   document.getElementById('bottom-nav').style.display = 'none';
 }
 
 function goBack() {
   if (!screenStack.length) return;
   const prev = screenStack.pop();
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(prev).classList.add('active');
   if (!screenStack.length) {
     document.getElementById('bottom-nav').style.display = 'flex';
     updateHomeProgress();
-    if (currentTab === 'progress') renderProgress();
+    if (currentTab==='progress') renderProgress();
+    if (currentCourse) renderCourseDetail(currentCourse);
   }
 }
 
-function openFlutterwave() { window.open(FLUTTERWAVE_LINK, '_blank'); }
+function openFlutterwave() { window.open(FLUTTERWAVE_LINK,'_blank'); }
 
-// ════════════════════════════════════════
-//  ICON HELPERS
-// ════════════════════════════════════════
-const ICONS = {
-  check: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
-  lock:  `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
-  play:  `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:3px"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
-  clock: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
-  plays: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>`,
-  hash:  `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>`,
-  chev:  `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`,
-  chevD: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`,
-  chevU: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>`,
+// ═══ ICONS ═══
+const IC = {
+  check:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
   check2:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
-  award: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>`,
-  phone: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
-  mail:  `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
-  tiktok:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>`,
-  head:  `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>`,
+  circle:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>`,
+  lock:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+  play:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:3px"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
+  clock:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+  plays:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>`,
+  hash:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>`,
+  chev:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`,
+  chevD:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`,
+  chevU:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>`,
+  award:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>`,
   unlock:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>`,
-  arrow: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`,
+  arrow:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`,
+  wa:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`,
+  mail:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
+  vid:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>`,
+  head:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>`,
 };
 
-// ════════════════════════════════════════
-//  COURSES SCREEN
-// ════════════════════════════════════════
+// ═══ COURSES SCREEN ═══
 function updateHomeProgress() {
-  const { total, done, pct } = getTotalProgress();
-  document.getElementById('home-prog-pct').textContent = pct + '%';
-  document.getElementById('home-prog-sub').textContent = done + ' of ' + total + ' lessons completed';
-  document.getElementById('home-bar-fill').style.width = pct + '%';
-
-  // refresh progress bars on course cards
+  const {total,done,pct} = getTotalProgress();
+  document.getElementById('home-prog-pct').textContent = pct+'%';
+  document.getElementById('home-prog-sub').textContent = done+' of '+total+' lessons completed';
+  document.getElementById('home-bar-fill').style.width = pct+'%';
   COURSES.forEach(c => {
     const p = getCourseProgress(c);
-    const el = document.getElementById('card-prog-' + c.id);
+    const el = document.getElementById('card-prog-'+c.id);
     if (el) {
-      el.querySelector('.mini-bar-fill').style.width = p + '%';
-      el.querySelector('.mini-prog-pct').textContent = p + '%';
-      el.style.display = p > 0 ? 'block' : 'none';
+      el.querySelector('.mini-bar-fill').style.width = p+'%';
+      el.querySelector('.mini-prog-pct').textContent = p+'%';
+      el.style.display = p>0 ? 'block' : 'none';
     }
   });
 }
@@ -437,7 +425,7 @@ function updateHomeProgress() {
 function renderCoursesList() {
   const list = document.getElementById('courses-list');
   list.innerHTML = COURSES.map(c => {
-    const freeCt = c.lessons.filter(l => !l.isPro).length;
+    const freeCount = c.lessons.filter(l=>!l.isPro).length;
     const p = getCourseProgress(c);
     return `
     <div class="course-card" onclick="openCourse('${c.id}')">
@@ -446,14 +434,14 @@ function renderCoursesList() {
         <div class="course-top">
           <div class="course-icon-wrap" style="background:${c.color}22">${c.icon}</div>
           <div class="level-badge" style="background:${c.color}20;color:${c.color}">${c.level}</div>
-          <div class="free-chip">${freeCt} free</div>
+          <div class="free-chip">${freeCount} free</div>
         </div>
         <div class="course-title-text">${c.title}</div>
         <div class="course-desc">${c.description}</div>
         <div class="meta-row">
-          <div class="meta-item">${ICONS.plays} ${c.totalLessons} lessons</div>
-          <div class="meta-item">${ICONS.clock} ${c.estimatedHours}</div>
-          <div class="chevron-right">${ICONS.chev}</div>
+          <div class="meta-item">${IC.plays} ${c.totalLessons} lessons</div>
+          <div class="meta-item">${IC.clock} ${c.estimatedHours}</div>
+          <div class="chevron-right">${IC.chev}</div>
         </div>
         <div id="card-prog-${c.id}" style="display:${p>0?'block':'none'}">
           <div class="mini-prog-header">
@@ -468,30 +456,27 @@ function renderCoursesList() {
 }
 
 function openCourse(courseId) {
-  currentCourse = COURSES.find(c => c.id === courseId);
+  currentCourse = COURSES.find(c=>c.id===courseId);
   renderCourseDetail(currentCourse);
   pushScreen('screen-detail');
 }
 
-// ════════════════════════════════════════
-//  COURSE DETAIL
-// ════════════════════════════════════════
+// ═══ COURSE DETAIL ═══
 function renderCourseDetail(c) {
-  document.getElementById('detail-screen-title').textContent = '';
   const prog = getCourseProgress(c);
-  const done = c.lessons.filter(l => isComplete(l.id)).length;
-  const proCount = c.lessons.filter(l => l.isPro).length;
-  const freeCount = c.lessons.filter(l => !l.isPro).length;
-
+  const done = c.lessons.filter(l=>isComplete(l.id)).length;
+  const proCount = c.lessons.filter(l=>l.isPro).length;
+  const freeCount = c.lessons.filter(l=>!l.isPro).length;
+  document.getElementById('detail-screen-title').textContent = '';
   document.getElementById('detail-body').innerHTML = `
     <div class="detail-hero" style="background:${c.color}15;border-color:${c.color}30">
-      <div class="hero-icon" style="background:${c.color}">${c.icon.replace('width="18" height="18"','width="26" height="26"').replace('stroke-width="2.2"','stroke-width="2.5"').replace('stroke="currentColor"','stroke="#fff"')}</div>
+      <div class="hero-icon" style="background:${c.color}">${c.icon.replace('width="18" height="18"','width="26" height="26"').replace('stroke="currentColor"','stroke="#fff"')}</div>
       <div class="level-badge" style="background:${c.color}25;color:${c.color};align-self:flex-start">${c.level}</div>
       <div style="font-size:21px;font-weight:700">${c.title}</div>
       <div style="font-size:14px;color:var(--muted);line-height:1.6">${c.description}</div>
       <div class="hero-meta">
-        <div class="meta-item">${ICONS.plays} ${c.totalLessons} lessons</div>
-        <div class="meta-item">${ICONS.clock} ${c.estimatedHours}</div>
+        <div class="meta-item">${IC.plays} ${c.totalLessons} lessons</div>
+        <div class="meta-item">${IC.clock} ${c.estimatedHours}</div>
         <div class="meta-item" style="color:var(--green)">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
           ${freeCount} free
@@ -499,7 +484,7 @@ function renderCourseDetail(c) {
       </div>
     </div>
 
-    ${prog > 0 ? `
+    ${prog>0 ? `
     <div class="card" style="margin-bottom:14px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
         <span style="font-size:14px;font-weight:600">Your Progress</span>
@@ -509,32 +494,28 @@ function renderCourseDetail(c) {
       <div style="font-size:12px;color:var(--muted);margin-top:6px">${done} of ${c.totalLessons} lessons completed</div>
     </div>` : ''}
 
-    ${proCount > 0 ? `
+    ${proCount>0 ? `
     <button class="pro-btn" style="margin-bottom:20px" onclick="openFlutterwave()">
-      ${ICONS.unlock} Unlock ${proCount} Pro Lessons
+      ${IC.unlock} Unlock ${proCount} Pro Lessons
     </button>` : ''}
 
     <div class="section-title">Lessons</div>
-    ${c.lessons.map(l => renderLessonItem(l, c)).join('')}
+    ${c.lessons.map(l=>renderLessonItem(l,c)).join('')}
   `;
 }
 
-function renderLessonItem(l, c) {
+function renderLessonItem(l,c) {
   const done   = isComplete(l.id);
   const locked = l.isPro;
   let numWrap;
-  if (done) {
-    numWrap = `<div class="lesson-num" style="background:rgba(34,197,94,.18);color:var(--green)">${ICONS.check}</div>`;
-  } else if (locked) {
-    numWrap = `<div class="lesson-num" style="background:var(--card2);color:var(--muted)">${ICONS.lock}</div>`;
-  } else {
-    numWrap = `<div class="lesson-num" style="background:${c.color}18;color:${c.color};font-size:15px;font-weight:700">${l.order}</div>`;
-  }
-  const borderColor = done ? 'rgba(34,197,94,.4)' : 'var(--border)';
-  const cls = locked ? 'lesson-item locked' : done ? 'lesson-item completed' : 'lesson-item';
-  const onclick = locked ? '' : `onclick="openLesson('${l.id}','${c.id}')"`;
+  if (done)        numWrap = `<div class="lesson-num" style="background:rgba(34,197,94,.18);color:var(--green)">${IC.check}</div>`;
+  else if (locked) numWrap = `<div class="lesson-num" style="background:var(--card2);color:var(--muted)">${IC.lock}</div>`;
+  else             numWrap = `<div class="lesson-num" style="background:${c.color}18;color:${c.color}">${l.order}</div>`;
+  const border = done ? 'rgba(34,197,94,.4)' : 'var(--border)';
+  const cls    = locked ? 'lesson-item locked' : done ? 'lesson-item completed' : 'lesson-item';
+  const click  = locked ? '' : `onclick="openLesson('${l.id}','${c.id}')"`;
   return `
-  <div class="${cls}" style="border-color:${borderColor}" ${onclick}>
+  <div class="${cls}" style="border-color:${border}" ${click}>
     ${numWrap}
     <div class="lesson-body">
       <div class="lesson-title-row">
@@ -545,17 +526,15 @@ function renderLessonItem(l, c) {
     </div>
     <div class="lesson-right">
       <span>${l.duration}</span>
-      ${!locked ? ICONS.chev : ''}
+      ${!locked ? IC.chev : ''}
     </div>
   </div>`;
 }
 
-// ════════════════════════════════════════
-//  LESSON PLAYER
-// ════════════════════════════════════════
+// ═══ LESSON PLAYER ═══
 function openLesson(lessonId, courseId) {
-  const course = COURSES.find(c => c.id === courseId);
-  const lesson = course.lessons.find(l => l.id === lessonId);
+  const course  = COURSES.find(c=>c.id===courseId);
+  const lesson  = course.lessons.find(l=>l.id===lessonId);
   if (lesson.isPro) { renderProLock(lesson, course); pushScreen('screen-lesson'); return; }
   renderLessonPlayer(lesson, course);
   pushScreen('screen-lesson');
@@ -563,21 +542,21 @@ function openLesson(lessonId, courseId) {
 
 function renderLessonPlayer(lesson, course) {
   const done = isComplete(lesson.id);
-  const next = course.lessons.find(l => l.order === lesson.order + 1);
+  const next = course.lessons.find(l=>l.order===lesson.order+1);
   document.getElementById('lesson-back-header').style.display = 'flex';
   document.getElementById('lesson-body').innerHTML = `
     <div class="course-tag" style="background:${course.color}20;color:${course.color}">${course.icon.replace('width="18" height="18"','width="12" height="12"')} ${course.title}</div>
     <div class="lesson-title-big">${lesson.title}</div>
     <div class="lesson-meta-row">
-      <div class="meta-item">${ICONS.clock} ${lesson.duration}</div>
-      <div class="meta-item">${ICONS.hash} Lesson ${lesson.order} of ${course.totalLessons}</div>
-      ${done ? `<div class="done-badge">${ICONS.check} Complete</div>` : ''}
+      <div class="meta-item">${IC.clock} ${lesson.duration}</div>
+      <div class="meta-item">${IC.hash} Lesson ${lesson.order} of ${course.totalLessons}</div>
+      ${done ? `<div class="done-badge">${IC.check} Complete</div>` : ''}
     </div>
 
     <div class="video-player" style="border-color:${course.color}60" onclick="openVideo('${lesson.videoUrl}')">
-      <div class="play-circle" style="background:${course.color}">${ICONS.play}</div>
-      <div class="video-hint">Tap to open video</div>
-      <div class="video-sub">Replace the URL in the JS data section with your YouTube / Vimeo link</div>
+      <div class="play-circle" style="background:${course.color}">${IC.play}</div>
+      <div class="video-hint">Tap to watch video</div>
+      <div class="video-sub">Opens in YouTube · swap the URL in the VIDEO variable at the top of the script</div>
     </div>
 
     <div class="card desc-card">
@@ -585,14 +564,13 @@ function renderLessonPlayer(lesson, course) {
       <div class="desc-text">${lesson.description}</div>
     </div>
 
-    <div id="complete-area">
-      ${done
-        ? `<div class="completed-banner">${ICONS.check2} Lesson Completed!</div>`
-        : `<button class="complete-btn" style="background:${course.color};color:#fff" onclick="doMarkComplete('${lesson.id}','${course.id}')">
-             ${ICONS.check2} Mark as Complete
-           </button>`
-      }
-    </div>
+    <button id="toggle-btn"
+      class="complete-btn ${done?'done':''}"
+      style="background:${done?'var(--green)':course.color}"
+      onclick="doToggle('${lesson.id}','${course.id}')">
+      ${done ? IC.check2 : IC.circle}
+      <span>${done ? 'Completed — Tap to Undo' : 'Mark as Complete'}</span>
+    </button>
 
     ${next && !next.isPro ? `
     <div class="next-btn" onclick="openLesson('${next.id}','${course.id}')">
@@ -600,7 +578,7 @@ function renderLessonPlayer(lesson, course) {
         <div class="next-label">Up next</div>
         <div class="next-title">${next.title}</div>
       </div>
-      <div class="next-arrow" style="color:${course.color}">${ICONS.arrow}</div>
+      <div class="next-arrow" style="color:${course.color}">${IC.arrow}</div>
     </div>` : ''}
   `;
 }
@@ -608,8 +586,8 @@ function renderLessonPlayer(lesson, course) {
 function renderProLock(lesson, course) {
   document.getElementById('lesson-back-header').style.display = 'none';
   document.getElementById('lesson-body').innerHTML = `
-    <div style="padding-top:52px">
-      <button class="back-btn" onclick="goBack()" style="margin-bottom:0">
+    <div style="padding-top:52px;padding-left:18px">
+      <button class="back-btn" onclick="goBack()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
     </div>
@@ -618,10 +596,9 @@ function renderProLock(lesson, course) {
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       </div>
       <div class="lock-title">Pro Lesson</div>
-      <div class="lock-desc">"${lesson.title}" is a Pro lesson. Unlock all Pro lessons with a one-time payment via Flutterwave (MTN & Airtel Uganda Mobile Money supported).</div>
+      <div class="lock-desc">"${lesson.title}" is a Pro lesson. Unlock all Pro content with a one-time payment via Flutterwave — MTN & Airtel Uganda Mobile Money supported.</div>
       <button class="lock-btn" onclick="openFlutterwave()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
-        Unlock Pro Lessons
+        ${IC.unlock} Unlock Pro Lessons
       </button>
       <div class="back-link" onclick="goBack()">← Back to course</div>
     </div>
@@ -629,26 +606,40 @@ function renderProLock(lesson, course) {
 }
 
 function openVideo(url) {
-  if (url.includes('PLACEHOLDER')) {
-    alert('Paste your YouTube or Vimeo URL in the lesson data inside the <script> section of this HTML file.');
-    return;
-  }
   window.open(url, '_blank');
 }
 
-function doMarkComplete(lessonId, courseId) {
-  markComplete(lessonId);
-  const course = COURSES.find(c => c.id === courseId);
-  const lesson = course.lessons.find(l => l.id === lessonId);
-  renderLessonPlayer(lesson, course);
+function doToggle(lessonId, courseId) {
+  toggleComplete(lessonId);
+  const course = COURSES.find(c=>c.id===courseId);
+  const lesson = course.lessons.find(l=>l.id===lessonId);
+  // update only the button — no full re-render so scroll position is preserved
+  const done = isComplete(lessonId);
+  const btn  = document.getElementById('toggle-btn');
+  if (!btn) return;
+  btn.className = 'complete-btn' + (done?' done':'');
+  btn.style.background = done ? 'var(--green)' : course.color;
+  btn.innerHTML = (done ? IC.check2 : IC.circle) + `<span>${done ? 'Completed — Tap to Undo' : 'Mark as Complete'}</span>`;
+
+  // update the done badge in the meta row
+  const metaRow = document.querySelector('.lesson-meta-row');
+  if (metaRow) {
+    const existing = metaRow.querySelector('.done-badge');
+    if (done && !existing) {
+      const badge = document.createElement('div');
+      badge.className = 'done-badge';
+      badge.innerHTML = IC.check + ' Complete';
+      metaRow.appendChild(badge);
+    } else if (!done && existing) {
+      existing.remove();
+    }
+  }
 }
 
-// ════════════════════════════════════════
-//  PROGRESS TAB
-// ════════════════════════════════════════
+// ═══ PROGRESS TAB ═══
 function renderProgress() {
-  const { total, done, pct } = getTotalProgress();
-  const completedCourses = COURSES.filter(c => getCourseProgress(c) === 100).length;
+  const {total,done,pct} = getTotalProgress();
+  const finishedCourses  = COURSES.filter(c=>getCourseProgress(c)===100).length;
   document.getElementById('progress-body').innerHTML = `
     <div class="overall-card">
       <div class="overall-row">
@@ -661,21 +652,20 @@ function renderProgress() {
 
     <div class="stats-row">
       <div class="stat-card">
-        <div class="stat-icon" style="background:rgba(34,197,94,.18)">${ICONS.check2.replace('22','20')}</div>
+        <div class="stat-icon" style="background:rgba(34,197,94,.18)">${IC.check2}</div>
         <div class="stat-value">${done}</div>
         <div class="stat-label">Lessons Done</div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon" style="background:rgba(251,191,36,.18)">${ICONS.award}</div>
-        <div class="stat-value">${completedCourses}</div>
+        <div class="stat-icon" style="background:rgba(251,191,36,.18)">${IC.award}</div>
+        <div class="stat-value">${finishedCourses}</div>
         <div class="stat-label">Courses Finished</div>
       </div>
     </div>
 
     <div class="section-title">Course Breakdown</div>
-    ${COURSES.map(c => {
-      const p = getCourseProgress(c);
-      const d = c.lessons.filter(l => isComplete(l.id)).length;
+    ${COURSES.map(c=>{
+      const p=getCourseProgress(c), d=c.lessons.filter(l=>isComplete(l.id)).length;
       return `
       <div class="course-prog-row">
         <div class="course-prog-accent" style="background:${c.color}"></div>
@@ -693,7 +683,7 @@ function renderProgress() {
       </div>`;
     }).join('')}
 
-    ${done === 0 ? `
+    ${done===0 ? `
     <div class="empty-state">
       <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
       <div class="empty-title">No progress yet</div>
@@ -702,53 +692,56 @@ function renderProgress() {
   `;
 }
 
-// ════════════════════════════════════════
-//  SUPPORT TAB
-// ════════════════════════════════════════
+// ═══ SUPPORT TAB ═══
 const FAQS = [
-  { q:'How do I watch a video lesson?',               a:"Go to the Courses tab, tap a course, then tap any unlocked lesson. The video player will open so you can follow along at your own pace." },
-  { q:'How does progress saving work?',               a:"Your progress is saved automatically to your device (localStorage) when you tap 'Mark as Complete' on a lesson. It stays saved even after you close the browser." },
-  { q:'How do I unlock Pro lessons?',                 a:"Tap the orange 'Unlock Pro Lessons' button on the Courses screen. You'll be taken to our Flutterwave payment page where you can pay via MTN or Airtel Uganda Mobile Money." },
-  { q:'Which payment methods are supported?',         a:"We accept MTN Uganda Mobile Money and Airtel Uganda Mobile Money through Flutterwave." },
-  { q:'What is FlipaClip?',                           a:"FlipaClip is a popular mobile animation app available on Android and iOS. This academy teaches you everything from beginner basics all the way to advanced lip sync." },
-  { q:"I completed a lesson but progress didn't save.",a:"Make sure you tapped the 'Mark as Complete' button at the bottom of the lesson page. If the issue persists, try refreshing the page." },
+  { q:'How do I watch a video lesson?',
+    a:"Tap a course, then tap any unlocked lesson. The video will open in YouTube so you can follow along at your own pace." },
+  { q:'How does progress saving work?',
+    a:"Progress is saved to your browser when you tap 'Mark as Complete'. If you tapped by mistake, tap the button again — it toggles back and forth." },
+  { q:'How do I unlock Pro lessons?',
+    a:"Tap the orange 'Unlock Pro Lessons' button on the Courses screen. You'll be taken to Flutterwave where you can pay via MTN or Airtel Uganda Mobile Money." },
+  { q:'Which payment methods are supported?',
+    a:'MTN Uganda Mobile Money and Airtel Uganda Mobile Money through Flutterwave.' },
+  { q:'What is FlipaClip?',
+    a:'FlipaClip is a mobile animation app for Android and iOS. This academy covers everything from beginner basics to advanced lip sync.' },
+  { q:"I tapped 'Mark as Complete' by mistake. Can I undo it?",
+    a:"Yes! Just tap the button again. It now toggles — green means complete, orange means not complete. You can switch back and forth as many times as you like." },
 ];
 
 function renderSupport() {
   document.getElementById('support-body').innerHTML = `
     <div class="hero-banner">
-      <div class="hero-icon-big">${ICONS.head}</div>
+      <div class="hero-icon-big">${IC.head}</div>
       <div class="hero-title">Get in Touch</div>
-      <div class="hero-desc">Reach out via phone, email, or TikTok. We typically respond within 24 hours.</div>
+      <div class="hero-desc">Reach out via WhatsApp, email, or TikTok. We typically respond within 24 hours.</div>
     </div>
 
     <div class="section-title">Contact & Socials</div>
 
-    <a class="contact-card" href="tel:0745414641" style="text-decoration:none;color:inherit">
-      <div class="contact-icon" style="background:rgba(34,197,94,.15);color:var(--green)">${ICONS.phone}</div>
-      <div><div class="contact-label">Call Us</div><div class="contact-sub">0745414641</div></div>
-      <div style="margin-left:auto;color:var(--muted)">${ICONS.chev}</div>
+    <a class="contact-card" href="https://wa.me/256745414641" target="_blank">
+      <div class="contact-icon" style="background:rgba(37,211,102,.15);color:#25D366">${IC.wa}</div>
+      <div><div class="contact-label">WhatsApp</div><div class="contact-sub">0745414641</div></div>
+      <div style="margin-left:auto;color:var(--muted)">${IC.chev}</div>
     </a>
 
-    <a class="contact-card" href="mailto:alexkasaba20006@gmail.com" style="text-decoration:none;color:inherit">
-      <div class="contact-icon" style="background:rgba(255,107,26,.15);color:var(--primary)">${ICONS.mail}</div>
+    <a class="contact-card" href="mailto:alexkasaba20006@gmail.com">
+      <div class="contact-icon" style="background:rgba(255,107,26,.15);color:var(--primary)">${IC.mail}</div>
       <div><div class="contact-label">Email Support</div><div class="contact-sub">alexkasaba20006@gmail.com</div></div>
-      <div style="margin-left:auto;color:var(--muted)">${ICONS.chev}</div>
+      <div style="margin-left:auto;color:var(--muted)">${IC.chev}</div>
     </a>
 
-    <a class="contact-card" href="https://www.tiktok.com/@mac_toonzug" target="_blank" style="text-decoration:none;color:inherit">
-      <div class="contact-icon" style="background:rgba(240,240,240,.1);color:var(--fg)">${ICONS.tiktok}</div>
+    <a class="contact-card" href="https://www.tiktok.com/@mac_toonzug" target="_blank">
+      <div class="contact-icon" style="background:rgba(240,240,240,.1);color:var(--fg)">${IC.vid}</div>
       <div><div class="contact-label">TikTok</div><div class="contact-sub">@mac_toonzug</div></div>
-      <div style="margin-left:auto;color:var(--muted)">${ICONS.chev}</div>
+      <div style="margin-left:auto;color:var(--muted)">${IC.chev}</div>
     </a>
 
     <div class="section-title" style="margin-top:16px">Frequently Asked Questions</div>
-
-    ${FAQS.map((f,i) => `
+    ${FAQS.map((f,i)=>`
     <div class="faq-item" id="faq-${i}" onclick="toggleFaq(${i})">
       <div class="faq-row">
         <div class="faq-q">${f.q}</div>
-        <span id="faq-chev-${i}">${ICONS.chevD}</span>
+        <span id="faq-chev-${i}">${IC.chevD}</span>
       </div>
       <div class="faq-a">${f.a}</div>
     </div>`).join('')}
@@ -758,15 +751,13 @@ function renderSupport() {
 }
 
 function toggleFaq(i) {
-  const el = document.getElementById('faq-' + i);
-  const ch = document.getElementById('faq-chev-' + i);
+  const el = document.getElementById('faq-'+i);
+  const ch = document.getElementById('faq-chev-'+i);
   const open = el.classList.toggle('open');
-  ch.innerHTML = open ? ICONS.chevU : ICONS.chevD;
+  ch.innerHTML = open ? IC.chevU : IC.chevD;
 }
 
-// ════════════════════════════════════════
-//  INIT
-// ════════════════════════════════════════
+// ═══ INIT ═══
 renderCoursesList();
 updateHomeProgress();
 </script>
