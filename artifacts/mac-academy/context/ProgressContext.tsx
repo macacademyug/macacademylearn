@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 interface ProgressContextType {
   completedLessons: Record<string, boolean>;
   markComplete: (lessonId: string) => void;
+  toggleComplete: (lessonId: string) => void;
   isComplete: (lessonId: string) => boolean;
   getCourseProgress: (courseId: string, totalLessons: number) => number;
   unlockedCourses: Record<string, boolean>;
@@ -41,6 +42,15 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     } catch {}
   };
 
+  const toggleComplete = async (lessonId: string) => {
+    const current = !!completedLessons[lessonId];
+    const updated = { ...completedLessons, [lessonId]: !current };
+    setCompletedLessons(updated);
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    } catch {}
+  };
+
   const isComplete = (lessonId: string) => !!completedLessons[lessonId];
 
   const getCourseProgress = (courseId: string, totalLessons: number) => {
@@ -63,7 +73,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
   return (
     <ProgressContext.Provider
-      value={{ completedLessons, markComplete, isComplete, getCourseProgress, unlockedCourses, unlockCourse, isUnlocked }}
+      value={{ completedLessons, markComplete, toggleComplete, isComplete, getCourseProgress, unlockedCourses, unlockCourse, isUnlocked }}
     >
       {children}
     </ProgressContext.Provider>

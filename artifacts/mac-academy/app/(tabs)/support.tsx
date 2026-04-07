@@ -16,11 +16,11 @@ import * as Haptics from "expo-haptics";
 const FAQS = [
   {
     q: "How do I watch a video lesson?",
-    a: "Go to the Courses tab, tap a course, then tap any unlocked lesson. The video player will open so you can follow along at your own pace.",
+    a: "Go to the Courses tab, tap a course, then tap any unlocked lesson. The video will open in YouTube so you can follow along at your own pace.",
   },
   {
     q: "How does progress saving work?",
-    a: "Your progress is saved automatically to your device when you tap 'Mark as Complete' on a lesson. It stays saved even after you close the app.",
+    a: "Your progress is saved automatically to your device when you tap 'Mark as Complete' on a lesson. It stays saved even after you close the app. You can also tap the button again to undo it if you tapped by mistake.",
   },
   {
     q: "How do I unlock Pro lessons?",
@@ -138,7 +138,7 @@ export default function SupportScreen() {
           Get in Touch
         </Text>
         <Text style={[styles.heroDesc, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
-          Reach out via phone, email, or TikTok. We typically respond within 24 hours.
+          Reach out via WhatsApp, email, or TikTok. We typically respond within 24 hours.
         </Text>
       </View>
 
@@ -147,11 +147,11 @@ export default function SupportScreen() {
       </Text>
 
       <ContactRow
-        icon="phone"
-        label="Call Us"
+        icon="message-circle"
+        label="WhatsApp"
         sub="0745414641"
-        url="tel:0745414641"
-        color="#22c55e"
+        url="https://wa.me/256745414641"
+        color="#25D366"
       />
       <ContactRow
         icon="mail"

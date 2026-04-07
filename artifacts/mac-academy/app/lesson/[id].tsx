@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -22,8 +22,7 @@ export default function LessonScreen() {
   const colors = useColors();
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { markComplete, isComplete } = useProgress();
-  const [justMarked, setJustMarked] = useState(false);
+  const { toggleComplete, isComplete } = useProgress();
 
   const course = COURSES.find((c) => c.id === courseId);
   const lesson = course?.lessons.find((l) => l.id === id);
@@ -31,21 +30,27 @@ export default function LessonScreen() {
   const nextLesson = course?.lessons.find((l) => l.order === (lesson?.order ?? 0) + 1);
   const topPadding = Platform.OS === "web" ? 67 : insets.top;
 
-  const handleMarkComplete = async () => {
-    if (!lesson || completed) return;
-    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    await markComplete(lesson.id);
-    setJustMarked(true);
+  const handleToggleComplete = async () => {
+    if (!lesson) return;
+    Haptics.notificationAsync(
+      completed
+        ? Haptics.NotificationFeedbackType.Warning
+        : Haptics.NotificationFeedbackType.Success
+    );
+    await toggleComplete(lesson.id);
   };
 
   const handleOpenVideo = async () => {
     if (!lesson) return;
     try {
       const ok = await Linking.canOpenURL(lesson.videoUrl);
-      if (ok) await Linking.openURL(lesson.videoUrl);
-      else Alert.alert("Video Placeholder", "Paste your YouTube or Vimeo link in data/courses.ts for this lesson.");
+      if (ok) {
+        await Linking.openURL(lesson.videoUrl);
+      } else {
+        Alert.alert("Video", "Could not open the video link.");
+      }
     } catch {
-      Alert.alert("Video Placeholder", "Paste your YouTube or Vimeo link in data/courses.ts for this lesson.");
+      Alert.alert("Video", "Could not open the video link.");
     }
   };
 
@@ -152,7 +157,7 @@ export default function LessonScreen() {
             Lesson {lesson.order} of {course.totalLessons}
           </Text>
         </View>
-        {(completed || justMarked) && (
+        {completed && (
           <View style={[styles.doneBadge, { backgroundColor: colors.completed + "20" }]}>
             <Feather name="check" size={12} color={colors.completed} />
             <Text style={[styles.doneText, { color: colors.completed, fontFamily: "Inter_600SemiBold" }]}>
@@ -171,10 +176,10 @@ export default function LessonScreen() {
           <Feather name="play" size={30} color="#fff" style={{ marginLeft: 3 }} />
         </View>
         <Text style={[styles.videoHint, { fontFamily: "Inter_600SemiBold" }]}>
-          Tap to open video
+          Tap to watch video
         </Text>
         <Text style={[styles.videoSub, { fontFamily: "Inter_400Regular" }]}>
-          Replace the URL in data/courses.ts with your YouTube / Vimeo link
+          Opens in YouTube · replace the URL in data/courses.ts
         </Text>
       </TouchableOpacity>
 
@@ -187,25 +192,26 @@ export default function LessonScreen() {
         </Text>
       </View>
 
-      {!(completed || justMarked) ? (
-        <TouchableOpacity
-          style={[styles.completeBtn, { backgroundColor: course.color }]}
-          onPress={handleMarkComplete}
-          activeOpacity={0.85}
-        >
-          <Feather name="check-circle" size={22} color="#fff" />
-          <Text style={[styles.completeBtnText, { fontFamily: "Inter_700Bold" }]}>
-            Mark as Complete
-          </Text>
-        </TouchableOpacity>
-      ) : (
-        <View style={[styles.completedBanner, { backgroundColor: colors.completed + "18", borderColor: colors.completed + "40" }]}>
-          <Feather name="check-circle" size={22} color={colors.completed} />
-          <Text style={[styles.completedText, { color: colors.completed, fontFamily: "Inter_700Bold" }]}>
-            Lesson Completed!
-          </Text>
-        </View>
-      )}
+      <TouchableOpacity
+        style={[
+          styles.completeBtn,
+          {
+            backgroundColor: completed ? colors.completed : course.color,
+            borderWidth: 0,
+          },
+        ]}
+        onPress={handleToggleComplete}
+        activeOpacity={0.85}
+      >
+        <Feather
+          name={completed ? "check-circle" : "circle"}
+          size={22}
+          color="#fff"
+        />
+        <Text style={[styles.completeBtnText, { fontFamily: "Inter_700Bold" }]}>
+          {completed ? "Completed — Tap to Undo" : "Mark as Complete"}
+        </Text>
+      </TouchableOpacity>
 
       {nextLesson && !nextLesson.isPro && (
         <TouchableOpacity
@@ -286,7 +292,7 @@ const styles = StyleSheet.create({
     alignItems: "center", justifyContent: "center",
   },
   videoHint: { color: "#fff", fontSize: 15, fontWeight: "600" },
-  videoSub: { color: "rgba(255,255,255,0.45)", fontSize: 11, textAlign: "center", paddingHorizontal: 20 },
+  videoSub: { color: "rgba(255,255,255,.45)", fontSize: 11, textAlign: "center", paddingHorizontal: 20 },
   descCard: {
     borderRadius: 14, borderWidth: 1, padding: 18, gap: 10, marginBottom: 18,
   },
@@ -298,13 +304,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000", shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2, shadowRadius: 10, elevation: 4,
   },
-  completeBtnText: { fontSize: 18, fontWeight: "700", color: "#fff" },
-  completedBanner: {
-    flexDirection: "row", alignItems: "center", justifyContent: "center",
-    gap: 12, borderRadius: 16, borderWidth: 1,
-    paddingVertical: 20, marginBottom: 14,
-  },
-  completedText: { fontSize: 17, fontWeight: "700" },
+  completeBtnText: { fontSize: 17, fontWeight: "700", color: "#fff" },
   nextBtn: {
     flexDirection: "row", alignItems: "center",
     borderRadius: 14, borderWidth: 1, padding: 16, gap: 12,
