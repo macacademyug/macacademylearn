@@ -1,112 +1,119 @@
 // ═══════════════════════════════════════════════════
-//  MAC ACADEMY — script.js
-//  To swap videos: replace the YouTube URL in VIDEO
-//  with your own YouTube link. It applies everywhere.
+//  MAC ACADEMY — script.js  v4
 // ═══════════════════════════════════════════════════
 
+// ── PRO UNLOCK CODES ──────────────────────────────
+// Add or remove codes here. Give one code per paying student.
+// Each code can be used on as many devices as the student wants.
+const PRO_CODES = [
+  'MACPRO2024',
+  'FLIPACLIP-PRO',
+  'ANIMATION123',
+  'MACVIP-001',
+  'MACVIP-002',
+  'MACVIP-003',
+];
+
+// ── VIDEO PLACEHOLDER ─────────────────────────────
+// Replace with your real YouTube URL — applies to all lessons
 const VIDEO = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 
-// ── COURSE DATA ──────────────────────────────────────
+// ── CONTACT ───────────────────────────────────────
+const WHATSAPP_URL = 'https://wa.me/256745414641';
+const EMAIL        = 'alexkasaba2006@gmail.com';
+const TIKTOK_URL   = 'https://www.tiktok.com/@mac_toonzug';
+
+// ── STORAGE KEYS ──────────────────────────────────
+const KEY_SESSION   = 'mac_academy_session';
+const KEY_ACCOUNTS  = 'mac_academy_accounts';
+const KEY_PROGRESS  = 'mac_academy_progress_v4';
+const KEY_PRO       = 'mac_academy_pro_v4';
+const KEY_THEME     = 'mac_academy_theme';
+
+// ═══════════════════════════════════════════════════
+//  COURSE DATA
+// ═══════════════════════════════════════════════════
 const COURSES = [
   {
-    id: 'basics',
-    title: 'Basics of FlipaClip',
-    level: 'Beginner',
+    id: 'basics', title: 'Basics of FlipaClip', level: 'Beginner',
     description: 'Master the essential tools and techniques to start creating your first animations in FlipaClip from scratch.',
-    totalLessons: 3,
-    estimatedHours: '30 min',
-    color: '#22c55e',
+    totalLessons: 3, estimatedHours: '30 min', color: '#22c55e',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
     lessons: [
-      {
-        id: 'basics-1', order: 1, isPro: false,
-        title: 'Getting Started with FlipaClip',
-        duration: '10:00', videoUrl: VIDEO,
-        description: "A complete walkthrough of FlipaClip's interface — brushes, the timeline, layers, and playback controls. By the end you'll know exactly where everything lives and be ready to start animating.",
-      },
-      {
-        id: 'basics-2', order: 2, isPro: false,
-        title: 'Bouncing Ball Animation',
-        duration: '15:00', videoUrl: VIDEO,
-        description: 'Animate a bouncing ball to understand timing, spacing, squash, and stretch — the core principles every animator must master. The best hands-on exercise to build your animation instincts.',
-      },
-      {
-        id: 'basics-3', order: 3, isPro: true,
-        title: 'Exporting Your Animation',
-        duration: '5:00', videoUrl: VIDEO,
-        description: 'Export your finished animation as a video or GIF. Learn the best settings for TikTok, Instagram, and YouTube so your work looks great wherever you share it.',
-      },
+      { id:'basics-1', order:1, isPro:false, title:'Getting Started with FlipaClip', duration:'10:00', videoUrl:VIDEO,
+        description:"A complete walkthrough of FlipaClip's interface — brushes, the timeline, layers, and playback controls. By the end you'll know exactly where everything lives and be ready to start animating." },
+      { id:'basics-2', order:2, isPro:false, title:'Bouncing Ball Animation', duration:'15:00', videoUrl:VIDEO,
+        description:'Animate a bouncing ball to understand timing, spacing, squash, and stretch — the core principles every animator must master. The best hands-on exercise to build your animation instincts.' },
+      { id:'basics-3', order:3, isPro:true,  title:'Exporting Your Animation', duration:'5:00', videoUrl:VIDEO,
+        description:'Export your finished animation as a video or GIF. Learn the best settings for TikTok, Instagram, and YouTube so your work looks great wherever you share it.' },
     ],
   },
   {
-    id: 'character',
-    title: 'Character Animation',
-    level: 'Intermediate',
+    id: 'character', title: 'Character Animation', level: 'Intermediate',
     description: "Bring characters to life with walk cycles, run cycles, and expressive movement using FlipaClip's animation tools.",
-    totalLessons: 3,
-    estimatedHours: '40 min',
-    color: '#3B82F6',
+    totalLessons: 3, estimatedHours: '40 min', color: '#3B82F6',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
     lessons: [
-      {
-        id: 'character-1', order: 1, isPro: false,
-        title: 'Drawing the Background',
-        duration: '10:00', videoUrl: VIDEO,
-        description: 'Design and draw a complete scene background — perspective basics, layering elements, and creating depth that makes your character pop against the environment.',
-      },
-      {
-        id: 'character-2', order: 2, isPro: true,
-        title: 'Animating the Character',
-        duration: '20:00', videoUrl: VIDEO,
-        description: 'Animate your character moving through the scene. Cover walk cycles, weight shifts, and expressive actions — bringing your character to life with fluid, believable movement.',
-      },
-      {
-        id: 'character-3', order: 3, isPro: true,
-        title: 'Finalizing Your Scene',
-        duration: '10:00', videoUrl: VIDEO,
-        description: 'Polish and finalize your animated scene — adjust timing, clean up rough lines, add finishing touches, and export a complete short animation ready to share.',
-      },
+      { id:'character-1', order:1, isPro:false, title:'Drawing the Background', duration:'10:00', videoUrl:VIDEO,
+        description:'Design and draw a complete scene background — perspective basics, layering elements, and creating depth that makes your character pop against the environment.' },
+      { id:'character-2', order:2, isPro:true,  title:'Animating the Character', duration:'20:00', videoUrl:VIDEO,
+        description:'Animate your character moving through the scene. Cover walk cycles, weight shifts, and expressive actions — bringing your character to life with fluid, believable movement.' },
+      { id:'character-3', order:3, isPro:true,  title:'Finalizing Your Scene', duration:'10:00', videoUrl:VIDEO,
+        description:'Polish and finalize your animated scene — adjust timing, clean up rough lines, add finishing touches, and export a complete short animation ready to share.' },
     ],
   },
   {
-    id: 'lipsync',
-    title: 'Lip Sync',
-    level: 'Advanced',
+    id: 'lipsync', title: 'Lip Sync', level: 'Advanced',
     description: "Match your character's mouth movements perfectly to audio dialogue using FlipaClip's frame-by-frame lip sync techniques.",
-    totalLessons: 3,
-    estimatedHours: '30 min',
-    color: '#FF6B1A',
+    totalLessons: 3, estimatedHours: '30 min', color: '#FF6B1A',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>`,
     lessons: [
-      {
-        id: 'lipsync-1', order: 1, isPro: false,
-        title: 'Understanding Mouth Shapes',
-        duration: '10:00', videoUrl: VIDEO,
-        description: 'Learn the standard Preston Blair mouth chart — the 8 essential shapes (A/I, E, O, U, F/V, L/TH, M/B/P, rest) and how they map to sounds in spoken dialogue.',
-      },
-      {
-        id: 'lipsync-2', order: 2, isPro: true,
-        title: 'Breaking Down Audio',
-        duration: '10:00', videoUrl: VIDEO,
-        description: 'Import audio into FlipaClip, read the waveform, break a line of dialogue into individual sounds, and map each sound to the correct mouth shape frame by frame.',
-      },
-      {
-        id: 'lipsync-3', order: 3, isPro: true,
-        title: 'Full Lip Sync Scene',
-        duration: '10:00', videoUrl: VIDEO,
-        description: 'Animate a complete talking character scene with synced mouth shapes, eye blinks, and subtle head movement — a polished, convincing performance from start to finish.',
-      },
+      { id:'lipsync-1', order:1, isPro:false, title:'Understanding Mouth Shapes', duration:'10:00', videoUrl:VIDEO,
+        description:'Learn the standard Preston Blair mouth chart — the 8 essential shapes (A/I, E, O, U, F/V, L/TH, M/B/P, rest) and how they map to sounds in spoken dialogue.' },
+      { id:'lipsync-2', order:2, isPro:true,  title:'Breaking Down Audio', duration:'10:00', videoUrl:VIDEO,
+        description:'Import audio into FlipaClip, read the waveform, break a line of dialogue into individual sounds, and map each sound to the correct mouth shape frame by frame.' },
+      { id:'lipsync-3', order:3, isPro:true,  title:'Full Lip Sync Scene', duration:'10:00', videoUrl:VIDEO,
+        description:'Animate a complete talking character scene with synced mouth shapes, eye blinks, and subtle head movement — a polished, convincing performance from start to finish.' },
     ],
   },
 ];
 
-const FLUTTERWAVE_LINK = 'https://flutterwave.com/pay/mac-academy-pro';
-const STORAGE_KEY      = 'mac_academy_progress_v3';
+// ═══════════════════════════════════════════════════
+//  ACCOUNTS & SESSION
+// ═══════════════════════════════════════════════════
+function getAccounts() { try { return JSON.parse(localStorage.getItem(KEY_ACCOUNTS) || '[]'); } catch { return []; } }
+function saveAccounts(arr) { localStorage.setItem(KEY_ACCOUNTS, JSON.stringify(arr)); }
 
-// ── PROGRESS ─────────────────────────────────────────
-function getProgress()    { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { return {}; } }
-function saveProgress(p)  { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }
-function isComplete(id)   { return !!getProgress()[id]; }
+function getSession()    { try { return JSON.parse(localStorage.getItem(KEY_SESSION) || 'null'); } catch { return null; } }
+function saveSession(s)  { localStorage.setItem(KEY_SESSION, JSON.stringify(s)); }
+function clearSession()  { localStorage.removeItem(KEY_SESSION); }
+
+function signup(username, email, password) {
+  const accounts = getAccounts();
+  if (accounts.find(a => a.email.toLowerCase() === email.toLowerCase())) return { ok:false, msg:'An account with this email already exists.' };
+  if (username.trim().length < 2) return { ok:false, msg:'Username must be at least 2 characters.' };
+  if (password.length < 6) return { ok:false, msg:'Password must be at least 6 characters.' };
+  const account = { username: username.trim(), email: email.trim().toLowerCase(), password };
+  accounts.push(account);
+  saveAccounts(accounts);
+  saveSession({ username: account.username, email: account.email });
+  return { ok:true };
+}
+
+function login(email, password) {
+  const accounts = getAccounts();
+  const account = accounts.find(a => a.email.toLowerCase() === email.trim().toLowerCase() && a.password === password);
+  if (!account) return { ok:false, msg:'Incorrect email or password.' };
+  saveSession({ username: account.username, email: account.email });
+  return { ok:true };
+}
+
+// ═══════════════════════════════════════════════════
+//  PROGRESS
+// ═══════════════════════════════════════════════════
+function getProgress()   { try { return JSON.parse(localStorage.getItem(KEY_PROGRESS) || '{}'); } catch { return {}; } }
+function saveProgress(p) { localStorage.setItem(KEY_PROGRESS, JSON.stringify(p)); }
+function isComplete(id)  { return !!getProgress()[id]; }
 
 function toggleComplete(id) {
   const p = getProgress();
@@ -126,10 +133,55 @@ function getTotalProgress() {
   return { total, done, pct: total > 0 ? Math.round((done / total) * 100) : 0 };
 }
 
-// ── NAVIGATION ───────────────────────────────────────
+// ═══════════════════════════════════════════════════
+//  PRO UNLOCK
+// ═══════════════════════════════════════════════════
+function isProUnlocked() { return localStorage.getItem(KEY_PRO) === 'true'; }
+function unlockPro()     { localStorage.setItem(KEY_PRO, 'true'); }
+function revokePro()     { localStorage.removeItem(KEY_PRO); }
+
+function tryUnlockCode(code) {
+  const normalized = code.trim().toUpperCase();
+  if (PRO_CODES.includes(normalized)) {
+    unlockPro();
+    return { ok: true };
+  }
+  return { ok: false, msg: 'Invalid code. Please check and try again.' };
+}
+
+// ═══════════════════════════════════════════════════
+//  THEME
+// ═══════════════════════════════════════════════════
+function isDark()       { return localStorage.getItem(KEY_THEME) !== 'light'; }
+function applyTheme()   {
+  document.body.classList.toggle('light', !isDark());
+  const icon = document.getElementById('theme-icon');
+  if (icon) icon.innerHTML = isDark() ? IC.sun : IC.moon;
+}
+function toggleTheme()  {
+  localStorage.setItem(KEY_THEME, isDark() ? 'light' : 'dark');
+  applyTheme();
+}
+
+// ═══════════════════════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════════════════════
 let currentTab    = 'courses';
 let screenStack   = [];
 let currentCourse = null;
+
+function showMainApp() {
+  document.getElementById('auth-wrapper').style.display  = 'none';
+  document.getElementById('main-app').style.display      = 'flex';
+}
+
+function showAuthScreen(which) {
+  document.getElementById('main-app').style.display      = 'none';
+  document.getElementById('auth-wrapper').style.display  = 'flex';
+  document.getElementById('auth-login').classList.toggle('active', which === 'login');
+  document.getElementById('auth-signup').classList.toggle('active', which === 'signup');
+  clearAuthErrors();
+}
 
 function showTab(tab) {
   currentTab = tab;
@@ -141,12 +193,13 @@ function showTab(tab) {
   document.getElementById('nav-' + tab).classList.add('active');
   if (tab === 'progress') renderProgress();
   if (tab === 'support')  renderSupport();
+  if (tab === 'account')  renderAccount();
   if (tab === 'courses')  updateHomeProgress();
 }
 
 function pushScreen(id) {
-  screenStack.push(document.querySelector('.screen.active').id);
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  screenStack.push(document.querySelector('#main-app .screen.active').id);
+  document.querySelectorAll('#main-app .screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.getElementById('bottom-nav').style.display = 'none';
 }
@@ -154,24 +207,106 @@ function pushScreen(id) {
 function goBack() {
   if (!screenStack.length) return;
   const prev = screenStack.pop();
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('#main-app .screen').forEach(s => s.classList.remove('active'));
   document.getElementById(prev).classList.add('active');
   if (!screenStack.length) {
     document.getElementById('bottom-nav').style.display = 'flex';
     updateHomeProgress();
     if (currentTab === 'progress') renderProgress();
+    if (currentTab === 'account')  renderAccount();
     if (currentCourse) renderCourseDetail(currentCourse);
   }
 }
 
-function openFlutterwave() { window.open(FLUTTERWAVE_LINK, '_blank'); }
+// ── AUTH HANDLERS ─────────────────────────────────
+function clearAuthErrors() {
+  document.querySelectorAll('.auth-err').forEach(e => { e.classList.remove('show'); e.textContent = ''; });
+  document.querySelectorAll('.auth-input').forEach(i => i.value = '');
+}
 
-// ── SVG ICONS ────────────────────────────────────────
+function showAuthError(id, msg) {
+  const el = document.getElementById(id);
+  if (el) { el.textContent = msg; el.classList.add('show'); }
+}
+
+function doLogin() {
+  const email    = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+  if (!email || !password) { showAuthError('login-err', 'Please fill in all fields.'); return; }
+  const result = login(email, password);
+  if (!result.ok) { showAuthError('login-err', result.msg); return; }
+  bootApp();
+}
+
+function doSignup() {
+  const username = document.getElementById('signup-username').value;
+  const email    = document.getElementById('signup-email').value;
+  const password = document.getElementById('signup-password').value;
+  const confirm  = document.getElementById('signup-confirm').value;
+  if (!username || !email || !password || !confirm) { showAuthError('signup-err', 'Please fill in all fields.'); return; }
+  if (password !== confirm) { showAuthError('signup-err', 'Passwords do not match.'); return; }
+  const result = signup(username, email, password);
+  if (!result.ok) { showAuthError('signup-err', result.msg); return; }
+  bootApp();
+}
+
+function doLogout() {
+  clearSession();
+  revokePro();
+  showAuthScreen('login');
+}
+
+// ── PRO MODAL ─────────────────────────────────────
+function openProModal() {
+  document.getElementById('code-input').value = '';
+  document.getElementById('code-msg').className = 'code-msg';
+  document.getElementById('code-msg').textContent = '';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeProModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeProModal();
+}
+
+function submitCode() {
+  const code = document.getElementById('code-input').value;
+  if (!code.trim()) {
+    showCodeMsg('Please enter your unlock code.', false);
+    return;
+  }
+  const result = tryUnlockCode(code);
+  if (result.ok) {
+    showCodeMsg('🎉 Pro unlocked! All lessons are now available.', true);
+    setTimeout(() => {
+      closeProModal();
+      updateHomeProgress();
+      if (currentCourse) renderCourseDetail(currentCourse);
+      renderAccount();
+    }, 1800);
+  } else {
+    showCodeMsg(result.msg, false);
+  }
+}
+
+function showCodeMsg(msg, ok) {
+  const el = document.getElementById('code-msg');
+  el.textContent = msg;
+  el.className = 'code-msg ' + (ok ? 'ok' : 'err');
+}
+
+// ═══════════════════════════════════════════════════
+//  SVG ICONS
+// ═══════════════════════════════════════════════════
 const IC = {
   check:  `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
   check2: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
   circle: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>`,
   lock:   `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+  unlock: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>`,
   play:   `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:3px"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
   clock:  `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
   plays:  `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>`,
@@ -180,32 +315,47 @@ const IC = {
   chevD:  `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`,
   chevU:  `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>`,
   award:  `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>`,
-  unlock: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>`,
   arrow:  `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`,
   wa:     `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`,
   mail:   `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
   vid:    `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>`,
   head:   `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>`,
+  user:   `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+  logout: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>`,
+  phone2: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`,
+  key:    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M21 2 10.94 12.06"/><path d="M14.5 2.5 17 5"/><path d="M10 7l2.5 2.5"/></svg>`,
+  info:   `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+  sun:    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
+  moon:   `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
 };
 
-// ── COURSES SCREEN ───────────────────────────────────
+// ═══════════════════════════════════════════════════
+//  COURSES SCREEN
+// ═══════════════════════════════════════════════════
 function updateHomeProgress() {
   const { total, done, pct } = getTotalProgress();
-  document.getElementById('home-prog-pct').textContent  = pct + '%';
-  document.getElementById('home-prog-sub').textContent  = done + ' of ' + total + ' lessons completed';
-  document.getElementById('home-bar-fill').style.width  = pct + '%';
+  const pctEl = document.getElementById('home-prog-pct');
+  const subEl = document.getElementById('home-prog-sub');
+  const barEl = document.getElementById('home-bar-fill');
+  if (pctEl) pctEl.textContent = pct + '%';
+  if (subEl) subEl.textContent = done + ' of ' + total + ' lessons completed';
+  if (barEl) barEl.style.width = pct + '%';
   COURSES.forEach(c => {
     const p  = getCourseProgress(c);
     const el = document.getElementById('card-prog-' + c.id);
     if (!el) return;
-    el.querySelector('.mini-bar-fill').style.width       = p + '%';
-    el.querySelector('.mini-prog-pct').textContent       = p + '%';
+    el.querySelector('.mini-bar-fill').style.width  = p + '%';
+    el.querySelector('.mini-prog-pct').textContent  = p + '%';
     el.style.display = p > 0 ? 'block' : 'none';
   });
+  const proBtn = document.getElementById('home-pro-btn');
+  if (proBtn) proBtn.style.display = isProUnlocked() ? 'none' : 'flex';
 }
 
 function renderCoursesList() {
-  document.getElementById('courses-list').innerHTML = COURSES.map(c => {
+  const list = document.getElementById('courses-list');
+  if (!list) return;
+  list.innerHTML = COURSES.map(c => {
     const freeCount = c.lessons.filter(l => !l.isPro).length;
     const p = getCourseProgress(c);
     return `
@@ -242,18 +392,21 @@ function openCourse(courseId) {
   pushScreen('screen-detail');
 }
 
-// ── COURSE DETAIL ────────────────────────────────────
+// ═══════════════════════════════════════════════════
+//  COURSE DETAIL
+// ═══════════════════════════════════════════════════
 function renderCourseDetail(c) {
   const prog      = getCourseProgress(c);
   const done      = c.lessons.filter(l => isComplete(l.id)).length;
   const proCount  = c.lessons.filter(l => l.isPro).length;
   const freeCount = c.lessons.filter(l => !l.isPro).length;
+  const pro       = isProUnlocked();
   document.getElementById('detail-screen-title').textContent = '';
   document.getElementById('detail-body').innerHTML = `
     <div class="detail-hero" style="background:${c.color}15;border-color:${c.color}30">
-      <div class="hero-icon" style="background:${c.color}">${c.icon.replace('width="18" height="18"', 'width="26" height="26"').replace('stroke="currentColor"', 'stroke="#fff"')}</div>
+      <div class="hero-icon" style="background:${c.color}">${c.icon.replace('width="18" height="18"','width="26" height="26"').replace('stroke="currentColor"','stroke="#fff"')}</div>
       <div class="level-badge" style="background:${c.color}25;color:${c.color};align-self:flex-start">${c.level}</div>
-      <div style="font-size:21px;font-weight:700">${c.title}</div>
+      <div style="font-size:21px;font-weight:700;color:var(--fg)">${c.title}</div>
       <div style="font-size:14px;color:var(--muted);line-height:1.6">${c.description}</div>
       <div class="hero-meta">
         <div class="meta-item">${IC.plays} ${c.totalLessons} lessons</div>
@@ -267,16 +420,17 @@ function renderCourseDetail(c) {
     ${prog > 0 ? `
     <div class="card" style="margin-bottom:14px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <span style="font-size:14px;font-weight:600">Your Progress</span>
+        <span style="font-size:14px;font-weight:600;color:var(--fg)">Your Progress</span>
         <span style="font-size:18px;font-weight:700;color:${c.color}">${prog}%</span>
       </div>
       <div class="bar-track"><div class="bar-fill" style="width:${prog}%;background:${c.color}"></div></div>
       <div style="font-size:12px;color:var(--muted);margin-top:6px">${done} of ${c.totalLessons} lessons completed</div>
     </div>` : ''}
-    ${proCount > 0 ? `
-    <button class="pro-btn" style="margin-bottom:20px" onclick="openFlutterwave()">
+    ${proCount > 0 && !pro ? `
+    <button class="pro-btn" style="margin-bottom:20px" onclick="openProModal()">
       ${IC.unlock} Unlock ${proCount} Pro Lessons
     </button>` : ''}
+    ${pro ? `<div style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px;margin-bottom:16px;font-size:13px;font-weight:600;color:var(--green)">${IC.check} Pro Unlocked — All lessons available</div>` : ''}
     <div class="section-title">Lessons</div>
     ${c.lessons.map(l => renderLessonItem(l, c)).join('')}
   `;
@@ -284,7 +438,7 @@ function renderCourseDetail(c) {
 
 function renderLessonItem(l, c) {
   const done   = isComplete(l.id);
-  const locked = l.isPro;
+  const locked = l.isPro && !isProUnlocked();
   let numWrap;
   if (done)        numWrap = `<div class="lesson-num" style="background:rgba(34,197,94,.18);color:var(--green)">${IC.check}</div>`;
   else if (locked) numWrap = `<div class="lesson-num" style="background:var(--card2);color:var(--muted)">${IC.lock}</div>`;
@@ -298,7 +452,7 @@ function renderLessonItem(l, c) {
     <div class="lesson-body">
       <div class="lesson-title-row">
         <div class="lesson-name">${l.title}</div>
-        ${l.isPro ? `<div class="pro-tag" style="background:${c.color}20;color:${c.color}">PRO</div>` : ''}
+        ${l.isPro && !isProUnlocked() ? `<div class="pro-tag" style="background:${c.color}20;color:${c.color}">PRO</div>` : ''}
       </div>
       <div class="lesson-desc-preview">${l.description}</div>
     </div>
@@ -309,11 +463,13 @@ function renderLessonItem(l, c) {
   </div>`;
 }
 
-// ── LESSON PLAYER ────────────────────────────────────
+// ═══════════════════════════════════════════════════
+//  LESSON PLAYER
+// ═══════════════════════════════════════════════════
 function openLesson(lessonId, courseId) {
   const course = COURSES.find(c => c.id === courseId);
   const lesson = course.lessons.find(l => l.id === lessonId);
-  if (lesson.isPro) { renderProLock(lesson, course); pushScreen('screen-lesson'); return; }
+  if (lesson.isPro && !isProUnlocked()) { renderProLock(lesson, course); pushScreen('screen-lesson'); return; }
   renderLessonPlayer(lesson, course);
   pushScreen('screen-lesson');
 }
@@ -321,6 +477,7 @@ function openLesson(lessonId, courseId) {
 function renderLessonPlayer(lesson, course) {
   const done = isComplete(lesson.id);
   const next = course.lessons.find(l => l.order === lesson.order + 1);
+  const nextFree = next && (!next.isPro || isProUnlocked());
   document.getElementById('lesson-back-header').style.display = 'flex';
   document.getElementById('lesson-body').innerHTML = `
     <div class="course-tag" style="background:${course.color}20;color:${course.color}">${course.icon.replace('width="18" height="18"','width="12" height="12"')} ${course.title}</div>
@@ -330,10 +487,10 @@ function renderLessonPlayer(lesson, course) {
       <div class="meta-item">${IC.hash} Lesson ${lesson.order} of ${course.totalLessons}</div>
       ${done ? `<div class="done-badge">${IC.check} Complete</div>` : ''}
     </div>
-    <div class="video-player" style="border-color:${course.color}60" onclick="openVideo('${lesson.videoUrl}')">
+    <div class="video-player" style="border-color:${course.color}60" onclick="window.open('${lesson.videoUrl}','_blank')">
       <div class="play-circle" style="background:${course.color}">${IC.play}</div>
       <div class="video-hint">Tap to watch video</div>
-      <div class="video-sub">Opens in YouTube · change the VIDEO variable at the top of script.js</div>
+      <div class="video-sub">Opens in YouTube · change VIDEO in script.js</div>
     </div>
     <div class="card desc-card">
       <div class="desc-label">Lesson Description</div>
@@ -346,7 +503,7 @@ function renderLessonPlayer(lesson, course) {
       ${done ? IC.check2 : IC.circle}
       <span>${done ? 'Completed — Tap to Undo' : 'Mark as Complete'}</span>
     </button>
-    ${next && !next.isPro ? `
+    ${nextFree ? `
     <div class="next-btn" onclick="openLesson('${next.id}','${course.id}')">
       <div>
         <div class="next-label">Up next</div>
@@ -360,7 +517,7 @@ function renderLessonPlayer(lesson, course) {
 function renderProLock(lesson, course) {
   document.getElementById('lesson-back-header').style.display = 'none';
   document.getElementById('lesson-body').innerHTML = `
-    <div style="padding-top:52px;padding-left:18px">
+    <div style="padding-top:52px;padding-left:18px;padding-right:18px">
       <button class="back-btn" onclick="goBack()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
@@ -370,14 +527,12 @@ function renderProLock(lesson, course) {
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       </div>
       <div class="lock-title">Pro Lesson</div>
-      <div class="lock-desc">"${lesson.title}" is a Pro lesson. Unlock all Pro content with a one-time payment via Flutterwave — MTN & Airtel Uganda Mobile Money supported.</div>
-      <button class="lock-btn" onclick="openFlutterwave()">${IC.unlock} Unlock Pro Lessons</button>
+      <div class="lock-desc">"${lesson.title}" is a Pro lesson. Unlock all Pro content by entering your code below.</div>
+      <button class="lock-btn" onclick="openProModal()">${IC.unlock} Enter Unlock Code</button>
       <div class="back-link" onclick="goBack()">← Back to course</div>
     </div>
   `;
 }
-
-function openVideo(url) { window.open(url, '_blank'); }
 
 function doToggle(lessonId, courseId) {
   toggleComplete(lessonId);
@@ -385,27 +540,29 @@ function doToggle(lessonId, courseId) {
   const done   = isComplete(lessonId);
   const btn    = document.getElementById('toggle-btn');
   if (!btn) return;
-  btn.className          = 'complete-btn' + (done ? ' done' : '');
-  btn.style.background   = done ? 'var(--green)' : course.color;
-  btn.innerHTML          = (done ? IC.check2 : IC.circle) + `<span>${done ? 'Completed — Tap to Undo' : 'Mark as Complete'}</span>`;
+  btn.className       = 'complete-btn' + (done ? ' done' : '');
+  btn.style.background = done ? 'var(--green)' : course.color;
+  btn.innerHTML       = (done ? IC.check2 : IC.circle) + `<span>${done ? 'Completed — Tap to Undo' : 'Mark as Complete'}</span>`;
   const metaRow = document.querySelector('.lesson-meta-row');
   if (metaRow) {
     const existing = metaRow.querySelector('.done-badge');
     if (done && !existing) {
-      const badge = document.createElement('div');
-      badge.className = 'done-badge';
-      badge.innerHTML = IC.check + ' Complete';
-      metaRow.appendChild(badge);
+      const b = document.createElement('div');
+      b.className = 'done-badge';
+      b.innerHTML = IC.check + ' Complete';
+      metaRow.appendChild(b);
     } else if (!done && existing) {
       existing.remove();
     }
   }
 }
 
-// ── PROGRESS TAB ─────────────────────────────────────
+// ═══════════════════════════════════════════════════
+//  PROGRESS TAB
+// ═══════════════════════════════════════════════════
 function renderProgress() {
   const { total, done, pct } = getTotalProgress();
-  const finishedCourses = COURSES.filter(c => getCourseProgress(c) === 100).length;
+  const finished = COURSES.filter(c => getCourseProgress(c) === 100).length;
   document.getElementById('progress-body').innerHTML = `
     <div class="overall-card">
       <div class="overall-row">
@@ -423,7 +580,7 @@ function renderProgress() {
       </div>
       <div class="stat-card">
         <div class="stat-icon" style="background:rgba(251,191,36,.18)">${IC.award}</div>
-        <div class="stat-value">${finishedCourses}</div>
+        <div class="stat-value">${finished}</div>
         <div class="stat-label">Courses Finished</div>
       </div>
     </div>
@@ -456,20 +613,106 @@ function renderProgress() {
   `;
 }
 
-// ── SUPPORT TAB ──────────────────────────────────────
+// ═══════════════════════════════════════════════════
+//  ACCOUNT TAB
+// ═══════════════════════════════════════════════════
+function renderAccount() {
+  const session = getSession();
+  if (!session) return;
+  const pro    = isProUnlocked();
+  const dark   = isDark();
+  const initials = session.username.charAt(0).toUpperCase();
+
+  document.getElementById('account-body').innerHTML = `
+    <div class="account-hero">
+      <div class="account-avatar">${initials}</div>
+      <div class="account-name">${session.username}</div>
+      <div class="account-email">${session.email}</div>
+      <div class="account-pro-badge">${pro ? '✦ Pro Member' : 'Free Plan'}</div>
+    </div>
+
+    <div class="account-section">
+      <div class="section-title">Appearance</div>
+      <div class="account-row">
+        <div class="account-row-icon" style="background:rgba(251,191,36,.18)">
+          ${dark ? IC.moon : IC.sun}
+        </div>
+        <div>
+          <div class="account-row-label">Dark Mode</div>
+          <div class="account-row-sub">${dark ? 'Currently enabled' : 'Currently disabled'}</div>
+        </div>
+        <div class="account-row-action">
+          <div class="toggle-track ${dark ? 'on' : ''}" onclick="toggleTheme();renderAccount()">
+            <div class="toggle-thumb"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="account-section">
+      <div class="section-title">Pro Access</div>
+      ${pro ? `
+      <div class="account-row">
+        <div class="account-row-icon" style="background:rgba(34,197,94,.18)">
+          ${IC.check2}
+        </div>
+        <div>
+          <div class="account-row-label" style="color:var(--green)">Pro Unlocked</div>
+          <div class="account-row-sub">All lessons are available</div>
+        </div>
+      </div>` : `
+      <div class="account-row clickable" onclick="openProModal()">
+        <div class="account-row-icon" style="background:rgba(255,107,26,.18)">
+          ${IC.key}
+        </div>
+        <div>
+          <div class="account-row-label">Unlock Pro</div>
+          <div class="account-row-sub">Enter your code to unlock all lessons</div>
+        </div>
+        <div class="account-row-action" style="color:var(--muted)">${IC.chev}</div>
+      </div>`}
+    </div>
+
+    <div class="account-section">
+      <div class="section-title">Use on Multiple Devices</div>
+      <div class="info-box">
+        <div class="info-box-title">How to access on another phone</div>
+        <div class="info-box-text">
+          1. Open Mac Academy on the other device.<br>
+          2. Tap <strong>Sign In</strong> on the login screen.<br>
+          3. Enter your email <strong>${session.email}</strong> and your password.<br>
+          4. If you have Pro, enter your unlock code again to re-activate it.
+        </div>
+      </div>
+    </div>
+
+    <div class="account-section">
+      <div class="section-title">Account</div>
+      <button class="logout-btn" onclick="doLogout()">
+        ${IC.logout} Sign Out
+      </button>
+    </div>
+
+    <div class="version-card">Mac Academy v4.0 · Made with creativity</div>
+  `;
+}
+
+// ═══════════════════════════════════════════════════
+//  SUPPORT TAB
+// ═══════════════════════════════════════════════════
 const FAQS = [
-  { q: 'How do I watch a video lesson?',
-    a: 'Tap a course, then tap any unlocked lesson. The video opens in YouTube so you can follow along at your own pace.' },
-  { q: 'How does progress saving work?',
-    a: "Progress is saved to your browser when you tap 'Mark as Complete'. If you tapped by mistake, tap the button again — it toggles back and forth." },
-  { q: 'How do I unlock Pro lessons?',
-    a: "Tap the orange 'Unlock Pro Lessons' button. You'll be taken to Flutterwave where you can pay via MTN or Airtel Uganda Mobile Money." },
-  { q: 'Which payment methods are supported?',
-    a: 'MTN Uganda Mobile Money and Airtel Uganda Mobile Money through Flutterwave.' },
-  { q: 'What is FlipaClip?',
-    a: 'FlipaClip is a mobile animation app for Android and iOS. This academy covers everything from beginner basics to advanced lip sync.' },
-  { q: "I tapped 'Mark as Complete' by mistake. Can I undo it?",
-    a: 'Yes! Just tap the button again. It toggles — green means complete, orange means incomplete.' },
+  { q:'How do I watch a video lesson?',
+    a:'Tap a course, then tap any unlocked lesson. The video opens in YouTube so you can follow along at your own pace.' },
+  { q:'How does progress saving work?',
+    a:"Progress is saved to your browser when you tap 'Mark as Complete'. If you tapped by mistake, tap the button again — it toggles back and forth." },
+  { q:'How do I unlock Pro lessons?',
+    a:'After paying via Mobile Money, send a screenshot to our WhatsApp or email. Once confirmed, you will receive a code. Enter the code in the Unlock screen to activate Pro on any device.' },
+  { q:'Which payment methods are accepted?',
+    a:'MTN Uganda Mobile Money and Airtel Uganda Mobile Money. Send your screenshot to WhatsApp 0745414641 or email alexkasaba2006@gmail.com.' },
+  { q:'Can I use my account on multiple phones?',
+    a:'Yes! Sign in with the same email and password on any device. If you have Pro, enter your unlock code again on the new device to re-activate it.' },
+  { q:'I tapped Mark as Complete by mistake. Can I undo it?',
+    a:'Yes — just tap the button again. It toggles green (complete) and orange (not complete) back and forth.' },
 ];
 
 function renderSupport() {
@@ -480,18 +723,18 @@ function renderSupport() {
       <div class="hero-desc">Reach out via WhatsApp, email, or TikTok. We typically respond within 24 hours.</div>
     </div>
     <div class="section-title">Contact & Socials</div>
-    <a class="contact-card" href="https://wa.me/256745414641" target="_blank">
+    <a class="contact-card" href="${WHATSAPP_URL}" target="_blank">
       <div class="contact-icon" style="background:rgba(37,211,102,.15);color:#25D366">${IC.wa}</div>
       <div><div class="contact-label">WhatsApp</div><div class="contact-sub">0745414641</div></div>
       <div style="margin-left:auto;color:var(--muted)">${IC.chev}</div>
     </a>
-    <a class="contact-card" href="mailto:alexkasaba20006@gmail.com">
+    <a class="contact-card" href="mailto:${EMAIL}">
       <div class="contact-icon" style="background:rgba(255,107,26,.15);color:var(--primary)">${IC.mail}</div>
-      <div><div class="contact-label">Email Support</div><div class="contact-sub">alexkasaba20006@gmail.com</div></div>
+      <div><div class="contact-label">Email Support</div><div class="contact-sub">${EMAIL}</div></div>
       <div style="margin-left:auto;color:var(--muted)">${IC.chev}</div>
     </a>
-    <a class="contact-card" href="https://www.tiktok.com/@mac_toonzug" target="_blank">
-      <div class="contact-icon" style="background:rgba(240,240,240,.1);color:var(--fg)">${IC.vid}</div>
+    <a class="contact-card" href="${TIKTOK_URL}" target="_blank">
+      <div class="contact-icon" style="background:rgba(240,240,240,.08);color:var(--fg)">${IC.vid}</div>
       <div><div class="contact-label">TikTok</div><div class="contact-sub">@mac_toonzug</div></div>
       <div style="margin-left:auto;color:var(--muted)">${IC.chev}</div>
     </a>
@@ -504,7 +747,7 @@ function renderSupport() {
       </div>
       <div class="faq-a">${f.a}</div>
     </div>`).join('')}
-    <div class="version-card">Mac Academy v3.0 · Made with creativity</div>
+    <div class="version-card">Mac Academy v4.0 · Made with creativity</div>
   `;
 }
 
@@ -515,6 +758,34 @@ function toggleFaq(i) {
   ch.innerHTML = open ? IC.chevU : IC.chevD;
 }
 
-// ── BOOT ─────────────────────────────────────────────
-renderCoursesList();
-updateHomeProgress();
+// ═══════════════════════════════════════════════════
+//  KEYBOARD SHORTCUTS
+// ═══════════════════════════════════════════════════
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const overlay = document.getElementById('modal-overlay');
+    if (overlay && overlay.classList.contains('open')) { submitCode(); return; }
+    const loginScreen = document.getElementById('auth-login');
+    if (loginScreen && loginScreen.classList.contains('active')) { doLogin(); return; }
+    const signupScreen = document.getElementById('auth-signup');
+    if (signupScreen && signupScreen.classList.contains('active')) { doSignup(); return; }
+  }
+});
+
+// ═══════════════════════════════════════════════════
+//  BOOT
+// ═══════════════════════════════════════════════════
+function bootApp() {
+  const session = getSession();
+  if (!session) {
+    showAuthScreen('login');
+    return;
+  }
+  showMainApp();
+  applyTheme();
+  renderCoursesList();
+  updateHomeProgress();
+  renderSupport();
+}
+
+bootApp();
