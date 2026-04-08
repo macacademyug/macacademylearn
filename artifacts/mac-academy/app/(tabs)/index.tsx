@@ -18,8 +18,42 @@ import { useColors } from "@/hooks/useColors";
 import { useProgress } from "@/context/ProgressContext";
 import { usePro } from "@/context/ProContext";
 import CourseCard from "@/components/CourseCard";
+import ComingSoonCard from "@/components/ComingSoonCard";
 import { COURSES } from "@/data/courses";
 import * as Haptics from "expo-haptics";
+
+const COMING_SOON = [
+  {
+    title: "ToonBoom Harmony",
+    subtitle: "Professional studio-grade animation with ToonBoom Harmony — rigging, cut-out animation, and more.",
+    color: "#6C5CE7",
+    icon: "film",
+  },
+  {
+    title: "Blender Animation",
+    subtitle: "3D animation fundamentals using Blender — modelling, rigging, and rendering your first 3D scenes.",
+    color: "#E67E22",
+    icon: "box",
+  },
+  {
+    title: "Photoshop for Animators",
+    subtitle: "Frame-by-frame animation and digital painting in Adobe Photoshop — from sketch to finished frames.",
+    color: "#31A8FF",
+    icon: "image",
+  },
+  {
+    title: "Adobe Illustrator",
+    subtitle: "Design vector characters and assets in Illustrator to use across your animation projects.",
+    color: "#FF9A00",
+    icon: "pen-tool",
+  },
+  {
+    title: "After Effects",
+    subtitle: "Bring your animations to life with motion graphics, visual effects, and compositing in After Effects.",
+    color: "#9999FF",
+    icon: "layers",
+  },
+];
 
 function OverallProgressBar() {
   const colors = useColors();
@@ -129,7 +163,7 @@ export default function CoursesScreen() {
         )}
 
         <Text style={[styles.sectionTitle, { color: colors.foreground, fontFamily: "Inter_700Bold" }]}>
-          All Courses
+          FlipaClip Courses
         </Text>
 
         {COURSES.map((course) => (
@@ -138,6 +172,22 @@ export default function CoursesScreen() {
             course={course}
             onPress={() => router.push(`/course/${course.id}` as any)}
           />
+        ))}
+
+        <View style={[styles.comingSoonHeader, { borderTopColor: colors.border }]}>
+          <Text style={[styles.sectionTitle, { color: colors.foreground, fontFamily: "Inter_700Bold" }]}>
+            Coming Soon
+          </Text>
+          <View style={[styles.comingSoonPill, { backgroundColor: colors.muted }]}>
+            <Feather name="clock" size={11} color={colors.mutedForeground} />
+            <Text style={[styles.comingSoonPillText, { color: colors.mutedForeground, fontFamily: "Inter_500Medium" }]}>
+              In development
+            </Text>
+          </View>
+        </View>
+
+        {COMING_SOON.map((course) => (
+          <ComingSoonCard key={course.title} course={course} />
         ))}
       </ScrollView>
 
@@ -247,6 +297,24 @@ const styles = StyleSheet.create({
   },
   proActiveText: { fontSize: 14 },
   sectionTitle: { fontSize: 20, fontWeight: "700", marginBottom: 12 },
+  comingSoonHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderTopWidth: 1,
+    paddingTop: 20,
+    marginTop: 8,
+    marginBottom: 12,
+  },
+  comingSoonPill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  comingSoonPillText: { fontSize: 11 },
   modalOverlay: { flex: 1, justifyContent: "flex-end" },
   sheet: { borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, paddingTop: 16, gap: 14 },
   sheetHandle: { width: 40, height: 4, borderRadius: 2, alignSelf: "center", marginBottom: 8 },
