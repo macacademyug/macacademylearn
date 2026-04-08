@@ -24,11 +24,11 @@ const FAQS = [
   },
   {
     q: "How do I unlock Pro lessons?",
-    a: "Tap the orange 'Unlock Pro Lessons' button on the Courses screen. You'll be taken to our Flutterwave payment page where you can pay via MTN or Airtel Uganda Mobile Money.",
+    a: "Tap the orange 'Unlock Pro Lessons' button on the Courses screen. Send Mobile Money to 0745414641, then send your screenshot to our WhatsApp or email. We'll send you a code — enter it in the box to unlock all lessons instantly.",
   },
   {
     q: "Which payment methods are supported?",
-    a: "We accept MTN Uganda Mobile Money and Airtel Uganda Mobile Money through Flutterwave.",
+    a: "We accept MTN Uganda Mobile Money and Airtel Uganda Mobile Money. Send your payment to 0745414641 and screenshot it to us.",
   },
   {
     q: "What is FlipaClip?",
@@ -156,8 +156,8 @@ export default function SupportScreen() {
       <ContactRow
         icon="mail"
         label="Email Support"
-        sub="alexkasaba20006@gmail.com"
-        url="mailto:alexkasaba20006@gmail.com"
+        sub="alexkasaba2006@gmail.com"
+        url="mailto:alexkasaba2006@gmail.com"
         color={colors.primary}
       />
       <ContactRow
