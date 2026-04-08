@@ -16,12 +16,37 @@ const WHATSAPP_URL = 'https://wa.me/256745414641';
 const EMAIL        = 'alexkasaba2006@gmail.com';
 const TIKTOK_URL   = 'https://www.tiktok.com/@mac_toonzug';
 
+// ── ADMIN ──────────────────────────────────────────
+const ADMIN_PASSWORD = 'macadmin123';
+const KEY_ADMIN_HIST = 'mac_admin_code_hist';
+
 // ── STORAGE KEYS ──────────────────────────────────
 const KEY_SESSION   = 'mac_academy_session';
 const KEY_ACCOUNTS  = 'mac_academy_accounts';
 const KEY_PROGRESS  = 'mac_academy_progress_v4';
 const KEY_PRO       = 'mac_academy_pro_v4';
 const KEY_THEME     = 'mac_academy_theme';
+const KEY_ONBOARDED = 'mac_academy_onboarded';
+const KEY_NOTIFY    = 'mac_academy_notify_';
+
+// ── COMING SOON ────────────────────────────────────
+const COMING_SOON = [
+  { id:'toonboom',    title:'ToonBoom Harmony',       color:'#6C5CE7', desc:'Professional studio-grade animation with ToonBoom Harmony — rigging, cut-out animation, and more.' },
+  { id:'blender',     title:'Blender Animation',       color:'#E67E22', desc:'3D animation fundamentals using Blender — modelling, rigging, and rendering your first 3D scenes.' },
+  { id:'photoshop',   title:'Photoshop for Animators', color:'#31A8FF', desc:'Frame-by-frame animation and digital painting in Photoshop — from sketch to finished frames.' },
+  { id:'illustrator', title:'Adobe Illustrator',       color:'#FF9A00', desc:'Design vector characters and assets in Illustrator to use across your animation projects.' },
+  { id:'aftereffects',title:'After Effects',           color:'#9999FF', desc:'Bring your animations to life with motion graphics, visual effects, and compositing in After Effects.' },
+];
+
+// ── ONBOARDING ─────────────────────────────────────
+const ONBOARD_SLIDES = [
+  { color:'#FF6B1A', title:'Welcome to Mac Academy', body:'Learn FlipaClip animation from scratch — beginner basics to advanced lip sync techniques, all in one place.',
+    icon:`<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>` },
+  { color:'#22c55e', title:'Track Your Progress', body:"Tap 'Mark as Complete' after each lesson. Your progress is saved and you can undo it anytime.",
+    icon:`<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>` },
+  { color:'#6C5CE7', title:'Unlock Pro Lessons', body:'Pro lessons cost 25,000 UGX. Pay via Mobile Money → send screenshot → get your unlock code. Simple!',
+    icon:`<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>` },
+];
 
 // ═══════════════════════════════════════════════════
 //  COURSE DATA
@@ -195,7 +220,7 @@ function showTab(tab) {
   if (tab === 'progress') renderProgress();
   if (tab === 'support')  renderSupport();
   if (tab === 'account')  renderAccount();
-  if (tab === 'courses')  updateHomeProgress();
+  if (tab === 'courses')  { renderCoursesList(); renderComingSoon(); updateHomeProgress(); }
 }
 
 function pushScreen(id) {
@@ -248,7 +273,7 @@ function doSignup() {
   if (password !== confirm) { showAuthError('signup-err', 'Passwords do not match.'); return; }
   const result = signup(username, email, password);
   if (!result.ok) { showAuthError('signup-err', result.msg); return; }
-  bootApp();
+  bootApp(true);
 }
 
 function doLogout() {
@@ -353,10 +378,43 @@ function updateHomeProgress() {
   if (proBtn) proBtn.style.display = isProUnlocked() ? 'none' : 'flex';
 }
 
+let currentSearch = '';
+
+function handleSearch(val) {
+  currentSearch = val.trim().toLowerCase();
+  const clearBtn = document.getElementById('search-clear');
+  if (clearBtn) clearBtn.style.display = currentSearch ? 'inline' : 'none';
+  const progCard = document.getElementById('home-progress-card');
+  if (progCard) progCard.style.display = currentSearch ? 'none' : 'block';
+  const titleEl = document.getElementById('courses-section-title');
+  if (titleEl) titleEl.textContent = currentSearch ? 'Results' : 'FlipaClip Courses';
+  renderCoursesList();
+  renderComingSoon();
+}
+
+function clearSearch() {
+  const inp = document.getElementById('search-input');
+  if (inp) inp.value = '';
+  handleSearch('');
+}
+
 function renderCoursesList() {
   const list = document.getElementById('courses-list');
   if (!list) return;
-  list.innerHTML = COURSES.map(c => {
+  const filtered = currentSearch
+    ? COURSES.filter(c =>
+        c.title.toLowerCase().includes(currentSearch) ||
+        c.description.toLowerCase().includes(currentSearch) ||
+        c.lessons.some(l => l.title.toLowerCase().includes(currentSearch))
+      )
+    : COURSES;
+
+  if (filtered.length === 0 && currentSearch) {
+    list.innerHTML = `<div style="color:var(--muted);font-size:14px;text-align:center;padding:12px 0">No courses match "${currentSearch}"</div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map(c => {
     const freeCount = c.lessons.filter(l => !l.isPro).length;
     const p = getCourseProgress(c);
     return `
@@ -385,6 +443,64 @@ function renderCoursesList() {
       </div>
     </div>`;
   }).join('');
+}
+
+function renderComingSoon() {
+  const el = document.getElementById('coming-soon-section');
+  if (!el) return;
+  const filtered = currentSearch
+    ? COMING_SOON.filter(c => c.title.toLowerCase().includes(currentSearch) || c.desc.toLowerCase().includes(currentSearch))
+    : COMING_SOON;
+  if (filtered.length === 0 && currentSearch) { el.innerHTML = ''; return; }
+  el.innerHTML = `
+    <div class="coming-soon-section">
+      <div class="coming-soon-header">
+        <div class="section-title" style="margin-bottom:0">Coming Soon</div>
+        <div class="coming-soon-pill">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          In development
+        </div>
+      </div>
+      ${filtered.map(c => {
+        const notified = localStorage.getItem(KEY_NOTIFY + c.id) === 'true';
+        return `
+        <div class="cs-card">
+          <div class="accent-bar" style="background:${c.color}"></div>
+          <div class="cs-body">
+            <div class="cs-top">
+              <div class="cs-icon" style="background:${c.color}22">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${c.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="4" height="18" rx="1"/><rect x="9" y="3" width="4" height="18" rx="1"/><rect x="16" y="3" width="6" height="18" rx="1"/></svg>
+              </div>
+              <div class="cs-badge">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                COMING SOON
+              </div>
+            </div>
+            <div class="cs-title">${c.title}</div>
+            <div class="cs-desc">${c.desc}</div>
+            <div class="cs-bottom">
+              <div class="cs-locked">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Not available yet
+              </div>
+              <button class="cs-notify-btn" id="notify-${c.id}"
+                onclick="toggleNotify('${c.id}')"
+                style="${notified ? `background:${c.color}18;border-color:${c.color}50;color:${c.color}` : ''}">
+                ${notified
+                  ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Notified`
+                  : `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><line x1="1" y1="1" x2="23" y2="23"/></svg> Notify Me`}
+              </button>
+            </div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
+
+function toggleNotify(id) {
+  const cur = localStorage.getItem(KEY_NOTIFY + id) === 'true';
+  localStorage.setItem(KEY_NOTIFY + id, cur ? 'false' : 'true');
+  renderComingSoon();
 }
 
 function openCourse(courseId) {
@@ -429,7 +545,8 @@ function renderCourseDetail(c) {
     </div>` : ''}
     ${proCount > 0 && !pro ? `
     <button class="pro-btn" style="margin-bottom:20px" onclick="openProModal()">
-      ${IC.unlock} Unlock ${proCount} Pro Lessons
+      <div class="pro-btn-inner">${IC.unlock}<span class="pro-btn-text">Unlock ${proCount} Pro Lesson${proCount > 1 ? 's' : ''}</span></div>
+      <span class="pro-badge">PRO</span>
     </button>` : ''}
     ${pro ? `<div style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px;margin-bottom:16px;font-size:13px;font-weight:600;color:var(--green)">${IC.check} Pro Unlocked — All lessons available</div>` : ''}
     <div class="section-title">Lessons</div>
@@ -694,7 +811,8 @@ function renderAccount() {
       </button>
     </div>
 
-    <div class="version-card">Mac Academy v4.0 · Made with creativity</div>
+    <div class="version-card" onclick="handleVersionTap()" style="cursor:pointer;user-select:none">Mac Academy v4.0 · Made with creativity</div>
+    <div style="text-align:center;font-size:11px;color:var(--muted);margin-top:4px;margin-bottom:8px">Tap 3× for admin</div>
   `;
 }
 
@@ -762,6 +880,191 @@ function toggleFaq(i) {
 }
 
 // ═══════════════════════════════════════════════════
+//  ONBOARDING
+// ═══════════════════════════════════════════════════
+let onboardSlide = 0;
+
+function showOnboarding() {
+  onboardSlide = 0;
+  renderOnboardSlide();
+  document.getElementById('onboard-overlay').classList.add('open');
+}
+
+function renderOnboardSlide() {
+  const s = ONBOARD_SLIDES[onboardSlide];
+  const iconEl  = document.getElementById('onboard-icon');
+  const titleEl = document.getElementById('onboard-title');
+  const bodyEl  = document.getElementById('onboard-body');
+  const dotsEl  = document.getElementById('onboard-dots');
+  const btnsEl  = document.getElementById('onboard-btns');
+
+  if (iconEl)  { iconEl.style.background = s.color + '22'; iconEl.innerHTML = s.icon; }
+  if (titleEl) titleEl.textContent = s.title;
+  if (bodyEl)  bodyEl.textContent  = s.body;
+  if (dotsEl)  dotsEl.innerHTML    = ONBOARD_SLIDES.map((_, i) =>
+    `<div class="onboard-dot${i === onboardSlide ? ' active' : ''}"></div>`).join('');
+  const isLast = onboardSlide === ONBOARD_SLIDES.length - 1;
+  if (btnsEl) {
+    btnsEl.innerHTML = isLast
+      ? `<button class="onboard-next full" onclick="finishOnboarding()">Get Started</button>`
+      : `<span class="onboard-skip" onclick="finishOnboarding()">Skip</span>
+         <button class="onboard-next" onclick="nextOnboard()">Next
+           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+         </button>`;
+  }
+}
+
+function nextOnboard() {
+  if (onboardSlide < ONBOARD_SLIDES.length - 1) { onboardSlide++; renderOnboardSlide(); }
+}
+
+function finishOnboarding() {
+  localStorage.setItem(KEY_ONBOARDED, 'true');
+  document.getElementById('onboard-overlay').classList.remove('open');
+}
+
+// ═══════════════════════════════════════════════════
+//  ADMIN CODE GENERATOR
+// ═══════════════════════════════════════════════════
+let adminCurrentCode = '';
+let adminHistVisible = false;
+
+function openAdminModal() {
+  document.getElementById('admin-pw-input').value = '';
+  document.getElementById('admin-pw-err').style.display = 'none';
+  document.getElementById('admin-login-panel').style.display = 'block';
+  document.getElementById('admin-gen-panel').style.display = 'none';
+  document.getElementById('admin-overlay').classList.add('open');
+}
+
+function closeAdminModal() {
+  document.getElementById('admin-overlay').classList.remove('open');
+  adminHistVisible = false;
+}
+
+function handleAdminOverlayClick(e) {
+  if (e.target === document.getElementById('admin-overlay')) closeAdminModal();
+}
+
+function adminLogin() {
+  const pw = document.getElementById('admin-pw-input').value;
+  if (pw !== ADMIN_PASSWORD) {
+    document.getElementById('admin-pw-err').style.display = 'block';
+    return;
+  }
+  document.getElementById('admin-login-panel').style.display = 'none';
+  document.getElementById('admin-gen-panel').style.display   = 'block';
+  adminCurrentCode = '';
+  adminHistVisible = false;
+  renderAdminHist();
+}
+
+function adminRandomChars(n) {
+  const pool = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let out = '';
+  for (let i = 0; i < n; i++) out += pool[Math.floor(Math.random() * pool.length)];
+  return out;
+}
+
+function adminGenerate() {
+  adminCurrentCode = 'MAC-' + adminRandomChars(4) + '-' + SECRET_KEY.toUpperCase();
+  const box = document.getElementById('admin-code-box');
+  if (box) {
+    box.className = 'code-display-box has-code';
+    box.innerHTML = `<div class="admin-big-code">${adminCurrentCode}</div>`;
+  }
+  document.getElementById('admin-action-row').style.display = 'flex';
+
+  // Save to history
+  try {
+    const hist = JSON.parse(localStorage.getItem(KEY_ADMIN_HIST) || '[]');
+    hist.unshift({ code: adminCurrentCode, date: new Date().toLocaleString() });
+    localStorage.setItem(KEY_ADMIN_HIST, JSON.stringify(hist.slice(0, 100)));
+  } catch {}
+  renderAdminHist();
+}
+
+function adminCopy() {
+  if (!adminCurrentCode) return;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(adminCurrentCode).then(() => showAdminToast('Copied!'));
+  } else {
+    prompt('Copy this code:', adminCurrentCode);
+  }
+}
+
+function adminWhatsApp() {
+  if (!adminCurrentCode) return;
+  const msg = encodeURIComponent(
+    `Hi! Here is your Mac Academy Pro unlock code:\n\n${adminCurrentCode}\n\nOpen the app → Courses → tap "Unlock Pro Lessons" → enter the code. Enjoy! 🎬`
+  );
+  window.open('https://wa.me/?text=' + msg, '_blank');
+}
+
+function renderAdminHist() {
+  const countEl = document.getElementById('admin-hist-count');
+  const listEl  = document.getElementById('admin-hist-list');
+  try {
+    const hist = JSON.parse(localStorage.getItem(KEY_ADMIN_HIST) || '[]');
+    if (countEl) countEl.textContent = hist.length;
+    if (listEl) {
+      listEl.style.display = adminHistVisible ? 'flex' : 'none';
+      listEl.innerHTML = hist.length === 0
+        ? `<div style="color:var(--muted);font-size:13px;text-align:center;padding:10px">No codes generated yet.</div>`
+        : hist.map(item => `
+          <div class="admin-hist-item">
+            <div style="flex:1">
+              <div class="admin-hist-code">${item.code}</div>
+              <div class="admin-hist-date">${item.date}</div>
+            </div>
+            <button class="admin-share-btn" onclick="adminShareCode('${item.code}')">📋</button>
+          </div>`).join('');
+    }
+  } catch {}
+}
+
+function adminShareCode(code) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(code).then(() => showAdminToast('Copied!'));
+  } else {
+    prompt('Copy this code:', code);
+  }
+}
+
+function toggleAdminHist() {
+  adminHistVisible = !adminHistVisible;
+  const chevEl = document.getElementById('admin-hist-chev');
+  if (chevEl) chevEl.textContent = adminHistVisible ? '▴' : '▾';
+  renderAdminHist();
+}
+
+function showAdminToast(msg) {
+  let t = document.getElementById('admin-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'admin-toast';
+    t.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#22c55e;color:#fff;font-weight:700;font-size:14px;padding:10px 22px;border-radius:30px;z-index:9999;pointer-events:none;transition:opacity .2s';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  setTimeout(() => { t.style.opacity = '0'; }, 1800);
+}
+
+// ── Version card tap-to-admin ─────────────────────
+let versionTapCount = 0;
+let versionTapTimer = null;
+function handleVersionTap() {
+  versionTapCount++;
+  if (versionTapTimer) clearTimeout(versionTapTimer);
+  versionTapTimer = setTimeout(() => { versionTapCount = 0; }, 2500);
+  if (versionTapCount >= 3) {
+    versionTapCount = 0;
+    openAdminModal();
+  }
+}
+
+// ═══════════════════════════════════════════════════
 //  KEYBOARD SHORTCUTS
 // ═══════════════════════════════════════════════════
 document.addEventListener('keydown', e => {
@@ -778,7 +1081,7 @@ document.addEventListener('keydown', e => {
 // ═══════════════════════════════════════════════════
 //  BOOT
 // ═══════════════════════════════════════════════════
-function bootApp() {
+function bootApp(freshSignup = false) {
   const session = getSession();
   if (!session) {
     showAuthScreen('login');
@@ -787,8 +1090,12 @@ function bootApp() {
   showMainApp();
   applyTheme();
   renderCoursesList();
+  renderComingSoon();
   updateHomeProgress();
   renderSupport();
+  if (freshSignup || !localStorage.getItem(KEY_ONBOARDED)) {
+    setTimeout(showOnboarding, 400);
+  }
 }
 
 bootApp();
