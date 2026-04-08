@@ -160,8 +160,9 @@ function revokePro()     { localStorage.removeItem(KEY_PRO); }
 
 function isValidCode(raw) {
   const code = raw.trim().toUpperCase();
-  // Format: MAC-{4 chars}-{SECRET_KEY}
-  if (code.length !== 4 + 1 + 4 + 1 + SECRET_KEY.length) return false;
+  // Format: MAC-{4 chars}-{SECRET_KEY}  e.g. MAC-AB3X-X8K2
+  const expected = ('MAC-XXXX-' + SECRET_KEY).length;
+  if (code.length !== expected) return false;
   if (!code.startsWith('MAC-')) return false;
   if (code[8] !== '-') return false;
   return code.slice(9) === SECRET_KEY.toUpperCase();

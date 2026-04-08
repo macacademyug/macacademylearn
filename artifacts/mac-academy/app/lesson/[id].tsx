@@ -16,6 +16,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import { useColors } from "@/hooks/useColors";
 import { useProgress } from "@/context/ProgressContext";
+import { usePro } from "@/context/ProContext";
 import { COURSES } from "@/data/courses";
 import * as Haptics from "expo-haptics";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -30,6 +31,7 @@ export default function LessonScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { toggleComplete, isComplete, isCourseComplete } = useProgress();
+  const { isPro } = usePro();
 
   const course = COURSES.find((c) => c.id === courseId);
   const lesson = course?.lessons.find((l) => l.id === id);
@@ -89,7 +91,7 @@ export default function LessonScreen() {
     );
   }
 
-  if (lesson.isPro) {
+  if (lesson.isPro && !isPro) {
     return (
       <View style={[styles.proLockScreen, { backgroundColor: colors.background }]}>
         <TouchableOpacity

@@ -289,7 +289,7 @@ export default function CoursesScreen() {
               style={[styles.codeInput, { backgroundColor: colors.background, borderColor: codeError ? colors.destructive : colors.border, color: colors.foreground, fontFamily: "Inter_600SemiBold" }]}
               value={proCode}
               onChangeText={(v) => { setProCode(v); setCodeError(""); }}
-              placeholder="e.g. MAC-PRO-2024"
+              placeholder="e.g. MAC-AB3X-X8K2"
               placeholderTextColor={colors.mutedForeground}
               autoCapitalize="characters"
               autoCorrect={false}
@@ -305,6 +305,13 @@ export default function CoursesScreen() {
               activeOpacity={0.85}
             >
               <Text style={[styles.submitBtnText, { fontFamily: "Inter_700Bold" }]}>Unlock Pro</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.closeBtn, { backgroundColor: colors.muted, borderColor: colors.border }]}
+              onPress={() => setModalVisible(false)}
+              activeOpacity={0.8}
+            >
+              <Text style={[styles.closeBtnText, { color: colors.foreground, fontFamily: "Inter_600SemiBold" }]}>Close</Text>
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
@@ -435,6 +442,8 @@ const styles = StyleSheet.create({
   codeError: { fontSize: 13, textAlign: "center", marginTop: -6 },
   submitBtn: { borderRadius: 14, paddingVertical: 18, alignItems: "center", marginTop: 4 },
   submitBtnText: { fontSize: 17, color: "#fff", fontWeight: "700" },
+  closeBtn: { borderRadius: 14, paddingVertical: 16, alignItems: "center", borderWidth: 1, marginTop: -6 },
+  closeBtnText: { fontSize: 15 },
   onboardOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.6)", alignItems: "center", justifyContent: "center", padding: 28 },
   onboardCard: { borderRadius: 24, padding: 28, alignItems: "center", width: "100%" },
   onboardIconWrap: { width: 90, height: 90, borderRadius: 28, alignItems: "center", justifyContent: "center", marginBottom: 16 },
