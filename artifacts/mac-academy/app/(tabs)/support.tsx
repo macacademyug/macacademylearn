@@ -23,6 +23,10 @@ const FAQS = [
     a: "Your progress is saved automatically to your device when you tap 'Mark as Complete' on a lesson. It stays saved even after you close the app. You can also tap the button again to undo it if you tapped by mistake.",
   },
   {
+    q: "How much does the FlipaClip course cost?",
+    a: "The FlipaClip Pro course costs 25,000 UGX. Pay via MTN or Airtel Mobile Money, send us your screenshot, and we'll give you an unlock code.",
+  },
+  {
     q: "How do I unlock Pro lessons?",
     a: "Tap the orange 'Unlock Pro Lessons' button on the Courses screen. Send Mobile Money to 0745414641, then send your screenshot to our WhatsApp or email. We'll send you a code — enter it in the box to unlock all lessons instantly.",
   },

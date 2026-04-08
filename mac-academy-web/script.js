@@ -705,6 +705,8 @@ const FAQS = [
     a:'Tap a course, then tap any unlocked lesson. The video opens in YouTube so you can follow along at your own pace.' },
   { q:'How does progress saving work?',
     a:"Progress is saved to your browser when you tap 'Mark as Complete'. If you tapped by mistake, tap the button again — it toggles back and forth." },
+  { q:'How much does the FlipaClip course cost?',
+    a:'The FlipaClip Pro course costs 25,000 UGX. Pay via MTN or Airtel Mobile Money, send us your screenshot, and we will give you an unlock code.' },
   { q:'How do I unlock Pro lessons?',
     a:'After paying via Mobile Money, send a screenshot to our WhatsApp or email. Once confirmed, you will receive a code. Enter the code in the Unlock screen to activate Pro on any device.' },
   { q:'Which payment methods are accepted?',
