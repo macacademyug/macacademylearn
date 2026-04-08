@@ -179,9 +179,14 @@ export default function AccountScreen() {
           <TouchableOpacity style={StyleSheet.absoluteFill} onPress={() => setProModalVisible(false)} />
           <View style={[styles.sheet, { backgroundColor: colors.card }]}>
             <View style={[styles.sheetHandle, { backgroundColor: colors.border }]} />
-            <Text style={[styles.sheetTitle, { color: colors.foreground, fontFamily: "Inter_700Bold" }]}>
-              Unlock Pro Access
-            </Text>
+            <View style={styles.sheetTitleRow}>
+              <Text style={[styles.sheetTitle, { color: colors.foreground, fontFamily: "Inter_700Bold" }]}>
+                Unlock Pro Access
+              </Text>
+              <View style={[styles.pricePill, { backgroundColor: colors.primary + "20", borderColor: colors.primary + "40" }]}>
+                <Text style={[styles.priceText, { color: colors.primary, fontFamily: "Inter_700Bold" }]}>25,000 UGX</Text>
+              </View>
+            </View>
 
             <View style={[styles.paySteps, { backgroundColor: colors.background, borderColor: colors.border }]}>
               {[
@@ -302,6 +307,9 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   signOutText: { fontSize: 15, fontWeight: "600" },
+  sheetTitleRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
+  pricePill: { borderRadius: 10, borderWidth: 1, paddingHorizontal: 10, paddingVertical: 4 },
+  priceText: { fontSize: 13, fontWeight: "700" },
   modalOverlay: { flex: 1, justifyContent: "flex-end" },
   sheet: {
     borderTopLeftRadius: 24,
