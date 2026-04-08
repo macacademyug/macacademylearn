@@ -90,8 +90,8 @@ export default function AccountScreen() {
   const handleVersionTap = () => {
     tapCount.current += 1;
     if (tapTimer.current) clearTimeout(tapTimer.current);
-    tapTimer.current = setTimeout(() => { tapCount.current = 0; }, 1500);
-    if (tapCount.current >= 5) {
+    tapTimer.current = setTimeout(() => { tapCount.current = 0; }, 2500);
+    if (tapCount.current >= 3) {
       tapCount.current = 0;
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       setAdminVisible(true);
@@ -257,9 +257,17 @@ export default function AccountScreen() {
           <Text style={[styles.signOutText, { color: colors.destructive, fontFamily: "Inter_600SemiBold" }]}>Sign Out</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={handleVersionTap} activeOpacity={1} style={styles.versionWrap}>
+        <TouchableOpacity
+          onPress={handleVersionTap}
+          activeOpacity={0.6}
+          style={styles.versionWrap}
+          hitSlop={{ top: 20, bottom: 20, left: 60, right: 60 }}
+        >
           <Text style={[styles.versionText, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
             Mac Academy v4.0
+          </Text>
+          <Text style={[styles.versionHint, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
+            Tap 3× for admin
           </Text>
         </TouchableOpacity>
       </ScrollView>
@@ -487,6 +495,7 @@ const styles = StyleSheet.create({
   signOutText: { fontSize: 15, fontWeight: "600" },
   versionWrap: { alignItems: "center", paddingVertical: 16 },
   versionText: { fontSize: 12 },
+  versionHint: { fontSize: 10, marginTop: 3, opacity: 0.5 },
   modalOverlay: { flex: 1, justifyContent: "flex-end" },
   sheet: { borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, paddingTop: 16, gap: 14 },
   adminSheet: { borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, paddingTop: 16, maxHeight: "90%", alignItems: "center" },

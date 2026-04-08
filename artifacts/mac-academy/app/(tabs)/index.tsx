@@ -187,10 +187,14 @@ export default function CoursesScreen() {
             onPress={handleUnlockPress}
             activeOpacity={0.85}
           >
-            <Feather name="unlock" size={18} color="#fff" />
-            <Text style={[styles.proBtnText, { fontFamily: "Inter_700Bold" }]}>Unlock Pro Lessons</Text>
+            <View style={styles.proBtnInner}>
+              <Feather name="unlock" size={18} color="#fff" />
+              <Text style={[styles.proBtnText, { fontFamily: "Inter_700Bold" }]} numberOfLines={1} adjustsFontSizeToFit>
+                Unlock Pro Lessons
+              </Text>
+            </View>
             <View style={styles.proBadge}>
-              <Text style={[styles.proBadgeText, { fontFamily: "Inter_700Bold" }]}>25K UGX</Text>
+              <Text style={[styles.proBadgeText, { fontFamily: "Inter_700Bold" }]}>25,000 UGX</Text>
             </View>
           </TouchableOpacity>
         ) : (
@@ -393,13 +397,14 @@ const styles = StyleSheet.create({
   barTrack: { height: 6, borderRadius: 3, overflow: "hidden" },
   barFill: { height: "100%", borderRadius: 3 },
   proBtn: {
-    flexDirection: "row", alignItems: "center", justifyContent: "center",
-    gap: 10, borderRadius: 16, paddingVertical: 18, marginBottom: 24,
+    flexDirection: "row", alignItems: "center", justifyContent: "space-between",
+    borderRadius: 16, paddingVertical: 16, paddingHorizontal: 18, marginBottom: 24,
     shadowColor: "#FF6B1A", shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.35, shadowRadius: 12, elevation: 6,
   },
-  proBtnText: { fontSize: 17, fontWeight: "700", color: "#fff" },
-  proBadge: { backgroundColor: "rgba(255,255,255,0.25)", borderRadius: 8, paddingHorizontal: 8, paddingVertical: 3 },
+  proBtnInner: { flexDirection: "row", alignItems: "center", gap: 10, flex: 1, marginRight: 8 },
+  proBtnText: { fontSize: 16, fontWeight: "700", color: "#fff", flexShrink: 1 },
+  proBadge: { backgroundColor: "rgba(255,255,255,0.25)", borderRadius: 8, paddingHorizontal: 9, paddingVertical: 4 },
   proBadgeText: { fontSize: 12, color: "#fff", fontWeight: "700" },
   proActiveRow: { flexDirection: "row", alignItems: "center", gap: 10, borderRadius: 14, borderWidth: 1, padding: 14, marginBottom: 20 },
   proActiveText: { fontSize: 14 },
@@ -431,13 +436,13 @@ const styles = StyleSheet.create({
   submitBtn: { borderRadius: 14, paddingVertical: 18, alignItems: "center", marginTop: 4 },
   submitBtnText: { fontSize: 17, color: "#fff", fontWeight: "700" },
   onboardOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.6)", alignItems: "center", justifyContent: "center", padding: 28 },
-  onboardCard: { borderRadius: 24, padding: 28, alignItems: "center", gap: 14, width: "100%" },
-  onboardIconWrap: { width: 90, height: 90, borderRadius: 28, alignItems: "center", justifyContent: "center" },
-  onboardTitle: { fontSize: 22, fontWeight: "700", textAlign: "center" },
-  onboardBody: { fontSize: 14, textAlign: "center", lineHeight: 22 },
-  onboardDots: { flexDirection: "row", gap: 8 },
-  dot: { width: 8, height: 8, borderRadius: 4 },
-  onboardBtns: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%", gap: 12, marginTop: 4 },
+  onboardCard: { borderRadius: 24, padding: 28, alignItems: "center", width: "100%" },
+  onboardIconWrap: { width: 90, height: 90, borderRadius: 28, alignItems: "center", justifyContent: "center", marginBottom: 16 },
+  onboardTitle: { fontSize: 22, fontWeight: "700", textAlign: "center", marginBottom: 10 },
+  onboardBody: { fontSize: 14, textAlign: "center", lineHeight: 22, marginBottom: 16 },
+  onboardDots: { flexDirection: "row", marginBottom: 20 },
+  dot: { width: 8, height: 8, borderRadius: 4, marginHorizontal: 4 },
+  onboardBtns: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%", marginTop: 4 },
   skipText: { fontSize: 15 },
   nextOnboardBtn: { flexDirection: "row", alignItems: "center", gap: 6, borderRadius: 14, paddingVertical: 14, paddingHorizontal: 24 },
   nextOnboardText: { fontSize: 16, color: "#fff", fontWeight: "700" },
