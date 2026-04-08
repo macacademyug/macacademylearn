@@ -2,17 +2,10 @@
 //  MAC ACADEMY — script.js  v4
 // ═══════════════════════════════════════════════════
 
-// ── PRO UNLOCK CODES ──────────────────────────────
-// Add or remove codes here. Give one code per paying student.
-// Each code can be used on as many devices as the student wants.
-const PRO_CODES = [
-  'MACPRO2024',
-  'FLIPACLIP-PRO',
-  'ANIMATION123',
-  'MACVIP-001',
-  'MACVIP-002',
-  'MACVIP-003',
-];
+// ── PRO UNLOCK SECRET KEY ─────────────────────────
+// Must match SECRET_KEY in ProContext.tsx and code-generator.html.
+// Change this to invalidate all old codes. Keep it private.
+const SECRET_KEY = 'X8K2';
 
 // ── VIDEO PLACEHOLDER ─────────────────────────────
 // Replace with your real YouTube URL — applies to all lessons
@@ -140,9 +133,17 @@ function isProUnlocked() { return localStorage.getItem(KEY_PRO) === 'true'; }
 function unlockPro()     { localStorage.setItem(KEY_PRO, 'true'); }
 function revokePro()     { localStorage.removeItem(KEY_PRO); }
 
+function isValidCode(raw) {
+  const code = raw.trim().toUpperCase();
+  // Format: MAC-{4 chars}-{SECRET_KEY}
+  if (code.length !== 4 + 1 + 4 + 1 + SECRET_KEY.length) return false;
+  if (!code.startsWith('MAC-')) return false;
+  if (code[8] !== '-') return false;
+  return code.slice(9) === SECRET_KEY.toUpperCase();
+}
+
 function tryUnlockCode(code) {
-  const normalized = code.trim().toUpperCase();
-  if (PRO_CODES.includes(normalized)) {
+  if (isValidCode(code)) {
     unlockPro();
     return { ok: true };
   }
