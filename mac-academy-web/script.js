@@ -58,7 +58,7 @@ const COURSES = [
     totalLessons: 3, estimatedHours: '30 min', color: '#22c55e',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
     lessons: [
-      { id:'basics-1', order:1, isPro:false, title:'Getting Started with FlipaClip', duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=nns6YLVZLQY',
+      { id:'basics-1', order:1, isPro:false, title:'Getting Started with FlipaClip', duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=_p7AEsbkPgI',
         description:"A complete walkthrough of FlipaClip's interface — brushes, the timeline, layers, and playback controls. By the end you'll know exactly where everything lives and be ready to start animating." },
       { id:'basics-2', order:2, isPro:false, title:'Bouncing Ball Animation', duration:'15:00', videoUrl:VIDEO,
         description:'Animate a bouncing ball to understand timing, spacing, squash, and stretch — the core principles every animator must master. The best hands-on exercise to build your animation instincts.' },
