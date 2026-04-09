@@ -58,11 +58,24 @@ const COURSES = [
     totalLessons: 3, estimatedHours: '30 min', color: '#22c55e',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
     lessons: [
-      { id:'basics-1', order:1, isPro:false, title:'Getting Started with FlipaClip', duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=j8yrA_VqIx4',
+      { id:'basics-1', order:1, isPro:false, title:'Getting Started with FlipaClip', duration:'10:00',
+        videos:[
+          { title:'Part 1 – Interface Overview', url:'https://www.youtube.com/watch?v=j8yrA_VqIx4' },
+          { title:'Part 2 – Brushes & Tools', url:VIDEO },
+          { title:'Part 3 – Timeline & Layers', url:VIDEO },
+        ],
         description:"A complete walkthrough of FlipaClip's interface — brushes, the timeline, layers, and playback controls. By the end you'll know exactly where everything lives and be ready to start animating." },
-      { id:'basics-2', order:2, isPro:false, title:'Bouncing Ball Animation', duration:'15:00', videoUrl:VIDEO,
+      { id:'basics-2', order:2, isPro:false, title:'Bouncing Ball Animation', duration:'15:00',
+        videos:[
+          { title:'Part 1 – Timing & Spacing', url:VIDEO },
+          { title:'Part 2 – Squash & Stretch', url:VIDEO },
+        ],
         description:'Animate a bouncing ball to understand timing, spacing, squash, and stretch — the core principles every animator must master. The best hands-on exercise to build your animation instincts.' },
-      { id:'basics-3', order:3, isPro:true,  title:'Exporting Your Animation', duration:'5:00', videoUrl:VIDEO,
+      { id:'basics-3', order:3, isPro:true,  title:'Exporting Your Animation', duration:'5:00',
+        videos:[
+          { title:'Part 1 – Export Settings', url:VIDEO },
+          { title:'Part 2 – Best Quality for Social Media', url:VIDEO },
+        ],
         description:'Export your finished animation as a video or GIF. Learn the best settings for TikTok, Instagram, and YouTube so your work looks great wherever you share it.' },
     ],
   },
@@ -72,11 +85,24 @@ const COURSES = [
     totalLessons: 3, estimatedHours: '40 min', color: '#3B82F6',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
     lessons: [
-      { id:'character-1', order:1, isPro:false, title:'Drawing the Background', duration:'10:00', videoUrl:VIDEO,
+      { id:'character-1', order:1, isPro:false, title:'Drawing the Background', duration:'10:00',
+        videos:[
+          { title:'Part 1 – Perspective Basics', url:VIDEO },
+          { title:'Part 2 – Layering & Depth', url:VIDEO },
+        ],
         description:'Design and draw a complete scene background — perspective basics, layering elements, and creating depth that makes your character pop against the environment.' },
-      { id:'character-2', order:2, isPro:true,  title:'Animating the Character', duration:'20:00', videoUrl:VIDEO,
+      { id:'character-2', order:2, isPro:true,  title:'Animating the Character', duration:'20:00',
+        videos:[
+          { title:'Part 1 – Walk Cycle', url:VIDEO },
+          { title:'Part 2 – Weight & Expression', url:VIDEO },
+          { title:'Part 3 – Fluid Movement', url:VIDEO },
+        ],
         description:'Animate your character moving through the scene. Cover walk cycles, weight shifts, and expressive actions — bringing your character to life with fluid, believable movement.' },
-      { id:'character-3', order:3, isPro:true,  title:'Finalizing Your Scene', duration:'10:00', videoUrl:VIDEO,
+      { id:'character-3', order:3, isPro:true,  title:'Finalizing Your Scene', duration:'10:00',
+        videos:[
+          { title:'Part 1 – Timing Cleanup', url:VIDEO },
+          { title:'Part 2 – Export & Share', url:VIDEO },
+        ],
         description:'Polish and finalize your animated scene — adjust timing, clean up rough lines, add finishing touches, and export a complete short animation ready to share.' },
     ],
   },
@@ -86,11 +112,25 @@ const COURSES = [
     totalLessons: 3, estimatedHours: '30 min', color: '#FF6B1A',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>`,
     lessons: [
-      { id:'lipsync-1', order:1, isPro:false, title:'Understanding Mouth Shapes', duration:'10:00', videoUrl:VIDEO,
+      { id:'lipsync-1', order:1, isPro:false, title:'Understanding Mouth Shapes', duration:'10:00',
+        videos:[
+          { title:'Part 1 – The 8 Mouth Shapes', url:VIDEO },
+          { title:'Part 2 – Mapping Sounds', url:VIDEO },
+        ],
         description:'Learn the standard Preston Blair mouth chart — the 8 essential shapes (A/I, E, O, U, F/V, L/TH, M/B/P, rest) and how they map to sounds in spoken dialogue.' },
-      { id:'lipsync-2', order:2, isPro:true,  title:'Breaking Down Audio', duration:'10:00', videoUrl:VIDEO,
+      { id:'lipsync-2', order:2, isPro:true,  title:'Breaking Down Audio', duration:'10:00',
+        videos:[
+          { title:'Part 1 – Import Audio', url:VIDEO },
+          { title:'Part 2 – Reading the Waveform', url:VIDEO },
+          { title:'Part 3 – Frame by Frame Mapping', url:VIDEO },
+        ],
         description:'Import audio into FlipaClip, read the waveform, break a line of dialogue into individual sounds, and map each sound to the correct mouth shape frame by frame.' },
-      { id:'lipsync-3', order:3, isPro:true,  title:'Full Lip Sync Scene', duration:'10:00', videoUrl:VIDEO,
+      { id:'lipsync-3', order:3, isPro:true,  title:'Full Lip Sync Scene', duration:'10:00',
+        videos:[
+          { title:'Part 1 – Full Scene Setup', url:VIDEO },
+          { title:'Part 2 – Eye Blinks & Head Movement', url:VIDEO },
+          { title:'Part 3 – Final Polish', url:VIDEO },
+        ],
         description:'Animate a complete talking character scene with synced mouth shapes, eye blinks, and subtle head movement — a polished, convincing performance from start to finish.' },
     ],
   },
@@ -606,10 +646,17 @@ function renderLessonPlayer(lesson, course) {
       <div class="meta-item">${IC.hash} Lesson ${lesson.order} of ${course.totalLessons}</div>
       ${done ? `<div class="done-badge">${IC.check} Complete</div>` : ''}
     </div>
-    <div class="video-player" style="border-color:${course.color}60" onclick="window.open('${lesson.videoUrl}','_blank')">
-      <div class="play-circle" style="background:${course.color}">${IC.play}</div>
-      <div class="video-hint">Tap to watch video</div>
-      <div class="video-sub">Opens in YouTube · change VIDEO in script.js</div>
+    <div class="videos-section">
+      <div class="videos-label">Videos in this lesson</div>
+      ${(lesson.videos || [{ title:'Watch Lesson', url: lesson.videoUrl }]).map((v, i) => `
+      <div class="video-item" onclick="window.open('${v.url}','_blank')" style="border-color:${course.color}40">
+        <div class="video-item-num" style="background:${course.color}">${i + 1}</div>
+        <div class="video-item-info">
+          <div class="video-item-title">${v.title}</div>
+          <div class="video-item-sub">Tap to open in YouTube</div>
+        </div>
+        <div class="video-item-play" style="color:${course.color}">${IC.play}</div>
+      </div>`).join('')}
     </div>
     <div class="card desc-card">
       <div class="desc-label">Lesson Description</div>
