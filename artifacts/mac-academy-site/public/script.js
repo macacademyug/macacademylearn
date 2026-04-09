@@ -769,14 +769,27 @@ function showAccErr(id, msg) {
 }
 
 function switchAccTab(tab) {
-  document.getElementById('acc-tab-login').classList.toggle('active', tab === 'login');
-  document.getElementById('acc-tab-signup').classList.toggle('active', tab === 'signup');
+  const ON  = 'flex:1;padding:11px 0;border:none;border-radius:10px;font-size:14px;font-weight:700;font-family:Inter,sans-serif;cursor:pointer;background:var(--primary);color:#fff;box-shadow:0 4px 14px rgba(255,107,26,.35)';
+  const OFF = 'flex:1;padding:11px 0;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:Inter,sans-serif;cursor:pointer;background:transparent;color:var(--muted)';
+  document.getElementById('acc-tab-login').setAttribute('style',  tab === 'login'  ? ON : OFF);
+  document.getElementById('acc-tab-signup').setAttribute('style', tab === 'signup' ? ON : OFF);
   document.getElementById('acc-form-login').style.display  = tab === 'login'  ? 'block' : 'none';
   document.getElementById('acc-form-signup').style.display = tab === 'signup' ? 'block' : 'none';
 }
 
 function renderAccount() {
   const session = getSession();
+
+  const S = {
+    card:    'background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px;margin-bottom:12px',
+    tabs:    'display:flex;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:5px;margin-bottom:20px',
+    tabOn:   'flex:1;padding:11px 0;border:none;border-radius:10px;font-size:14px;font-weight:700;font-family:Inter,sans-serif;cursor:pointer;background:var(--primary);color:#fff;box-shadow:0 4px 14px rgba(255,107,26,.35)',
+    tabOff:  'flex:1;padding:11px 0;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:Inter,sans-serif;cursor:pointer;background:transparent;color:var(--muted)',
+    label:   'display:block;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin:14px 0 6px',
+    input:   'display:block;width:100%;box-sizing:border-box;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;font-size:15px;font-family:Inter,sans-serif;color:var(--fg);outline:none',
+    hint:    'text-align:center;font-size:13px;color:var(--muted);margin-top:18px;margin-bottom:0',
+    link:    'color:var(--primary);font-weight:700;cursor:pointer',
+  };
 
   if (!session) {
     document.getElementById('account-body').innerHTML = `
@@ -789,39 +802,39 @@ function renderAccount() {
         <div class="account-pro-badge">Free Plan</div>
       </div>
 
-      <div class="account-section" style="padding:20px">
-        <div class="acc-tabs">
-          <button class="acc-tab active" id="acc-tab-login" onclick="switchAccTab('login')">Sign In</button>
-          <button class="acc-tab" id="acc-tab-signup" onclick="switchAccTab('signup')">Sign Up</button>
+      <div style="${S.card}">
+        <div style="${S.tabs}">
+          <button id="acc-tab-login" onclick="switchAccTab('login')" style="${S.tabOn}">Sign In</button>
+          <button id="acc-tab-signup" onclick="switchAccTab('signup')" style="${S.tabOff}">Sign Up</button>
         </div>
 
         <div id="acc-form-login">
-          <label class="acc-label">Email</label>
-          <input id="acc-login-email" class="acc-input" type="email" placeholder="your@email.com"/>
-          <label class="acc-label">Password</label>
-          <input id="acc-login-password" class="acc-input" type="password" placeholder="••••••••"/>
-          <div class="auth-err" id="acc-login-err"></div>
+          <div style="${S.label}">Email</div>
+          <input id="acc-login-email" type="email" placeholder="your@email.com" style="${S.input}"/>
+          <div style="${S.label}">Password</div>
+          <input id="acc-login-password" type="password" placeholder="••••••••" style="${S.input}"/>
+          <div class="auth-err" id="acc-login-err" style="margin-top:12px"></div>
           <button class="auth-btn" style="margin-top:16px" onclick="doAccLogin()">Sign In</button>
-          <p class="acc-hint">Don't have an account? <span class="acc-link" onclick="switchAccTab('signup')">Sign Up</span></p>
+          <p style="${S.hint}">Don't have an account? <span style="${S.link}" onclick="switchAccTab('signup')">Sign Up</span></p>
         </div>
 
         <div id="acc-form-signup" style="display:none">
-          <label class="acc-label">Username</label>
-          <input id="acc-signup-username" class="acc-input" type="text" placeholder="Your name"/>
-          <label class="acc-label">Email</label>
-          <input id="acc-signup-email" class="acc-input" type="email" placeholder="your@email.com"/>
-          <label class="acc-label">Password</label>
-          <input id="acc-signup-password" class="acc-input" type="password" placeholder="Min. 6 characters"/>
-          <label class="acc-label">Confirm Password</label>
-          <input id="acc-signup-confirm" class="acc-input" type="password" placeholder="Repeat your password"/>
-          <div class="auth-err" id="acc-signup-err"></div>
+          <div style="${S.label}">Username</div>
+          <input id="acc-signup-username" type="text" placeholder="Your name" style="${S.input}"/>
+          <div style="${S.label}">Email</div>
+          <input id="acc-signup-email" type="email" placeholder="your@email.com" style="${S.input}"/>
+          <div style="${S.label}">Password</div>
+          <input id="acc-signup-password" type="password" placeholder="Min. 6 characters" style="${S.input}"/>
+          <div style="${S.label}">Confirm Password</div>
+          <input id="acc-signup-confirm" type="password" placeholder="Repeat your password" style="${S.input}"/>
+          <div class="auth-err" id="acc-signup-err" style="margin-top:12px"></div>
           <button class="auth-btn" style="margin-top:16px" onclick="doAccSignup()">Create Account</button>
-          <p class="acc-hint">Already have an account? <span class="acc-link" onclick="switchAccTab('login')">Sign In</span></p>
+          <p style="${S.hint}">Already have an account? <span style="${S.link}" onclick="switchAccTab('login')">Sign In</span></p>
         </div>
       </div>
 
-      <div class="account-section" style="padding:16px 20px">
-        <div class="info-box">
+      <div style="${S.card}">
+        <div class="info-box" style="margin:0">
           <div class="info-box-title">Free to browse</div>
           <div class="info-box-text">You can explore all courses freely. Create an account only when you are ready to unlock Pro access (25,000 UGX).</div>
         </div>
