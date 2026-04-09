@@ -780,43 +780,51 @@ function renderAccount() {
 
   if (!session) {
     document.getElementById('account-body').innerHTML = `
-      <div class="account-hero" style="background:linear-gradient(135deg,var(--card),var(--card));border:1px solid var(--border)">
-        <div class="account-avatar" style="background:var(--border);color:var(--muted);font-size:32px">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <div class="account-hero">
+        <div class="account-avatar" style="background:var(--border)">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted)"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
-        <div class="account-name" style="color:var(--fg)">Sign in to Mac Academy</div>
-        <div class="account-email">Save your progress across devices</div>
+        <div class="account-name">Welcome to Mac Academy</div>
+        <div class="account-email">Sign in to track your progress</div>
+        <div class="account-pro-badge">Free Plan</div>
       </div>
 
-      <div class="acc-tabs">
-        <button class="acc-tab active" id="acc-tab-login" onclick="switchAccTab('login')">Sign In</button>
-        <button class="acc-tab" id="acc-tab-signup" onclick="switchAccTab('signup')">Sign Up</button>
+      <div class="account-section" style="padding:20px">
+        <div class="acc-tabs">
+          <button class="acc-tab active" id="acc-tab-login" onclick="switchAccTab('login')">Sign In</button>
+          <button class="acc-tab" id="acc-tab-signup" onclick="switchAccTab('signup')">Sign Up</button>
+        </div>
+
+        <div id="acc-form-login">
+          <label class="acc-label">Email</label>
+          <input id="acc-login-email" class="acc-input" type="email" placeholder="your@email.com"/>
+          <label class="acc-label">Password</label>
+          <input id="acc-login-password" class="acc-input" type="password" placeholder="••••••••"/>
+          <div class="auth-err" id="acc-login-err"></div>
+          <button class="auth-btn" style="margin-top:16px" onclick="doAccLogin()">Sign In</button>
+          <p class="acc-hint">Don't have an account? <span class="acc-link" onclick="switchAccTab('signup')">Sign Up</span></p>
+        </div>
+
+        <div id="acc-form-signup" style="display:none">
+          <label class="acc-label">Username</label>
+          <input id="acc-signup-username" class="acc-input" type="text" placeholder="Your name"/>
+          <label class="acc-label">Email</label>
+          <input id="acc-signup-email" class="acc-input" type="email" placeholder="your@email.com"/>
+          <label class="acc-label">Password</label>
+          <input id="acc-signup-password" class="acc-input" type="password" placeholder="Min. 6 characters"/>
+          <label class="acc-label">Confirm Password</label>
+          <input id="acc-signup-confirm" class="acc-input" type="password" placeholder="Repeat your password"/>
+          <div class="auth-err" id="acc-signup-err"></div>
+          <button class="auth-btn" style="margin-top:16px" onclick="doAccSignup()">Create Account</button>
+          <p class="acc-hint">Already have an account? <span class="acc-link" onclick="switchAccTab('login')">Sign In</span></p>
+        </div>
       </div>
 
-      <div id="acc-form-login" style="display:block">
-        <div class="auth-field-label">Email</div>
-        <input id="acc-login-email" class="auth-input" type="email" placeholder="your@email.com"/>
-        <div class="auth-field-label">Password</div>
-        <input id="acc-login-password" class="auth-input" type="password" placeholder="••••••••"/>
-        <div class="auth-err" id="acc-login-err"></div>
-        <button class="auth-btn" onclick="doAccLogin()">Sign In</button>
-      </div>
-
-      <div id="acc-form-signup" style="display:none">
-        <div class="auth-field-label">Username</div>
-        <input id="acc-signup-username" class="auth-input" type="text" placeholder="Your name"/>
-        <div class="auth-field-label">Email</div>
-        <input id="acc-signup-email" class="auth-input" type="email" placeholder="your@email.com"/>
-        <div class="auth-field-label">Password</div>
-        <input id="acc-signup-password" class="auth-input" type="password" placeholder="••••••••"/>
-        <div class="auth-field-label">Confirm Password</div>
-        <input id="acc-signup-confirm" class="auth-input" type="password" placeholder="••••••••"/>
-        <div class="auth-err" id="acc-signup-err"></div>
-        <button class="auth-btn" onclick="doAccSignup()">Create Account</button>
-      </div>
-
-      <div style="text-align:center;font-size:13px;color:var(--muted);margin-top:12px">
-        You can browse courses freely — sign up only when you're ready to pay for Pro access.
+      <div class="account-section" style="padding:16px 20px">
+        <div class="info-box">
+          <div class="info-box-title">Free to browse</div>
+          <div class="info-box-text">You can explore all courses freely. Create an account only when you are ready to unlock Pro access (25,000 UGX).</div>
+        </div>
       </div>
     `;
     return;

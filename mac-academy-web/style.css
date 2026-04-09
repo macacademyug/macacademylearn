@@ -341,6 +341,15 @@ body.light .video-player { background: #1a1a1a; }
 
 
 /* ── ACCOUNT TAB AUTH FORMS ── */
-.acc-tabs { display:flex; gap:8px; margin-bottom:18px; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:6px; }
-.acc-tab  { flex:1; padding:10px; border:none; border-radius:10px; font-size:14px; font-weight:600; font-family:'Inter',sans-serif; cursor:pointer; background:transparent; color:var(--muted); transition:background .2s,color .2s; }
-.acc-tab.active { background:var(--primary); color:#fff; }
+.acc-tabs        { display:flex; gap:6px; margin-bottom:20px; background:var(--bg); border:1px solid var(--border); border-radius:14px; padding:5px; }
+.acc-tab         { flex:1; padding:11px 0; border:none; border-radius:10px; font-size:14px; font-weight:600; font-family:'Inter',sans-serif; cursor:pointer; background:transparent; color:var(--muted); transition:background .2s,color .2s,box-shadow .2s; }
+.acc-tab.active  { background:var(--primary); color:#fff; box-shadow:0 4px 14px rgba(255,107,26,.35); }
+
+.acc-label       { display:block; font-size:12px; font-weight:600; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; margin:14px 0 6px; }
+.acc-input       { display:block; width:100%; box-sizing:border-box; background:var(--bg); border:1.5px solid var(--border); border-radius:12px; padding:14px 16px; font-size:15px; font-family:'Inter',sans-serif; color:var(--fg); outline:none; transition:border-color .2s; }
+.acc-input:focus { border-color:var(--primary); }
+.acc-input::placeholder { color:var(--muted); }
+
+.acc-hint        { text-align:center; font-size:13px; color:var(--muted); margin-top:16px; }
+.acc-link        { color:var(--primary); font-weight:600; cursor:pointer; }
+.acc-link:hover  { text-decoration:underline; }
