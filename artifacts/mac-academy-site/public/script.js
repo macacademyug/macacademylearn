@@ -280,11 +280,15 @@ function doSignup() {
 function doLogout() {
   clearSession();
   revokePro();
-  showAuthScreen('login');
+  showTab('account');
 }
 
 // ── PRO MODAL ─────────────────────────────────────
 function openProModal() {
+  if (!getSession()) {
+    showTab('account');
+    return;
+  }
   document.getElementById('code-input').value = '';
   document.getElementById('code-msg').className = 'code-msg';
   document.getElementById('code-msg').textContent = '';
@@ -735,9 +739,89 @@ function renderProgress() {
 // ═══════════════════════════════════════════════════
 //  ACCOUNT TAB
 // ═══════════════════════════════════════════════════
+function doAccLogin() {
+  const email    = document.getElementById('acc-login-email').value;
+  const password = document.getElementById('acc-login-password').value;
+  if (!email || !password) { showAccErr('acc-login-err', 'Please fill in all fields.'); return; }
+  const result = login(email, password);
+  if (!result.ok) { showAccErr('acc-login-err', result.msg); return; }
+  renderAccount();
+  updateHomeProgress();
+}
+
+function doAccSignup() {
+  const username = document.getElementById('acc-signup-username').value;
+  const email    = document.getElementById('acc-signup-email').value;
+  const password = document.getElementById('acc-signup-password').value;
+  const confirm  = document.getElementById('acc-signup-confirm').value;
+  if (!username || !email || !password || !confirm) { showAccErr('acc-signup-err', 'Please fill in all fields.'); return; }
+  if (password !== confirm) { showAccErr('acc-signup-err', 'Passwords do not match.'); return; }
+  const result = signup(username, email, password);
+  if (!result.ok) { showAccErr('acc-signup-err', result.msg); return; }
+  renderAccount();
+  updateHomeProgress();
+  if (!localStorage.getItem(KEY_ONBOARDED)) setTimeout(showOnboarding, 300);
+}
+
+function showAccErr(id, msg) {
+  const el = document.getElementById(id);
+  if (el) { el.textContent = msg; el.classList.add('show'); }
+}
+
+function switchAccTab(tab) {
+  document.getElementById('acc-tab-login').classList.toggle('active', tab === 'login');
+  document.getElementById('acc-tab-signup').classList.toggle('active', tab === 'signup');
+  document.getElementById('acc-form-login').style.display  = tab === 'login'  ? 'block' : 'none';
+  document.getElementById('acc-form-signup').style.display = tab === 'signup' ? 'block' : 'none';
+}
+
 function renderAccount() {
   const session = getSession();
-  if (!session) return;
+
+  if (!session) {
+    document.getElementById('account-body').innerHTML = `
+      <div class="account-hero" style="background:linear-gradient(135deg,var(--card),var(--card));border:1px solid var(--border)">
+        <div class="account-avatar" style="background:var(--border);color:var(--muted);font-size:32px">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="account-name" style="color:var(--fg)">Sign in to Mac Academy</div>
+        <div class="account-email">Save your progress across devices</div>
+      </div>
+
+      <div class="acc-tabs">
+        <button class="acc-tab active" id="acc-tab-login" onclick="switchAccTab('login')">Sign In</button>
+        <button class="acc-tab" id="acc-tab-signup" onclick="switchAccTab('signup')">Sign Up</button>
+      </div>
+
+      <div id="acc-form-login" style="display:block">
+        <div class="auth-field-label">Email</div>
+        <input id="acc-login-email" class="auth-input" type="email" placeholder="your@email.com"/>
+        <div class="auth-field-label">Password</div>
+        <input id="acc-login-password" class="auth-input" type="password" placeholder="••••••••"/>
+        <div class="auth-err" id="acc-login-err"></div>
+        <button class="auth-btn" onclick="doAccLogin()">Sign In</button>
+      </div>
+
+      <div id="acc-form-signup" style="display:none">
+        <div class="auth-field-label">Username</div>
+        <input id="acc-signup-username" class="auth-input" type="text" placeholder="Your name"/>
+        <div class="auth-field-label">Email</div>
+        <input id="acc-signup-email" class="auth-input" type="email" placeholder="your@email.com"/>
+        <div class="auth-field-label">Password</div>
+        <input id="acc-signup-password" class="auth-input" type="password" placeholder="••••••••"/>
+        <div class="auth-field-label">Confirm Password</div>
+        <input id="acc-signup-confirm" class="auth-input" type="password" placeholder="••••••••"/>
+        <div class="auth-err" id="acc-signup-err"></div>
+        <button class="auth-btn" onclick="doAccSignup()">Create Account</button>
+      </div>
+
+      <div style="text-align:center;font-size:13px;color:var(--muted);margin-top:12px">
+        You can browse courses freely — sign up only when you're ready to pay for Pro access.
+      </div>
+    `;
+    return;
+  }
+
   const pro    = isProUnlocked();
   const dark   = isDark();
   const initials = session.username.charAt(0).toUpperCase();
@@ -1083,11 +1167,6 @@ document.addEventListener('keydown', e => {
 //  BOOT
 // ═══════════════════════════════════════════════════
 function bootApp(freshSignup = false) {
-  const session = getSession();
-  if (!session) {
-    showAuthScreen('login');
-    return;
-  }
   showMainApp();
   applyTheme();
   renderCoursesList();
