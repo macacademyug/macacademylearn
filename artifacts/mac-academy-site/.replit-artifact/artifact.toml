@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/mac-academy-site/"
+title = "Mac Academy"
+version = "1.0.0"
+id = "artifacts/mac-academy-site"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/mac-academy-site/" ]
+localPort = 26207
+
+[services.development]
+run = "pnpm --filter @workspace/mac-academy-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/mac-academy-site", "run", "build" ]
+publicDir = "artifacts/mac-academy-site/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26207"
+BASE_PATH = "/mac-academy-site/"
