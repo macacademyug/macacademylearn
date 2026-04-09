@@ -1,4 +1,4 @@
-const CACHE = 'mac-academy-v1';
+const CACHE = 'mac-academy-v2';
 const ASSETS = [
   './',
   './index.html',
