@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Mac Academy</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="app">
+
+  <!-- ═══════════════════════════════════
+       AUTH SCREENS (shown when logged out)
+       ═══════════════════════════════════ -->
+  <div id="auth-wrapper" style="display:none;flex-direction:column;height:100%;background:var(--bg);">
+
+    <!-- LOGIN -->
+    <div class="auth-screen" id="auth-login">
+      <div class="auth-logo">
+        <div class="auth-logo-mark">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="auth-app-name">Mac Academy</div>
+        <div class="auth-tagline">FlipaClip Animation Courses</div>
+      </div>
+      <div class="auth-title">Welcome back</div>
+      <div class="auth-sub">Sign in to continue learning</div>
+      <div class="auth-err" id="login-err"></div>
+      <div class="auth-field">
+        <label class="auth-label">Email</label>
+        <input class="auth-input" id="login-email" type="email" placeholder="your@email.com" autocomplete="email"/>
+      </div>
+      <div class="auth-field">
+        <label class="auth-label">Password</label>
+        <input class="auth-input" id="login-password" type="password" placeholder="••••••••" autocomplete="current-password"/>
+      </div>
+      <button class="auth-btn" onclick="doLogin()">Sign In</button>
+      <div class="auth-switch">Don't have an account? <span onclick="showAuthScreen('signup')">Sign Up</span></div>
+    </div>
+
+    <!-- SIGN UP -->
+    <div class="auth-screen" id="auth-signup">
+      <div class="auth-logo">
+        <div class="auth-logo-mark">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="auth-app-name">Mac Academy</div>
+      </div>
+      <div class="auth-title">Create an account</div>
+      <div class="auth-sub">Start your animation journey</div>
+      <div class="auth-err" id="signup-err"></div>
+      <div class="auth-field">
+        <label class="auth-label">Username</label>
+        <input class="auth-input" id="signup-username" type="text" placeholder="Your name" autocomplete="name"/>
+      </div>
+      <div class="auth-field">
+        <label class="auth-label">Email</label>
+        <input class="auth-input" id="signup-email" type="email" placeholder="your@email.com" autocomplete="email"/>
+      </div>
+      <div class="auth-field">
+        <label class="auth-label">Password</label>
+        <input class="auth-input" id="signup-password" type="password" placeholder="Min. 6 characters" autocomplete="new-password"/>
+      </div>
+      <div class="auth-field">
+        <label class="auth-label">Confirm Password</label>
+        <input class="auth-input" id="signup-confirm" type="password" placeholder="Repeat password" autocomplete="new-password"/>
+      </div>
+      <button class="auth-btn" onclick="doSignup()">Create Account</button>
+      <div class="auth-switch">Already have an account? <span onclick="showAuthScreen('login')">Sign In</span></div>
+    </div>
+
+  </div><!-- /auth-wrapper -->
+
+  <!-- ═══════════════════════════════════
+       MAIN APP (shown when logged in)
+       ═══════════════════════════════════ -->
+  <div id="main-app" style="display:none;flex-direction:column;flex:1;overflow:hidden;height:100%;">
+
+    <!-- COURSES TAB -->
+    <div class="screen active" id="screen-courses">
+      <div class="topbar">
+        <div class="topbar-row">
+          <div>
+            <div class="app-name">Mac Academy</div>
+            <div class="app-sub">FlipaClip Animation Courses</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-btn" onclick="toggleTheme();renderAccount()" title="Toggle dark/light mode">
+              <span id="theme-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-body">
+        <div class="card progress-wrap" id="home-progress-card">
+          <div class="prog-row">
+            <div>
+              <div class="prog-title">Your Progress</div>
+              <div class="prog-sub" id="home-prog-sub">0 of 9 lessons completed</div>
+            </div>
+            <div class="prog-pct" id="home-prog-pct">0%</div>
+          </div>
+          <div class="bar-track"><div class="bar-fill" id="home-bar-fill" style="width:0%"></div></div>
+        </div>
+
+        <div class="search-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted);flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input class="search-input" id="search-input" type="text" placeholder="Search courses or lessons…" oninput="handleSearch(this.value)" autocomplete="off"/>
+          <span class="search-clear" id="search-clear" style="display:none" onclick="clearSearch()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+        </div>
+
+        <button id="home-pro-btn" class="pro-btn" onclick="openProModal()">
+          <div class="pro-btn-inner">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+            <span class="pro-btn-text">Unlock Pro Lessons</span>
+          </div>
+          <span class="pro-badge">25,000 UGX</span>
+        </button>
+
+        <div class="section-title" id="courses-section-title">FlipaClip Courses</div>
+        <div id="courses-list"></div>
+        <div id="coming-soon-section"></div>
+      </div>
+    </div>
+
+    <!-- COURSE DETAIL -->
+    <div class="screen" id="screen-detail">
+      <div class="screen-header">
+        <button class="back-btn" onclick="goBack()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <span class="screen-header-title" id="detail-screen-title"></span>
+      </div>
+      <div class="scroll-body" id="detail-body"></div>
+    </div>
+
+    <!-- LESSON PLAYER -->
+    <div class="screen" id="screen-lesson">
+      <div id="lesson-back-header" class="screen-header">
+        <button class="back-btn" onclick="goBack()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+      </div>
+      <div class="scroll-body" id="lesson-body"></div>
+    </div>
+
+    <!-- PROGRESS TAB -->
+    <div class="screen" id="screen-progress">
+      <div class="topbar">
+        <div class="topbar-row">
+          <div>
+            <div class="app-name" style="font-size:24px">My Progress</div>
+            <div class="app-sub" style="margin-top:4px">Saved to your device</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-btn" onclick="toggleTheme();renderAccount()" title="Toggle theme">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-body" id="progress-body"></div>
+    </div>
+
+    <!-- ACCOUNT TAB -->
+    <div class="screen" id="screen-account">
+      <div class="topbar">
+        <div class="app-name" style="font-size:24px">Account</div>
+        <div class="app-sub" style="margin-top:4px">Your profile &amp; settings</div>
+      </div>
+      <div class="scroll-body" id="account-body"></div>
+    </div>
+
+    <!-- SUPPORT TAB -->
+    <div class="screen" id="screen-support">
+      <div class="topbar">
+        <div class="app-name" style="font-size:24px">Support</div>
+        <div class="app-sub" style="margin-top:4px">We're here to help</div>
+      </div>
+      <div class="scroll-body" id="support-body"></div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav" id="bottom-nav">
+      <button class="nav-tab active" id="nav-courses" onclick="showTab('courses')">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="4" height="18" rx="1"/><rect x="9" y="3" width="4" height="18" rx="1"/><rect x="16" y="3" width="6" height="18" rx="1"/></svg>
+        Courses
+      </button>
+      <button class="nav-tab" id="nav-progress" onclick="showTab('progress')">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Progress
+      </button>
+      <button class="nav-tab" id="nav-account" onclick="showTab('account')">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Account
+      </button>
+      <button class="nav-tab" id="nav-support" onclick="showTab('support')">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Support
+      </button>
+    </nav>
+
+  </div><!-- /main-app -->
+
+  <!-- ═══════════════════════════════════
+       PRO UNLOCK MODAL
+       ═══════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+    <div class="modal-sheet">
+      <div class="modal-handle"></div>
+      <div class="modal-title">Unlock Pro Lessons</div>
+      <div class="modal-sub">
+        All Pro lessons are unlocked with a one-time payment. Pay via Mobile Money, send us a screenshot, and we'll give you a code to enter below.
+      </div>
+
+      <div class="payment-steps">
+        <div class="payment-step">
+          <div class="step-num">1</div>
+          <div class="step-text">Send your payment to <strong>MTN / Airtel Uganda Mobile Money</strong> (number shared on WhatsApp).</div>
+        </div>
+        <div class="payment-step">
+          <div class="step-num">2</div>
+          <div class="step-text">Send a screenshot of your payment to <strong>WhatsApp 0745414641</strong> or email <strong>alexkasaba2006@gmail.com</strong>.</div>
+        </div>
+        <div class="payment-step">
+          <div class="step-num">3</div>
+          <div class="step-text">We confirm and send you an <strong>unlock code</strong>. Enter it below to activate Pro on any device.</div>
+        </div>
+      </div>
+
+      <div class="contact-links">
+        <button class="contact-link-btn" style="background:rgba(37,211,102,.15);color:#25D366" onclick="window.open('https://wa.me/256745414641','_blank')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          WhatsApp
+        </button>
+        <button class="contact-link-btn" style="background:rgba(255,107,26,.12);color:var(--primary)" onclick="window.open('mailto:alexkasaba2006@gmail.com','_blank')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </button>
+      </div>
+
+      <div class="code-input-wrap">
+        <input class="code-input" id="code-input" type="text" placeholder="Enter unlock code" maxlength="30"/>
+        <button class="code-submit-btn" onclick="submitCode()">Unlock</button>
+      </div>
+      <div class="code-msg" id="code-msg"></div>
+
+      <button class="modal-close-btn" onclick="closeProModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- ═══ ONBOARDING MODAL ═══ -->
+  <div class="onboard-overlay" id="onboard-overlay">
+    <div class="onboard-card">
+      <div class="onboard-icon-wrap" id="onboard-icon"></div>
+      <div class="onboard-title" id="onboard-title"></div>
+      <div class="onboard-body" id="onboard-body"></div>
+      <div class="onboard-dots" id="onboard-dots"></div>
+      <div class="onboard-btns" id="onboard-btns"></div>
+    </div>
+  </div>
+
+  <!-- ═══ ADMIN CODE GENERATOR MODAL ═══ -->
+  <div class="admin-overlay" id="admin-overlay" onclick="handleAdminOverlayClick(event)">
+    <div class="admin-sheet" id="admin-sheet">
+      <div class="modal-handle"></div>
+      <div id="admin-login-panel">
+        <div class="admin-title-row">
+          <div class="admin-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div><div class="admin-title">Admin Panel</div><div class="admin-sub">Enter password to continue</div></div>
+        </div>
+        <div style="margin-bottom:12px;font-size:13px;font-weight:600;color:var(--fg)">Admin Password</div>
+        <input class="code-input" id="admin-pw-input" type="password" placeholder="Enter admin password" style="width:100%;margin-bottom:10px" onkeydown="if(event.key==='Enter')adminLogin()"/>
+        <div id="admin-pw-err" style="color:var(--red);font-size:13px;display:none;margin-bottom:8px">Incorrect password.</div>
+        <button class="admin-generate-btn" onclick="adminLogin()">Login</button>
+        <button class="modal-close-btn" onclick="closeAdminModal()" style="margin-top:8px">Cancel</button>
+      </div>
+      <div id="admin-gen-panel" style="display:none">
+        <div class="admin-title-row">
+          <div class="admin-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M21 2 10.94 12.06"/><path d="M14.5 2.5 17 5"/><path d="M10 7l2.5 2.5"/></svg>
+          </div>
+          <div style="flex:1"><div class="admin-title">Code Generator</div><div class="admin-sub">1 code per paying student</div></div>
+          <button class="admin-close-x" onclick="closeAdminModal()">✕</button>
+        </div>
+        <div class="code-display-box" id="admin-code-box">
+          <div class="admin-code-hint">Tap Generate to create a code</div>
+        </div>
+        <button class="admin-generate-btn" onclick="adminGenerate()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Generate Code
+        </button>
+        <div class="admin-action-row" id="admin-action-row" style="display:none">
+          <button class="admin-action-btn" onclick="adminCopy()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+          <button class="admin-action-btn wa" onclick="adminWhatsApp()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            WhatsApp
+          </button>
+        </div>
+        <div class="admin-hist-toggle" onclick="toggleAdminHist()">
+          <span>History (<span id="admin-hist-count">0</span>)</span>
+          <span id="admin-hist-chev" style="color:var(--muted)">▾</span>
+        </div>
+        <div class="admin-hist-list" id="admin-hist-list" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<script src="script.js"></script>
+</body>
+</html>
