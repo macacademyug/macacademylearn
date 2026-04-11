@@ -637,7 +637,9 @@ function renderGroupView(g) {
 
     <div class="section-title">Choose your level</div>
 
-    ${courses.map(c => _courseCardHTML(c, `openCourse('${c.id}')`)).join('')}
+    <div style="display:flex;flex-direction:column;gap:14px;padding-bottom:28px">
+      ${courses.map(c => _courseCardHTML(c, `openCourse('${c.id}')`)).join('')}
+    </div>
   `;
 }
 
