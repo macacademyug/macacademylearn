@@ -51,7 +51,16 @@ const ONBOARD_SLIDES = [
 // ═══════════════════════════════════════════════════
 //  GROUPS  — bundles of courses shown as one card on home
 // ═══════════════════════════════════════════════════
-const GROUPS = [];
+const GROUPS = [
+  {
+    id: 'flipaclip',
+    title: 'FlipaClip Animation',
+    description: 'Master animation from beginner to advanced — tools, character movement, and lip sync techniques, all in one track.',
+    color: '#FF6B1A',
+    courseIds: ['basics', 'character', 'lipsync'],
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>`,
+  },
+];
 
 // helper — course IDs that belong to a group
 const GROUPED_IDS = GROUPS.flatMap(g => g.courseIds);
@@ -63,7 +72,7 @@ const COURSES = [
   {
     id: 'basics', title: 'Basics of FlipaClip', level: 'Beginner',
     description: 'Master the essential tools and techniques to start creating your first animations in FlipaClip from scratch.',
-    totalLessons: 3, estimatedHours: '30 min', color: '#22c55e',
+    totalLessons: 5, estimatedHours: '50 min', color: '#22c55e',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
     lessons: [
       { id:'basics-1', order:1, isPro:false, title:'Getting Started with FlipaClip', duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=wUOYgnxvIlo',
@@ -72,6 +81,10 @@ const COURSES = [
         description:'Animate a bouncing ball to understand timing, spacing, squash, and stretch — the core principles every animator must master. The best hands-on exercise to build your animation instincts.' },
       { id:'basics-3', order:3, isPro:true,  title:'Exporting Your Animation', duration:'5:00', videoUrl:'https://www.youtube.com/watch?v=hL7DKIPsrdc',
         description:'Export your finished animation as a video or GIF. Learn the best settings for TikTok, Instagram, and YouTube so your work looks great wherever you share it.' },
+      { id:'basics-4', order:4, isPro:true,  title:'4-Layer Scene Setup', duration:'10:00', videoUrl:'',
+        description:'Structure your scenes like a pro using 4 separate layers — Background, Midground, Character, and Foreground. Learn how each layer serves a purpose and how separating them gives you clean, flexible control over your animation.' },
+      { id:'basics-5', order:5, isPro:true,  title:'Animating Across 4 Layers', duration:'10:00', videoUrl:'',
+        description:'Put your 4-layer scene into motion — animate the character on its own layer while keeping the background still, add foreground overlays, and combine everything into a polished, depth-rich final scene.' },
     ],
   },
   {
@@ -100,6 +113,18 @@ const COURSES = [
         description:'Import audio into FlipaClip, read the waveform, break a line of dialogue into individual sounds, and map each sound to the correct mouth shape frame by frame.' },
       { id:'lipsync-3', order:3, isPro:true,  title:'Full Lip Sync Scene', duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=IIaEjnSaeIw',
         description:'Animate a complete talking character scene with synced mouth shapes, eye blinks, and subtle head movement — a polished, convincing performance from start to finish.' },
+    ],
+  },
+  {
+    id: 'flipaclip-pro', title: 'FlipaClip Pro', level: 'Pro',
+    description: 'Take your FlipaClip skills to the professional level — complete full character animation and master the fluid walk cycle techniques used by real animators.',
+    totalLessons: 2, estimatedHours: '1 hr', color: '#F59E0B',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
+    lessons: [
+      { id:'flipro-1', order:1, isPro:true, title:'Full Character Animation', duration:'30:00', videoUrl:'',
+        description:'Animate a complete character from head to toe — body weight, arm swings, head movement, and personality. Learn how to plan your keyframes, add in-betweens, and bring a character fully to life across an entire scene.' },
+      { id:'flipro-2', order:2, isPro:true, title:'Walk Cycles', duration:'30:00', videoUrl:'',
+        description:'Master the walk cycle — the foundation of character movement. Break down the contact, down, passing, and up positions, then loop them seamlessly so your character can walk across any scene with natural, convincing motion.' },
     ],
   },
 ];
