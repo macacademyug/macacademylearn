@@ -131,6 +131,26 @@ const COURSES = [
         description:'Unlock advanced techniques like keyframe animation for motion control and AI-powered rotoscoping to remove or replace backgrounds for professional-level visuals.' },
     ],
   },
+  {
+    id: 'ai-basics', title: 'AI for Creators & Business', level: 'Beginner',
+    description: 'Learn what AI really is, use it with everyday tools, and discover real career and business opportunities — built for Ugandan creators and entrepreneurs.',
+    totalLessons: 6, estimatedHours: '1 hr', color: '#8B5CF6',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 0 6h-1v1a4 4 0 0 1-8 0v-1H7a3 3 0 0 1 0-6h1V6a4 4 0 0 1 4-4z"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/></svg>`,
+    lessons: [
+      { id:'ai-1', order:1, isPro:false, title:'Introduction to AI', duration:'12:00', videoUrl:'',
+        description:'What AI actually is — with simple definitions and everyday examples like Google Translate and YouTube recommendations. Learn the difference between AI, machine learning, and deep learning, and why it matters for Ugandan creators and businesses.' },
+      { id:'ai-2', order:2, isPro:false, title:'AI in Everyday Apps', duration:'10:00', videoUrl:'',
+        description:'See how AI already powers tools you use — CapCut auto captions, FlipaClip animation aids, and Canva design suggestions. Hands-on demos: text-to-speech, auto-translation, and smart photo editing.' },
+      { id:'ai-3', order:3, isPro:true,  title:'Working with AI Chatbots', duration:'15:00', videoUrl:'',
+        description:'Use AI assistants like ChatGPT or Copilot for brainstorming, writing, and research. Learn how to craft great prompts (prompt engineering basics) and how to use AI safely and ethically.' },
+      { id:'ai-4', order:4, isPro:true,  title:'AI for Content Creation', duration:'15:00', videoUrl:'',
+        description:'Create graphics, posters, and social media visuals with text-to-image tools. Explore AI video tools for auto-editing and background removal, plus audio tools for voice cloning and noise reduction.' },
+      { id:'ai-5', order:5, isPro:true,  title:'AI for Business & Marketing', duration:'12:00', videoUrl:'',
+        description:'Automate your social media posts, set up AI-powered auto-replies in WhatsApp Business, and use AI to analyse trends and sharpen your customer outreach strategy.' },
+      { id:'ai-6', order:6, isPro:true,  title:'Future of AI & Career Opportunities', duration:'12:00', videoUrl:'',
+        description:'Freelance with AI skills on Upwork and Fiverr, explore local opportunities in digital marketing, education, and agriculture (AI crop monitoring), and build a plan to keep learning as the field evolves.' },
+    ],
+  },
 ];
 
 // ═══════════════════════════════════════════════════
