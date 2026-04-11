@@ -353,3 +353,7 @@ body.light .video-player { background: #1a1a1a; }
 .acc-hint        { text-align:center; font-size:13px; color:var(--muted); margin-top:16px; }
 .acc-link        { color:var(--primary); font-weight:600; cursor:pointer; }
 .acc-link:hover  { text-decoration:underline; }
+
+/* ── GROUP CARDS ── */
+.group-levels-row { display:flex; gap:6px; flex-wrap:wrap; margin:8px 0 4px; }
+.level-chip { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; white-space:nowrap; }

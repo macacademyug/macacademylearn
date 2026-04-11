@@ -91,7 +91,7 @@
         <div class="topbar-row">
           <div>
             <div class="app-name">Mac Academy</div>
-            <div class="app-sub">FlipaClip Animation Courses</div>
+            <div class="app-sub">Creative Skills Academy</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-btn" onclick="toggleTheme();renderAccount()" title="Toggle dark/light mode">
@@ -130,10 +130,21 @@
           <span class="pro-badge">25,000 UGX</span>
         </button>
 
-        <div class="section-title" id="courses-section-title">FlipaClip Courses</div>
+        <div class="section-title" id="courses-section-title">Courses</div>
         <div id="courses-list"></div>
         <div id="coming-soon-section"></div>
       </div>
+    </div>
+
+    <!-- GROUP VIEW (e.g. FlipaClip Animation → level picker) -->
+    <div class="screen" id="screen-group">
+      <div class="screen-header">
+        <button class="back-btn" onclick="goBack()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <span class="screen-header-title" id="group-screen-title"></span>
+      </div>
+      <div class="scroll-body" id="group-body"></div>
     </div>
 
     <!-- COURSE DETAIL -->

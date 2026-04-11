@@ -49,6 +49,23 @@ const ONBOARD_SLIDES = [
 ];
 
 // ═══════════════════════════════════════════════════
+//  GROUPS  — bundles of courses shown as one card on home
+// ═══════════════════════════════════════════════════
+const GROUPS = [
+  {
+    id: 'flipaclip',
+    title: 'FlipaClip Animation',
+    description: 'Master animation from beginner to advanced — tools, character movement, and lip sync techniques, all in one track.',
+    color: '#FF6B1A',
+    courseIds: ['basics', 'character', 'lipsync'],
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>`,
+  },
+];
+
+// helper — course IDs that belong to a group
+const GROUPED_IDS = GROUPS.flatMap(g => g.courseIds);
+
+// ═══════════════════════════════════════════════════
 //  COURSE DATA
 // ═══════════════════════════════════════════════════
 const COURSES = [
@@ -216,6 +233,7 @@ function toggleTheme()  {
 let currentTab    = 'courses';
 let screenStack   = [];
 let currentCourse = null;
+let currentGroup  = null;
 
 function showMainApp() {
   document.getElementById('auth-wrapper').style.display  = 'none';
@@ -399,6 +417,17 @@ function updateHomeProgress() {
     el.querySelector('.mini-prog-pct').textContent  = p + '%';
     el.style.display = p > 0 ? 'block' : 'none';
   });
+  GROUPS.forEach(g => {
+    const el = document.getElementById('group-prog-' + g.id);
+    if (!el) return;
+    const courses = g.courseIds.map(id => COURSES.find(c => c.id === id));
+    const total = courses.reduce((s, c) => s + c.totalLessons, 0);
+    const done  = courses.reduce((s, c) => s + c.lessons.filter(l => isComplete(l.id)).length, 0);
+    const pct   = Math.round((done / total) * 100);
+    el.querySelector('.mini-bar-fill').style.width = pct + '%';
+    el.querySelector('.mini-prog-pct').textContent = pct + '%';
+    el.style.display = done > 0 ? 'block' : 'none';
+  });
   const proBtn = document.getElementById('home-pro-btn');
   if (proBtn) proBtn.style.display = isProUnlocked() ? 'none' : 'flex';
 }
@@ -412,7 +441,7 @@ function handleSearch(val) {
   const progCard = document.getElementById('home-progress-card');
   if (progCard) progCard.style.display = currentSearch ? 'none' : 'block';
   const titleEl = document.getElementById('courses-section-title');
-  if (titleEl) titleEl.textContent = currentSearch ? 'Results' : 'FlipaClip Courses';
+  if (titleEl) titleEl.textContent = currentSearch ? 'Results' : 'Courses';
   renderCoursesList();
   renderComingSoon();
 }
@@ -423,51 +452,94 @@ function clearSearch() {
   handleSearch('');
 }
 
+function _courseCardHTML(c, onclick) {
+  const freeCount = c.lessons.filter(l => !l.isPro).length;
+  const p = getCourseProgress(c);
+  return `
+  <div class="course-card" onclick="${onclick}">
+    <div class="accent-bar" style="background:${c.color}"></div>
+    <div class="course-body">
+      <div class="course-top">
+        <div class="course-icon-wrap" style="background:${c.color}22">${c.icon}</div>
+        <div class="level-badge" style="background:${c.color}20;color:${c.color}">${c.level}</div>
+        <div class="free-chip">${freeCount} free</div>
+      </div>
+      <div class="course-title-text">${c.title}</div>
+      <div class="course-desc">${c.description}</div>
+      <div class="meta-row">
+        <div class="meta-item">${IC.plays} ${c.totalLessons} lessons</div>
+        <div class="meta-item">${IC.clock} ${c.estimatedHours}</div>
+        <div class="chevron-right">${IC.chev}</div>
+      </div>
+      <div id="card-prog-${c.id}" style="display:${p > 0 ? 'block' : 'none'}">
+        <div class="mini-prog-header">
+          <span style="color:var(--muted);font-size:11px">Progress</span>
+          <span class="mini-prog-pct" style="color:${c.color};font-size:11px;font-weight:600">${p}%</span>
+        </div>
+        <div class="mini-bar-track"><div class="mini-bar-fill" style="width:${p}%;background:${c.color}"></div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function _groupCardHTML(g) {
+  const courses     = g.courseIds.map(id => COURSES.find(c => c.id === id));
+  const totalLessons = courses.reduce((s, c) => s + c.totalLessons, 0);
+  const totalFree   = courses.reduce((s, c) => s + c.lessons.filter(l => !l.isPro).length, 0);
+  const done        = courses.reduce((s, c) => s + c.lessons.filter(l => isComplete(l.id)).length, 0);
+  const pct         = Math.round((done / totalLessons) * 100);
+  const levelChips  = courses.map(c =>
+    `<span class="level-chip" style="background:${c.color}20;color:${c.color}">${c.level}</span>`
+  ).join('');
+  return `
+  <div class="course-card" onclick="openGroup('${g.id}')">
+    <div class="accent-bar" style="background:${g.color}"></div>
+    <div class="course-body">
+      <div class="course-top">
+        <div class="course-icon-wrap" style="background:${g.color}22">${g.icon}</div>
+        <div class="level-badge" style="background:${g.color}20;color:${g.color}">${g.courseIds.length} Levels</div>
+        <div class="free-chip">${totalFree} free</div>
+      </div>
+      <div class="course-title-text">${g.title}</div>
+      <div class="course-desc">${g.description}</div>
+      <div class="group-levels-row">${levelChips}</div>
+      <div class="meta-row">
+        <div class="meta-item">${IC.plays} ${totalLessons} lessons</div>
+        <div class="chevron-right">${IC.chev}</div>
+      </div>
+      <div id="group-prog-${g.id}" style="display:${done > 0 ? 'block' : 'none'}">
+        <div class="mini-prog-header">
+          <span style="color:var(--muted);font-size:11px">Progress</span>
+          <span class="mini-prog-pct" style="color:${g.color};font-size:11px;font-weight:600">${pct}%</span>
+        </div>
+        <div class="mini-bar-track"><div class="mini-bar-fill" style="width:${pct}%;background:${g.color}"></div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
 function renderCoursesList() {
   const list = document.getElementById('courses-list');
   if (!list) return;
-  const filtered = currentSearch
-    ? COURSES.filter(c =>
-        c.title.toLowerCase().includes(currentSearch) ||
-        c.description.toLowerCase().includes(currentSearch) ||
-        c.lessons.some(l => l.title.toLowerCase().includes(currentSearch))
-      )
-    : COURSES;
 
-  if (filtered.length === 0 && currentSearch) {
-    list.innerHTML = `<div style="color:var(--muted);font-size:14px;text-align:center;padding:12px 0">No courses match "${currentSearch}"</div>`;
+  if (currentSearch) {
+    const filtered = COURSES.filter(c =>
+      c.title.toLowerCase().includes(currentSearch) ||
+      c.description.toLowerCase().includes(currentSearch) ||
+      c.lessons.some(l => l.title.toLowerCase().includes(currentSearch))
+    );
+    if (filtered.length === 0) {
+      list.innerHTML = `<div style="color:var(--muted);font-size:14px;text-align:center;padding:12px 0">No courses match "${currentSearch}"</div>`;
+    } else {
+      list.innerHTML = filtered.map(c => _courseCardHTML(c, `openCourse('${c.id}')`)).join('');
+    }
     return;
   }
 
-  list.innerHTML = filtered.map(c => {
-    const freeCount = c.lessons.filter(l => !l.isPro).length;
-    const p = getCourseProgress(c);
-    return `
-    <div class="course-card" onclick="openCourse('${c.id}')">
-      <div class="accent-bar" style="background:${c.color}"></div>
-      <div class="course-body">
-        <div class="course-top">
-          <div class="course-icon-wrap" style="background:${c.color}22">${c.icon}</div>
-          <div class="level-badge" style="background:${c.color}20;color:${c.color}">${c.level}</div>
-          <div class="free-chip">${freeCount} free</div>
-        </div>
-        <div class="course-title-text">${c.title}</div>
-        <div class="course-desc">${c.description}</div>
-        <div class="meta-row">
-          <div class="meta-item">${IC.plays} ${c.totalLessons} lessons</div>
-          <div class="meta-item">${IC.clock} ${c.estimatedHours}</div>
-          <div class="chevron-right">${IC.chev}</div>
-        </div>
-        <div id="card-prog-${c.id}" style="display:${p > 0 ? 'block' : 'none'}">
-          <div class="mini-prog-header">
-            <span style="color:var(--muted);font-size:11px">Progress</span>
-            <span class="mini-prog-pct" style="color:${c.color};font-size:11px;font-weight:600">${p}%</span>
-          </div>
-          <div class="mini-bar-track"><div class="mini-bar-fill" style="width:${p}%;background:${c.color}"></div></div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+  const standalone = COURSES.filter(c => !GROUPED_IDS.includes(c.id));
+  list.innerHTML =
+    GROUPS.map(g => _groupCardHTML(g)).join('') +
+    standalone.map(c => _courseCardHTML(c, `openCourse('${c.id}')`)).join('');
 }
 
 function renderComingSoon() {
@@ -526,6 +598,47 @@ function toggleNotify(id) {
   const cur = localStorage.getItem(KEY_NOTIFY + id) === 'true';
   localStorage.setItem(KEY_NOTIFY + id, cur ? 'false' : 'true');
   renderComingSoon();
+}
+
+function openGroup(groupId) {
+  currentGroup = GROUPS.find(g => g.id === groupId);
+  renderGroupView(currentGroup);
+  pushScreen('screen-group');
+}
+
+function renderGroupView(g) {
+  document.getElementById('group-screen-title').textContent = g.title;
+  const courses = g.courseIds.map(id => COURSES.find(c => c.id === id));
+  const totalLessons = courses.reduce((s, c) => s + c.totalLessons, 0);
+  const totalFree    = courses.reduce((s, c) => s + c.lessons.filter(l => !l.isPro).length, 0);
+  const done         = courses.reduce((s, c) => s + c.lessons.filter(l => isComplete(l.id)).length, 0);
+  const pct          = Math.round((done / totalLessons) * 100);
+
+  document.getElementById('group-body').innerHTML = `
+    <div class="detail-hero" style="background:${g.color}15;border-color:${g.color}30">
+      <div class="hero-icon" style="background:${g.color}">${g.icon.replace('width="18" height="18"','width="26" height="26"').replace('stroke="currentColor"','stroke="#fff"')}</div>
+      <div style="font-size:21px;font-weight:700;color:var(--fg)">${g.title}</div>
+      <div style="font-size:14px;color:var(--muted);line-height:1.6">${g.description}</div>
+      <div class="hero-meta">
+        <div class="meta-item">${IC.plays} ${totalLessons} lessons</div>
+        <div class="meta-item" style="color:var(--green)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+          ${totalFree} free
+        </div>
+      </div>
+      ${done > 0 ? `
+      <div style="width:100%">
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px">
+          <span>Overall progress</span><span style="color:${g.color};font-weight:700">${pct}%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${g.color}"></div></div>
+      </div>` : ''}
+    </div>
+
+    <div class="section-title">Choose your level</div>
+
+    ${courses.map(c => _courseCardHTML(c, `openCourse('${c.id}')`)).join('')}
+  `;
 }
 
 function openCourse(courseId) {
