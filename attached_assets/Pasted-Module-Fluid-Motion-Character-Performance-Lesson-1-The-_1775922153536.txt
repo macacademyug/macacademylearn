@@ -1,0 +1,57 @@
+Module: Fluid Motion & Character Performance
+Lesson 1: The "S-Curve" and Follow-Through (12 mins)
+The Goal: Moving away from stiff movements.
+
+The Task: Animating a character with a tail or long hair.
+
+Key Concept: Teaching how the "base" moves first and the "tip" follows later.
+
+FlipaClip Tip: Using the Lasso Tool to shift parts of a drawing to save time while maintaining the curve.
+
+Lesson 2: Advanced Smear Frames (10 mins)
+The Goal: Creating high-speed movement without using 60 frames per second.
+
+The Task: A character throwing a punch or swinging a bat.
+
+Key Concept: Stretching the drawing to bridge the gap between two distant points.
+
+FlipaClip Tip: Adjusting Onion Skin settings to "1 frame before" to see exactly where to stretch the blur.
+
+Lesson 3: Introduction to Lip Sync (15 mins)
+The Goal: Making a character talk convincingly.
+
+The Task: Syncing a 3-word sentence (e.g., "Oli otya, Toto?").
+
+Key Concept: Identifying the "M, B, P" (closed mouth) and "A, E, O" (open mouth) shapes.
+
+FlipaClip Tip: Utilizing the Audio Import feature and the "scrubbing" timeline to find the exact frame where a sound starts.
+
+Lesson 4: Multi-Layer Parallax Backgrounds (12 mins)
+The Goal: Creating a sense of depth and 3D space.
+
+The Task: A character walking past a house and distant mountains.
+
+Key Concept: Foreground moves fast, background moves slow.
+
+FlipaClip Tip: Organizing the Layer Stack. Layer 1: Sky (Static), Layer 2: Mountains (Slow), Layer 3: Character (Walk cycle), Layer 4: Close-up bushes (Fast).
+
+Lesson 5: Weight and Heavy Impact (15 mins)
+The Goal: Making objects feel heavy, not floaty.
+
+The Task: An elephant or a heavy box falling and hitting the ground.
+
+Key Concept: Timing and Spacing. Fewer frames at the top, many "impact" frames at the bottom with a screen shake.
+
+FlipaClip Tip: Using the Glow or FX features in Pro to add a "dust cloud" or "impact spark" for extra polish.
+
+Why 10–15 Minutes?
+Mobile Attention Span: FlipaClip is used on tablets/phones. Students often get eye strain if the tutorial is too long.
+
+File Sizes: If your course app is a "Webview," loading a 30-minute high-def video might lag for users on slower connections in Uganda.
+
+Practice Ratio: For every 1 minute of video, a student usually needs 10 minutes of drawing. A 15-minute video equals over 2 hours of actual work.
+
+Pro Idea for your App:
+Since you mentioned using Toon Boom for your own professional work, you could add a "Bonus" lesson showing them how a professional animator takes a FlipaClip sketch and turns it into a high-end rig in Toon Boom. This gives them a "career path" to look forward to!
+
+Do you want to focus more on technical tools (like how to use the Glow effect) or animation principles (like how to make a walk cycle look natural)?

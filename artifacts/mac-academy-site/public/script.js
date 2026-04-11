@@ -72,7 +72,7 @@ const COURSES = [
   {
     id: 'basics', title: 'Basics of FlipaClip', level: 'Beginner',
     description: 'Master the essential tools and techniques to start creating your first animations in FlipaClip from scratch.',
-    totalLessons: 5, estimatedHours: '50 min', color: '#22c55e',
+    totalLessons: 3, estimatedHours: '30 min', color: '#22c55e',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
     lessons: [
       { id:'basics-1', order:1, isPro:false, title:'Getting Started with FlipaClip', duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=wUOYgnxvIlo',
@@ -81,10 +81,6 @@ const COURSES = [
         description:'Animate a bouncing ball to understand timing, spacing, squash, and stretch — the core principles every animator must master. The best hands-on exercise to build your animation instincts.' },
       { id:'basics-3', order:3, isPro:true,  title:'Exporting Your Animation', duration:'5:00', videoUrl:'https://www.youtube.com/watch?v=hL7DKIPsrdc',
         description:'Export your finished animation as a video or GIF. Learn the best settings for TikTok, Instagram, and YouTube so your work looks great wherever you share it.' },
-      { id:'basics-4', order:4, isPro:true,  title:'4-Layer Scene Setup', duration:'10:00', videoUrl:'',
-        description:'Structure your scenes like a pro using 4 separate layers — Background, Midground, Character, and Foreground. Learn how each layer serves a purpose and how separating them gives you clean, flexible control over your animation.' },
-      { id:'basics-5', order:5, isPro:true,  title:'Animating Across 4 Layers', duration:'10:00', videoUrl:'',
-        description:'Put your 4-layer scene into motion — animate the character on its own layer while keeping the background still, add foreground overlays, and combine everything into a polished, depth-rich final scene.' },
     ],
   },
   {
@@ -117,14 +113,20 @@ const COURSES = [
   },
   {
     id: 'flipaclip-pro', title: 'FlipaClip Pro', level: 'Pro',
-    description: 'Take your FlipaClip skills to the professional level — complete full character animation and master the fluid walk cycle techniques used by real animators.',
-    totalLessons: 2, estimatedHours: '1 hr', color: '#F59E0B',
+    description: 'Fluid Motion & Character Performance — 5 advanced lessons taking you from stiff movements to professional-quality animation with smears, lip sync, parallax, and weight.',
+    totalLessons: 5, estimatedHours: '1 hr', color: '#F59E0B',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
     lessons: [
-      { id:'flipro-1', order:1, isPro:true, title:'Full Character Animation', duration:'30:00', videoUrl:'',
-        description:'Animate a complete character from head to toe — body weight, arm swings, head movement, and personality. Learn how to plan your keyframes, add in-betweens, and bring a character fully to life across an entire scene.' },
-      { id:'flipro-2', order:2, isPro:true, title:'Walk Cycles', duration:'30:00', videoUrl:'',
-        description:'Master the walk cycle — the foundation of character movement. Break down the contact, down, passing, and up positions, then loop them seamlessly so your character can walk across any scene with natural, convincing motion.' },
+      { id:'flipro-1', order:1, isPro:true, title:'The S-Curve & Follow-Through', duration:'12:00', videoUrl:'',
+        description:'Move away from stiff movements by animating a character with a tail or long hair. Learn how the "base" moves first and the "tip" follows later — then use the Lasso Tool to shift parts of a drawing and maintain the curve without redrawing everything.' },
+      { id:'flipro-2', order:2, isPro:true, title:'Advanced Smear Frames', duration:'10:00', videoUrl:'',
+        description:'Create high-speed movement without needing 60 frames per second. Animate a character throwing a punch or swinging a bat by stretching the drawing to bridge the gap between two distant points. Adjust Onion Skin to "1 frame before" to see exactly where to stretch.' },
+      { id:'flipro-3', order:3, isPro:true, title:'Introduction to Lip Sync', duration:'15:00', videoUrl:'',
+        description:'Make a character talk convincingly by syncing a 3-word sentence to audio. Identify the key mouth shapes — "M, B, P" (closed) and "A, E, O" (open) — then use FlipaClip\'s Audio Import and timeline scrubbing to pin the exact frame where each sound starts.' },
+      { id:'flipro-4', order:4, isPro:true, title:'Multi-Layer Parallax Backgrounds', duration:'12:00', videoUrl:'',
+        description:'Create a real sense of depth and 3D space with a 4-layer setup: Sky (static), Mountains (slow), Character walk cycle, Close-up bushes (fast). Animate a character walking past a house and distant mountains — foreground fast, background slow.' },
+      { id:'flipro-5', order:5, isPro:true, title:'Weight & Heavy Impact', duration:'15:00', videoUrl:'',
+        description:'Make objects feel genuinely heavy, not floaty. Drop an elephant or heavy box and nail the timing — fewer frames at the top, many impact frames at the bottom with a screen shake. Polish it with FlipaClip\'s Glow or FX features for a dust cloud or impact spark.' },
     ],
   },
 ];
