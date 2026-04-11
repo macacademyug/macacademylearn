@@ -94,6 +94,20 @@ const COURSES = [
         description:'Animate a complete talking character scene with synced mouth shapes, eye blinks, and subtle head movement — a polished, convincing performance from start to finish.' },
     ],
   },
+  {
+    id: 'capcut', title: 'CapCut Mobile Editing', level: 'Beginner',
+    description: 'Edit professional-looking videos on your phone using CapCut — cuts, transitions, effects, text, music and exporting, all from mobile.',
+    totalLessons: 3, estimatedHours: '35 min', color: '#06B6D4',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>`,
+    lessons: [
+      { id:'capcut-1', order:1, isPro:false, title:'Getting Started with CapCut', duration:'12:00', videoUrl:'',
+        description:'A full tour of the CapCut mobile interface — importing clips, the timeline, basic cuts and trims, and how to navigate the app confidently from day one.' },
+      { id:'capcut-2', order:2, isPro:true,  title:'Cuts, Effects & Transitions', duration:'13:00', videoUrl:'',
+        description:'Learn how to cut clips cleanly, add smooth transitions between scenes, apply effects and filters, and use speed controls to create engaging video edits.' },
+      { id:'capcut-3', order:3, isPro:true,  title:'Text, Music & Exporting', duration:'10:00', videoUrl:'',
+        description:'Add animated text and captions, sync your edit to music, adjust audio levels, and export your finished video in the best quality settings for TikTok, Instagram and YouTube.' },
+    ],
+  },
 ];
 
 // ═══════════════════════════════════════════════════
@@ -610,10 +624,11 @@ function renderLessonPlayer(lesson, course) {
       <div class="meta-item">${IC.hash} Lesson ${lesson.order} of ${course.totalLessons}</div>
       ${done ? `<div class="done-badge">${IC.check} Complete</div>` : ''}
     </div>
-    <div class="video-player" style="border-color:${course.color}60" onclick="window.open('${lesson.videoUrl}','_blank')">
+    <div class="video-player" style="border-color:${course.color}60;${!lesson.videoUrl ? 'opacity:.5;cursor:default' : ''}"
+      onclick="${lesson.videoUrl ? `window.open('${lesson.videoUrl}','_blank')` : ''}">
       <div class="play-circle" style="background:${course.color}">${IC.play}</div>
-      <div class="video-hint">Tap to watch video</div>
-      <div class="video-sub">Opens in YouTube</div>
+      <div class="video-hint">${lesson.videoUrl ? 'Tap to watch video' : 'Video coming soon'}</div>
+      <div class="video-sub">${lesson.videoUrl ? 'Opens in YouTube' : 'Check back later'}</div>
     </div>
     <div class="card desc-card">
       <div class="desc-label">Lesson Description</div>
