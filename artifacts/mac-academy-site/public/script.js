@@ -33,8 +33,8 @@ const KEY_NOTIFY    = 'mac_academy_notify_';
 const COMING_SOON = [
   { id:'toonboom',    title:'ToonBoom Harmony',       color:'#6C5CE7', desc:'Professional studio-grade animation with ToonBoom Harmony — rigging, cut-out animation, and more.' },
   { id:'blender',     title:'Blender Animation',       color:'#E67E22', desc:'3D animation fundamentals using Blender — modelling, rigging, and rendering your first 3D scenes.' },
-  { id:'photoshop',   title:'Photoshop for Animators', color:'#31A8FF', desc:'Frame-by-frame animation and digital painting in Photoshop — from sketch to finished frames.' },
-  { id:'illustrator', title:'Adobe Illustrator',       color:'#FF9A00', desc:'Design vector characters and assets in Illustrator to use across your animation projects.' },
+  { id:'photoshop',   title:'Adobe Photoshop',         color:'#31A8FF', desc:'Master photo editing, digital art, and graphic design in Photoshop — from retouching photos to creating stunning posters and social media graphics.' },
+  { id:'illustrator', title:'Adobe Illustrator',       color:'#FF9A00', desc:'Create professional logos, brand identities, and print-ready graphics using Illustrator\'s powerful vector design tools.' },
   { id:'aftereffects',title:'After Effects',           color:'#9999FF', desc:'Bring your animations to life with motion graphics, visual effects, and compositing in After Effects.' },
 ];
 
