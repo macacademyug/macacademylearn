@@ -113,8 +113,8 @@ const COURSES = [
   },
   {
     id: 'flipaclip-pro', title: 'FlipaClip Pro', level: 'Pro',
-    description: 'Fluid Motion & Character Performance — 5 advanced lessons covering backgrounds, fluid movement, smear frames, lip sync, and weight to take your animation to a professional level.',
-    totalLessons: 5, estimatedHours: '1 hr', color: '#F59E0B',
+    description: 'Fluid Motion & Character Performance — 6 advanced lessons covering backgrounds, fluid movement, smear frames, walk cycles, and AI tools to take your animation to a professional level.',
+    totalLessons: 6, estimatedHours: '1 hr 15 min', color: '#F59E0B',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
     lessons: [
       { id:'flipro-1', order:1, isPro:true, title:'Drawing Backgrounds', duration:'12:00', videoUrl:'',
@@ -127,6 +127,8 @@ const COURSES = [
         description:'Break down the walk cycle into its four key positions — Contact, Down, Passing, and Up — and understand how each one drives natural-looking movement. Learn how to plan your frames, set the right timing, and loop the cycle so it plays back smoothly.' },
       { id:'flipro-5', order:5, isPro:true, title:'Moving a Character Across the Screen', duration:'15:00', videoUrl:'',
         description:'Take your walk cycle off the spot and move your character from one side of the screen to the other. Learn how to shift the character position across frames, match the step pace to the movement speed, and combine the background to sell a convincing walk-through scene.' },
+      { id:'flipro-6', order:6, isPro:true, title:'AI for Animators', duration:'15:00', videoUrl:'',
+        description:'Discover how to use AI tools to speed up your animation workflow. Generate detailed scene backgrounds, create character reference sheets, produce lip sync mouth-shape charts, convert scripts to speech for timing, and use AI to help you write and structure your animation scripts — all without leaving your creative flow.' },
     ],
   },
 ];
