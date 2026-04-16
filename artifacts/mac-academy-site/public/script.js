@@ -1078,20 +1078,22 @@ function renderAccount() {
 //  SUPPORT TAB
 // ═══════════════════════════════════════════════════
 const FAQS = [
+  { q:'Who are these lessons for?',
+    a:'Mac Academy is designed for two types of people. First, aspiring animators — students who are just starting out and want to learn animation from scratch using FlipaClip on their phone or tablet. Second, content creators — people who already make videos, skits, or social media content and want to add animation to their skillset. Whether you have never drawn a single frame or you already animate occasionally, the courses are structured to take you step by step from the basics all the way to professional-level techniques.' },
   { q:'How do I watch a video lesson?',
     a:'Tap a course, then tap any unlocked lesson. The video opens in YouTube so you can follow along at your own pace.' },
   { q:'How does progress saving work?',
-    a:"Progress is saved to your browser when you tap 'Mark as Complete'. If you tapped by mistake, tap the button again — it toggles back and forth." },
-  { q:'How much does the FlipaClip course cost?',
-    a:'The FlipaClip Pro course costs 25,000 UGX. Pay via MTN or Airtel Mobile Money, send us your screenshot, and we will give you an unlock code.' },
+    a:"Your progress is saved automatically when you tap 'Mark as Complete'. If you tapped by mistake, just tap the button again — it toggles back and forth." },
+  { q:'How much does the Pro content cost?',
+    a:'Unlocking all Pro lessons costs 25,000 UGX. Pay via MTN or Airtel Mobile Money, send us your payment screenshot, and we will send you an unlock code.' },
   { q:'How do I unlock Pro lessons?',
-    a:'After paying via Mobile Money, send a screenshot to our WhatsApp or email. Once confirmed, you will receive a code. Enter the code in the Unlock screen to activate Pro on any device.' },
-  { q:'Which payment methods are accepted?',
-    a:'MTN Uganda Mobile Money and Airtel Uganda Mobile Money. Send your screenshot to WhatsApp 0745414641 or email alexkasaba2006@gmail.com.' },
-  { q:'Can I use my account on multiple phones?',
-    a:'Yes! Sign in with the same email and password on any device. If you have Pro, enter your unlock code again on the new device to re-activate it.' },
+    a:'After paying via Mobile Money, send a screenshot of your payment to our WhatsApp or email. Once confirmed, you will receive an unlock code. Enter the code on the Unlock screen to activate Pro access on any device.' },
+  { q:'Which payment methods do you accept?',
+    a:'MTN Uganda Mobile Money and Airtel Uganda Mobile Money. Send your payment screenshot to WhatsApp 0745414641 or email alexkasaba2006@gmail.com.' },
+  { q:'Can I use my account on multiple devices?',
+    a:'Yes. Sign in with the same email and password on any device. If you have Pro, simply enter your unlock code again on the new device to re-activate it.' },
   { q:'I tapped Mark as Complete by mistake. Can I undo it?',
-    a:'Yes — just tap the button again. It toggles green (complete) and orange (not complete) back and forth.' },
+    a:'Yes — just tap the button again. It toggles between complete (green) and not complete (orange).' },
 ];
 
 function renderSupport() {
