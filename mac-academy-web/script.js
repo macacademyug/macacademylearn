@@ -516,10 +516,7 @@ function renderCoursesList() {
     return;
   }
 
-  const standalone = COURSES.filter(c => !GROUPED_IDS.includes(c.id));
-  list.innerHTML =
-    GROUPS.map(g => _groupCardHTML(g)).join('') +
-    standalone.map(c => _courseCardHTML(c, `openCourse('${c.id}')`)).join('');
+  list.innerHTML = COURSES.map(c => _courseCardHTML(c, `openCourse('${c.id}')`)).join('');
 }
 
 function renderComingSoon() {
