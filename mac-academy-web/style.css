@@ -220,6 +220,8 @@ body.light .video-player { background: #1a1a1a; }
 .desc-text  { font-size: 14px; color: var(--muted); line-height: 1.6; }
 
 /* ── COMPLETE BUTTON ── */
+.files-btn { width: 100%; border: 1.5px solid #25D366; background: rgba(37, 211, 102, 0.08); color: #25D366; border-radius: 16px; padding: 16px; font-size: 15px; font-weight: 700; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; margin-bottom: 12px; text-decoration: none; transition: background .15s, transform .1s; -webkit-tap-highlight-color: transparent; }
+.files-btn:active { transform: scale(.98); background: rgba(37, 211, 102, 0.15); }
 .complete-btn { width: 100%; border: none; border-radius: 16px; padding: 20px; font-size: 17px; font-weight: 700; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer; margin-bottom: 14px; transition: background .2s, opacity .15s; -webkit-tap-highlight-color: transparent; box-shadow: 0 4px 14px rgba(0,0,0,.2); }
 .complete-btn:active { opacity: .85; }
 .complete-btn.done { background: var(--green) !important; }
