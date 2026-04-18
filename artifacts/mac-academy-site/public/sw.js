@@ -1,4 +1,4 @@
-const CACHE = 'mac-academy-v8';
+const CACHE = 'mac-academy-v9';
 const STATIC = [
   './',
   './index.html',
