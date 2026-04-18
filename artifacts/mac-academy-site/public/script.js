@@ -111,42 +111,6 @@ const COURSES = [
         description:'Animate a complete talking character scene with synced mouth shapes, eye blinks, and subtle head movement — a polished, convincing performance from start to finish.' },
     ],
   },
-  {
-    id: 'flipaclip-pro', title: 'FlipaClip Pro', level: 'Pro',
-    description: 'Fluid Motion & Character Performance — 5 advanced lessons covering backgrounds, fluid movement, smear frames, and walk cycles to take your animation to a professional level.',
-    totalLessons: 5, estimatedHours: '1 hr', color: '#F59E0B',
-    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
-    lessons: [
-      { id:'flipro-1', order:1, isPro:true, title:'Drawing Backgrounds', duration:'12:00', videoUrl:'',
-        description:'Build rich, convincing scene backgrounds from scratch in FlipaClip. Learn how to sketch environment layouts, apply basic perspective, add depth through layering foreground and background elements, and use colour fills and shading to bring your scene to life before your character steps in.' },
-      { id:'flipro-2', order:2, isPro:true, title:'The S-Curve & Follow-Through', duration:'12:00', videoUrl:'',
-        description:'Move away from stiff movements by animating a character with a tail or long hair. Learn how the "base" moves first and the "tip" follows later — then use the Lasso Tool to shift parts of a drawing and maintain the curve without redrawing everything.' },
-      { id:'flipro-3', order:3, isPro:true, title:'Advanced Smear Frames', duration:'10:00', videoUrl:'',
-        description:'Create high-speed movement without needing 60 frames per second. Animate a character throwing a punch or swinging a bat by stretching the drawing to bridge the gap between two distant points. Adjust Onion Skin to "1 frame before" to see exactly where to stretch.' },
-      { id:'flipro-4', order:4, isPro:true, title:'Introduction to Walk Cycles', duration:'12:00', videoUrl:'',
-        description:'Break down the walk cycle into its four key positions — Contact, Down, Passing, and Up — and understand how each one drives natural-looking movement. Learn how to plan your frames, set the right timing, and loop the cycle so it plays back smoothly.' },
-      { id:'flipro-5', order:5, isPro:true, title:'Moving a Character Across the Screen', duration:'15:00', videoUrl:'',
-        description:'Take your walk cycle off the spot and move your character from one side of the screen to the other. Learn how to shift the character position across frames, match the step pace to the movement speed, and combine the background to sell a convincing walk-through scene.' },
-    ],
-  },
-  {
-    id: 'ai-animators', title: 'AI for Animators', level: 'Pro',
-    description: 'Learn how to use AI tools to generate backgrounds, characters, lip sync charts, voiceovers, and scripts — giving you a professional production edge directly from your phone.',
-    totalLessons: 5, estimatedHours: '1 hr', color: '#8B5CF6',
-    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>`,
-    lessons: [
-      { id:'ai-1', order:1, isPro:true, title:'Generating Animation Backgrounds with AI', duration:'12:00', videoUrl:'',
-        description:'Use AI image tools to generate detailed, ready-to-use scene backgrounds in seconds. Learn the right prompts for outdoor scenes, indoor rooms, cityscapes, and nature environments — then bring them straight into FlipaClip as a background layer.' },
-      { id:'ai-2', order:2, isPro:true, title:'Creating Characters with AI', duration:'12:00', videoUrl:'',
-        description:'Generate character reference sheets and pose references using AI. Learn how to prompt for consistent character styles, get front/side/back views, and use the output as a drawing guide inside FlipaClip so your character stays on-model across every scene.' },
-      { id:'ai-3', order:3, isPro:true, title:'AI Lip Sync Charts', duration:'10:00', videoUrl:'',
-        description:'Use AI to analyse audio and produce a timed mouth-shape chart — mapping each sound to the correct frame. Learn how to read the chart and apply it to your character drawings in FlipaClip for fast, accurate lip sync without guessing.' },
-      { id:'ai-4', order:4, isPro:true, title:'Text to Speech for Animation', duration:'12:00', videoUrl:'',
-        description:'Generate realistic voiceovers from your script using text-to-speech tools. Learn which tools give the most natural results for Ugandan English and local languages, how to export the audio, and how to import it into FlipaClip to time your animation.' },
-      { id:'ai-5', order:5, isPro:true, title:'AI Scripting for Animators', duration:'15:00', videoUrl:'',
-        description:'Use AI to help you write animation scripts, story outlines, and scene descriptions. Learn how to prompt for short-form skits, educational content, and storytelling formats — then turn the script into a shot list and storyboard ready for FlipaClip.' },
-    ],
-  },
 ];
 
 // ═══════════════════════════════════════════════════
