@@ -79,7 +79,7 @@ const COURSES = [
         description:'Discover what animation really is and how it works. Learn the magic behind making still drawings come to life — frame by frame — and see real examples that show how every cartoon, ad, and short film starts. The perfect first lesson before you pick up FlipaClip.' },
       { id:'basics-1', order:2, isPro:false, title:'Getting Started with FlipaClip', duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=wUOYgnxvIlo',
         description:"A complete walkthrough of FlipaClip's interface — brushes, the timeline, layers, and playback controls. By the end you'll know exactly where everything lives and be ready to start animating." },
-      { id:'basics-2', order:3, isPro:false, title:'Bouncing Ball Animation & Exporting', duration:'15:00', videoUrl:'https://www.youtube.com/watch?v=47c2EyOfsj4',
+      { id:'basics-2', order:3, isPro:false, title:'Bouncing Ball Animation', duration:'15:00', videoUrl:'https://www.youtube.com/watch?v=47c2EyOfsj4',
         description:'Animate a bouncing ball to understand timing, spacing, squash, and stretch — the core principles every animator must master. Then learn how to export your finished animation as a video or GIF, with the best settings for TikTok, Instagram, and YouTube so your work looks great wherever you share it.' },
     ],
   },
