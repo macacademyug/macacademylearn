@@ -72,17 +72,15 @@ const COURSES = [
   {
     id: 'basics', title: 'Basics of FlipaClip', level: 'Beginner',
     description: 'Master the essential tools and techniques to start creating your first animations in FlipaClip from scratch.',
-    totalLessons: 4, estimatedHours: '40 min', color: '#22c55e',
+    totalLessons: 3, estimatedHours: '35 min', color: '#22c55e',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
     lessons: [
       { id:'basics-0', order:1, isPro:false, title:'Introduction to Animation', duration:'10:00', videoUrl:'https://youtu.be/Xt_wJ5H3vdg',
         description:'Discover what animation really is and how it works. Learn the magic behind making still drawings come to life — frame by frame — and see real examples that show how every cartoon, ad, and short film starts. The perfect first lesson before you pick up FlipaClip.' },
       { id:'basics-1', order:2, isPro:false, title:'Getting Started with FlipaClip', duration:'10:00', videoUrl:'https://www.youtube.com/watch?v=wUOYgnxvIlo',
         description:"A complete walkthrough of FlipaClip's interface — brushes, the timeline, layers, and playback controls. By the end you'll know exactly where everything lives and be ready to start animating." },
-      { id:'basics-2', order:3, isPro:false, title:'Bouncing Ball Animation', duration:'15:00', videoUrl:'https://www.youtube.com/watch?v=47c2EyOfsj4',
-        description:'Animate a bouncing ball to understand timing, spacing, squash, and stretch — the core principles every animator must master. The best hands-on exercise to build your animation instincts.' },
-      { id:'basics-3', order:4, isPro:true,  title:'Exporting Your Animation', duration:'5:00', videoUrl:'https://www.youtube.com/watch?v=hL7DKIPsrdc',
-        description:'Export your finished animation as a video or GIF. Learn the best settings for TikTok, Instagram, and YouTube so your work looks great wherever you share it.' },
+      { id:'basics-2', order:3, isPro:false, title:'Bouncing Ball Animation & Exporting', duration:'15:00', videoUrl:'https://www.youtube.com/watch?v=47c2EyOfsj4',
+        description:'Animate a bouncing ball to understand timing, spacing, squash, and stretch — the core principles every animator must master. Then learn how to export your finished animation as a video or GIF, with the best settings for TikTok, Instagram, and YouTube so your work looks great wherever you share it.' },
     ],
   },
   {
